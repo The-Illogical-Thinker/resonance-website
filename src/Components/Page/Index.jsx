@@ -165,6 +165,10 @@ export default function Index() {
     return () => observer.disconnect();
   }, []);
 
+  // sponsors
+
+  
+
 
   return (
     <div className="w-full">
@@ -583,183 +587,191 @@ export default function Index() {
       {/* End of Gokart / OUR FLEET Section */}
 
       {/* End of Gokart */}
+      <div className="JoineUs">
+        <h2 className="learn-more-line">
+          <span
+            style={{
+              fontWeight: "bold",
+              lineHeight: "0",
+              fontSize: "30px",
+              marginBottom: "20%",
+            }}
+          >
+            Sponsors
+          </span>
+        </h2>
 
-      <div
-        id="VISION"
-        className="relative text-center w-full py-[10px] pt-0"
-      ></div>
+        {/* Work Section */}
 
-      {/* Work Section */}
-
-     
-      {/* Footer Section */}
-      {/* Footer Section */}
-      <div className="marquee-box">
-        <marquee behavior="alternate" direction="">
-          <div className="marquee-content flex flex-row gap-[200px]">
-            <div className="flex items-center gap-3">
-              <img src={slideImg1} className="w-20 h-20 invert" alt="" />
-              <div>
-                <h2 className="text-4xl ">
-                  <span
-                    style={{
-                      fontFamily: "cursive",
-                      color: "red",
-                    }}
-                  >
-                    Connectivity{" "}
-                  </span>
-                </h2>
-                <p className="text-md">Collaborate with others</p>
+        {/* Footer Section */}
+        {/* Footer Section */}
+        <div className="marquee-box">
+          <marquee behavior="alternate" direction="">
+            <div className="marquee-content flex flex-row gap-[200px]">
+              <div className="flex items-center gap-3">
+                <img src={slideImg1} className="w-20 h-20 invert" alt="" />
+                <div>
+                  <h2 className="text-4xl ">
+                    <span
+                      style={{
+                        fontFamily: "cursive",
+                        color: "red",
+                      }}
+                    >
+                      Connectivity{" "}
+                    </span>
+                  </h2>
+                  <p className="text-md">Collaborate with others</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <img src={slideImg2} className="w-20 h-20 invert" alt="" />
+                <div>
+                  <h2 className="text-4xl">
+                    <span
+                      style={{
+                        fontFamily: "cursive",
+                        color: "red",
+                      }}
+                    >
+                      Graphic Designing{" "}
+                    </span>
+                  </h2>
+                  <p className="text-md">To create effectiveness</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <img src={slideImg3} className="w-20 h-20 invert" alt="" />
+                <div>
+                  <h2 className="text-4xl">
+                    <span
+                      style={{
+                        fontFamily: "cursive",
+                        color: "red",
+                      }}
+                    >
+                      Readability
+                    </span>
+                  </h2>
+                  <p className="text-md">Proper spacing & font</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <img src={slideImg4} className="w-20 h-20 invert" alt="" />
+                <div>
+                  <h2 className="text-4xl">
+                    <span
+                      style={{
+                        fontFamily: "cursive",
+                        color: "red",
+                      }}
+                    >
+                      Professional Branding
+                    </span>
+                  </h2>
+                  <p className="text-md">Consistent tone & voice</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <img src={slideImg5} className="w-20 h-20 invert" alt="" />
+                <div>
+                  <h2 className="text-4xl">
+                    <span
+                      style={{
+                        fontFamily: "cursive",
+                        color: "red",
+                      }}
+                    >
+                      User-friendliness
+                    </span>
+                  </h2>
+                  <p className="text-md">Quick to get into</p>
+                </div>
+              </div>
+              {/* Repeat for seamless scrolling */}
+              <div className="flex items-center gap-3">
+                <img src={slideImg1} className="w-20 h-20 invert" alt="" />
+                <div>
+                  <h2 className="text-4xl">
+                    <span
+                      style={{
+                        fontFamily: "cursive",
+                        color: "red",
+                      }}
+                    >
+                      Connectivity
+                    </span>
+                  </h2>
+                  <p className="text-md">Collaborate with others</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <img src={slideImg2} className="w-20 h-20 invert" alt="" />
+                <div>
+                  <h2 className="text-4xl">
+                    <span
+                      style={{
+                        fontFamily: "cursive",
+                        color: "red",
+                      }}
+                    >
+                      Graphic Designing
+                    </span>
+                  </h2>
+                  <p className="text-md">To create effectiveness</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <img src={slideImg3} className="w-20 h-20 invert" alt="" />
+                <div>
+                  <h2 className="text-4xl">
+                    <span
+                      style={{
+                        fontFamily: "cursive",
+                        color: "red",
+                      }}
+                    >
+                      Readability
+                    </span>
+                  </h2>
+                  <p className="text-md">Proper spacing & font</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <img src={slideImg4} className="w-20 h-20 invert" alt="" />
+                <div>
+                  <h2 className="text-4xl">
+                    <span
+                      style={{
+                        fontFamily: "cursive",
+                        color: "red",
+                      }}
+                    >
+                      Professional Branding
+                    </span>
+                  </h2>
+                  <p className="text-md">Consistent tone & voice</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <img src={slideImg5} className="w-20 h-20 invert" alt="" />
+                <div>
+                  <h2 className="text-4xl">
+                    <span
+                      style={{
+                        fontFamily: "cursive",
+                        color: "red",
+                      }}
+                    >
+                      User-friendliness
+                    </span>
+                  </h2>
+                  <p className="text-md">Quick to get into</p>
+                </div>
               </div>
             </div>
-            <div className="flex items-center gap-3">
-              <img src={slideImg2} className="w-20 h-20 invert" alt="" />
-              <div>
-                <h2 className="text-4xl">
-                  <span
-                    style={{
-                      fontFamily: "cursive",
-                      color: "red",
-                    }}
-                  >
-                    Graphic Designing{" "}
-                  </span>
-                </h2>
-                <p className="text-md">To create effectiveness</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <img src={slideImg3} className="w-20 h-20 invert" alt="" />
-              <div>
-                <h2 className="text-4xl">
-                  <span
-                    style={{
-                      fontFamily: "cursive",
-                      color: "red",
-                    }}
-                  >
-                    Readability
-                  </span>
-                </h2>
-                <p className="text-md">Proper spacing & font</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <img src={slideImg4} className="w-20 h-20 invert" alt="" />
-              <div>
-                <h2 className="text-4xl">
-                  <span
-                    style={{
-                      fontFamily: "cursive",
-                      color: "red",
-                    }}
-                  >
-                    Professional Branding
-                  </span>
-                </h2>
-                <p className="text-md">Consistent tone & voice</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <img src={slideImg5} className="w-20 h-20 invert" alt="" />
-              <div>
-                <h2 className="text-4xl">
-                  <span
-                    style={{
-                      fontFamily: "cursive",
-                      color: "red",
-                    }}
-                  >
-                    User-friendliness
-                  </span>
-                </h2>
-                <p className="text-md">Quick to get into</p>
-              </div>
-            </div>
-            {/* Repeat for seamless scrolling */}
-            <div className="flex items-center gap-3">
-              <img src={slideImg1} className="w-20 h-20 invert" alt="" />
-              <div>
-                <h2 className="text-4xl">
-                  <span
-                    style={{
-                      fontFamily: "cursive",
-                      color: "red",
-                    }}
-                  >
-                    Connectivity
-                  </span>
-                </h2>
-                <p className="text-md">Collaborate with others</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <img src={slideImg2} className="w-20 h-20 invert" alt="" />
-              <div>
-                <h2 className="text-4xl">
-                  <span
-                    style={{
-                      fontFamily: "cursive",
-                      color: "red",
-                    }}
-                  >
-                    Graphic Designing
-                  </span>
-                </h2>
-                <p className="text-md">To create effectiveness</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <img src={slideImg3} className="w-20 h-20 invert" alt="" />
-              <div>
-                <h2 className="text-4xl">
-                  <span
-                    style={{
-                      fontFamily: "cursive",
-                      color: "red",
-                    }}
-                  >
-                    Readability
-                  </span>
-                </h2>
-                <p className="text-md">Proper spacing & font</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <img src={slideImg4} className="w-20 h-20 invert" alt="" />
-              <div>
-                <h2 className="text-4xl">
-                  <span
-                    style={{
-                      fontFamily: "cursive",
-                      color: "red",
-                    }}
-                  >
-                    Professional Branding
-                  </span>
-                </h2>
-                <p className="text-md">Consistent tone & voice</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <img src={slideImg5} className="w-20 h-20 invert" alt="" />
-              <div>
-                <h2 className="text-4xl">
-                  <span
-                    style={{
-                      fontFamily: "cursive",
-                      color: "red",
-                    }}
-                  >
-                    User-friendliness
-                  </span>
-                </h2>
-                <p className="text-md">Quick to get into</p>
-              </div>
-            </div>
-          </div>
-        </marquee>
+          </marquee>
+        </div>
       </div>
     </div>
   );
