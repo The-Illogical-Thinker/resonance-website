@@ -173,9 +173,10 @@ export default function Index() {
   return (
     <div className="w-full">
       {/* Hero Section */}
-      <section
+     <section
         ref={heroRef}
-        className="relative w-full h-[500px] md:h-[700px] flex items-center justify-center bg-black overflow-hidden"
+        className="relative w-screen h-screen flex items-center justify-center bg-black overflow-hidden hero-section"
+        style={{ opacity: 1, transition: "opacity 1s ease-in-out" }}
       >
         <video
           src={videoFile}
@@ -183,7 +184,13 @@ export default function Index() {
           muted
           loop
           playsInline
-          className="w-full h-auto object-cover"
+          className="absolute inset-0 w-full h-full object-cover object-center"
+          style={{
+            minWidth: "100%",
+            minHeight: "100%",
+            width: "auto",
+            height: "auto",
+          }}
         ></video>
 
         <div
