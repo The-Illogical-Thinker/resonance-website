@@ -1,1 +1,31 @@
-Achievements
+.section-subtitle {
+  text-shadow: 0 0 0.2em var(--primary-color);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  z-index: 1;
+    
+}
+.section-title {
+  font-size: clamp(5rem, 8vw + 2rem, 14rem);
+  /* 
+    - Minimum: 5rem (for small screens)
+    - Fluid value: grows with viewport via 8vw + 2rem
+    - Maximum: 14rem (for large screens)
+  */
+  font-weight: bold;
+  color: var(--text-light);
+  white-space: nowrap;
+  text-transform: capitalize;
+  line-height: normal;
+  margin-right: 5rem;
+  mask-image: var(--title-mask);
+  user-select: none;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
