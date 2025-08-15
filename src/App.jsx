@@ -5,7 +5,7 @@ import Index from "./Components/Page/Index";
 import Footer from "./Components/Footer/Footer";
 import Achievements from "./Components/Achievements/Achievements";
 import logo from "./assets/logo.png";
-import applogo from "./assets/gears-13819.gif";
+import applogo from "./assets/gears-138199.gif";
 
 function App() {
   const [loading, setLoading] = useState(true);
