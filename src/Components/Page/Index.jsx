@@ -183,8 +183,12 @@ export default function Index() {
   return (
     <div className="w-full">
       {/* Hero Section */}
+<<<<<<< HEAD
 
       <section
+=======
+     <section
+>>>>>>> 305652c9cf2e6b3cf1946cbbc6f2d22c482a57d4
         ref={heroRef}
         className="relative w-screen h-screen flex items-center justify-center bg-black overflow-hidden hero-section"
         style={{ opacity: 1, transition: "opacity 1s ease-in-out" }}

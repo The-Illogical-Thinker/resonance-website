@@ -18,7 +18,11 @@ function App() {
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen bg-black">
+<<<<<<< HEAD
         <img src={logo} alt="Resonance Racing" className="w-64 mb-6" />
+=======
+        
+>>>>>>> 305652c9cf2e6b3cf1946cbbc6f2d22c482a57d4
         <img src={applogo} alt="Loading animation" className="h-30 w-[120px]" />
       </div>
     );
