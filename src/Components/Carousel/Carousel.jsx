@@ -37,7 +37,7 @@ function App() {
   const slides = [...slidesData, ...slidesData]; // duplicate for loop
 
   return (
-    <div className="container">
+    <div className="carce">
       <Swiper
         effect="coverflow"
         grabCursor={true}
