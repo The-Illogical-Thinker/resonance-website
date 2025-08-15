@@ -917,20 +917,20 @@ nav {
 
 .marquee-box{
   position: relative !important;
-  top: -125px;
+  margin-top: 3%;
   left: auto;
   transform: none;
   width: 100%;
-  /* width: 100%; */
-  /* position: relative !important; */
-  /* top: 95%;
-  left: 0; */
+  width: 100%;
+  position: relative !important;
+  /* /* top: 95%; */
+  left: 0; 
   z-index: 999;
 }
 
 .marquee-box:after{
   content: "";
-  position: absolute;
+  position: relative;
   top: 0;
   left: 0;
   width: 100%;
@@ -983,3 +983,49 @@ nav {
 .learn-more-line.active::after {
   width: 100%;
 }
+
+
+
+.JoineUs{
+  margin: 3% 0% 5% 0%;
+  text-align: center;
+
+}
+
+.JoineUs:hover .learn-more-line::after {
+  width: 100%;
+}
+
+.Joinme{
+  margin: 0% 0% 4% 0%;
+  text-align: center;
+
+}
+
+.Joinme:hover .learn-more-line::after {
+  width: 100%;
+}
+.learn-more-line {
+  position: relative;
+  display: inline-block;
+    text-decoration: none;
+
+}
+
+.learn-more-line::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -5px;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(to right, transparent, #ff0000, transparent);
+  box-shadow: 0 0 3px #ff0000, 0 0 px #ff0000;
+  transform: translateX(-50%);
+  transition: width 0.3s ease-in-out;
+}
+
+.learn-more-line.active::after {
+  width: 100%;
+}
+
