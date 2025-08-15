@@ -1,99 +1,83 @@
-import React, { useEffect, useRef } from "react";
-import "./styles.css";
+import React from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/effect-coverflow";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 
-const movies = [
-  {
-    name: "AWS certificate",
-    image:
-      "https://c4.wallpaperflare.com/wallpaper/646/182/375/blue-background-mercedes-benz-mercedes-wallpaper-preview.jpg",
-  },
-  {
-    name: "Accenture certificate",
-    image:
-      "https://c4.wallpaperflare.com/wallpaper/646/182/375/blue-background-mercedes-benz-mercedes-wallpaper-preview.jpg",
-  },
-  {
-    name: "Tata certificate",
-    image:
-      "https://c4.wallpaperflare.com/wallpaper/646/182/375/blue-background-mercedes-benz-mercedes-wallpaper-preview.jpg",
-  },
-];
+import {
+  EffectCoverflow,
+  Pagination,
+  Navigation,
+  Autoplay,
+} from "swiper/modules";
 
-const Carousel = () => {
-  const carouselRef = useRef(null);
-  const sectionRef = useRef(null);
-  const sliders = useRef([]);
-  const slideIndex = useRef(0);
+// Images
+import slide_image_1 from "../../assets/img_1.jpg";
+import slide_image_2 from "../../assets/img_2.jpg";
+import slide_image_3 from "../../assets/img_3.jpg";
+import slide_image_4 from "../../assets/img_4.jpg";
+import slide_image_5 from "../../assets/img_5.jpg";
+import slide_image_6 from "../../assets/img_6.jpg";
+import slide_image_7 from "../../assets/img_7.jpg";
+import slide_image_8 from "../../assets/img_8.jpg";
 
-  const createSlide = () => {
-    if (slideIndex.current >= movies.length) slideIndex.current = 0;
-    const { image } = movies[slideIndex.current];
+function App() {
+  const slidesData = [
+    { img: slide_image_1, text: "Slide " },
+    { img: slide_image_2, text: "Slide " },
+    { img: slide_image_3, text: "Slide " },
+    { img: slide_image_4, text: "Slide " },
+    { img: slide_image_5, text: "Slide " },
+    { img: slide_image_6, text: "Slide " },
+    { img: slide_image_7, text: "Slide " },
+    { img: slide_image_8, text: "Slide " },
+  ];
 
-    const slide = document.createElement("div");
-    const img = document.createElement("img");
-
-    img.src = image;
-    img.className = "slider-img";
-
-    slide.className = "slider";
-    slide.appendChild(img);
-
-    carouselRef.current.appendChild(slide);
-    sliders.current.push(slide);
-
-    // Shift slides left
-    if (sliders.current.length > 1) {
-      const offset = sliders.current.length - 2;
-      sliders.current[0].style.marginLeft = `calc(-${100 * offset}% - ${
-        30 * offset
-      }px)`;
-    }
-
-    slideIndex.current++;
-  };
-
-  useEffect(() => {
-    // Create initial slides
-    for (let i = 0; i < 3; i++) createSlide();
-
-    const interval = setInterval(createSlide, 3000);
-    return () => clearInterval(interval);
-  }, []);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const heading = sectionRef.current.querySelector(".learns-more-line");
-          if (entry.isIntersecting) {
-            heading.classList.add("active");
-          } else {
-            heading.classList.remove("active");
-          }
-        });
-      },
-      { threshold: 0.3 }
-    );
-
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
+  const slides = [...slidesData, ...slidesData]; // duplicate for loop
 
   return (
-    <div className="carousel-container" ref={sectionRef}>
-      <div className="Jointus">
-        <h2 className="learns-more-line">
-          <span
-            style={{ fontWeight: "bold", lineHeight: "1.5", fontSize: "30px" }}
-          >
-            Why Join Us ?
-          </span>
-        </h2>
-        <br />
-      </div>
-      <div className="carousel" ref={carouselRef}></div>
+    <div className="container">
+      <Swiper
+        effect="coverflow"
+        grabCursor={true}
+        centeredSlides={true}
+        loop={true}
+        slidesPerView={5}
+        autoplay={{ delay: 2000, disableOnInteraction: false }}
+        speed={800}
+        breakpoints={{ 600: { slidesPerView: 3 }, 1024: { slidesPerView: 5 } }}
+        coverflowEffect={{ rotate: 0, stretch: 0, depth: 100, modifier: 2.5 }}
+        pagination={{ clickable: true }}
+        navigation={true}
+        modules={[EffectCoverflow, Pagination, Navigation, Autoplay]}
+        className="swiper_container"
+      >
+        {slides.map((slide, index) => (
+          <SwiperSlide key={index} className="w-[250px] h-[120px]">
+            <div className="relative w-full h-full">
+              {/* Image */}
+              <img
+                src={slide.img}
+                alt={`slide_${index + 1}`}
+                className="w-full h-full object-cover"
+              />
+
+              {/* Gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+
+              {/* Text at bottom */}
+              <div className="absolute bottom-0 left-0 right-0 pb-[20%] pl-[20%] pr-[50%]">
+                <div className="text-xl font-semibold text-white">
+                  {slide.text}
+                </div>
+              </div>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </div>
   );
-};
+}
 
-export default Carousel;
+export default App;

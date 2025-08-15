@@ -2,11 +2,21 @@ import React, { useEffect, useRef, useState } from "react";
 import Carousel from "../../Components/Carousel/Carousel";
 import MoviesCarousel from "../../Components/MoviesCarousel/MoviesCarousel";
 
+import Img from "../../assets/why.jpg";
+import go from "../../assets/goc.jpg";
+import ev from "../../assets/eve.jpg";
+
+
+import v1 from "../../assets/v1.jpg";
+import v2 from "../../assets/v2.jpg";
+import v3 from "../../assets/v3.jpg";
+
+
+
 // Video
 import videoFile from "../../assets/video.mp4";
 
 // Assets
-import heroImage from "../../assets/hero-image.png";
 import slideImg1 from "../../assets/slide-icon-1.svg";
 import slideImg2 from "../../assets/slide-icon-2.svg";
 import slideImg3 from "../../assets/slide-icon-3.svg";
@@ -165,13 +175,19 @@ export default function Index() {
     return () => observer.disconnect();
   }, []);
 
+  // sponsors
+
+  
+
 
   return (
     <div className="w-full">
       {/* Hero Section */}
+
       <section
         ref={heroRef}
-        className="relative w-full h-[500px] md:h-[700px] flex items-center justify-center bg-black overflow-hidden"
+        className="relative w-screen h-screen flex items-center justify-center bg-black overflow-hidden hero-section"
+        style={{ opacity: 1, transition: "opacity 1s ease-in-out" }}
       >
         <video
           src={videoFile}
@@ -179,7 +195,13 @@ export default function Index() {
           muted
           loop
           playsInline
-          className="w-full h-auto object-cover"
+          className="absolute inset-0 w-full h-full object-cover object-center"
+          style={{
+            minWidth: "100%",
+            minHeight: "100%",
+            width: "auto",
+            height: "auto",
+          }}
         ></video>
 
         <div
@@ -257,7 +279,7 @@ export default function Index() {
               alt="About REEV"
               className="w-full h-80 lg:h-96 object-cover"
               loading="lazy"
-              src="https://static.vecteezy.com/system/resources/thumbnails/035/380/035/small_2x/ai-generated-red-racing-car-on-a-dark-background-with-copy-space-free-photo.jpg"
+              src={Img}
             />
           </div>
 
@@ -335,13 +357,12 @@ export default function Index() {
 
         <p>
           <br></br>
-          I'm Anmol Gour, currently pursuing my B.Tech in Computer Science
-          Engineering. I have a strong interest in Full Stack Web Development,
-          and I’m actively learning and working with technologies such as HTML,
-          CSS, JavaScript, React, Vite, Tailwind CSS, Angular,Bootstrap,
-          Node.js,Neo4j, and Google Cloud. In addition to my development work,
-          I’m passionate about Problem Solving and enjoy tackling coding
-          challenges to sharpen my logic and analytical skills.
+          lmportant to us, and we are always looking for passionate individuals
+          to join our team. Whether you are a student, a professional, or simply
+          someone who loves cars and technology, there is a place for you in our
+          community. We offer various opportunities for learning, collaboration,
+          and innovation. Join us in our mission to revolutionize the automotive
+          industry with electric vehicles.
         </p>
       </div>
 
@@ -353,7 +374,7 @@ export default function Index() {
           <div className="whyjoin-cards">
             <div className="cards-image">
               <img
-                src="https://i.pinimg.com/736x/e4/64/74/e4647499e09315448135619108ee3a09.jpg"
+                src={v1}
                 alt="GoKart"
               />
             </div>
@@ -387,7 +408,7 @@ export default function Index() {
           <div className="whyjoin-cards">
             <div className="cards-image">
               <img
-                src="https://i.pinimg.com/736x/e4/64/74/e4647499e09315448135619108ee3a09.jpg"
+                src={v2}
                 alt="GoKart"
               />
             </div>
@@ -420,7 +441,7 @@ export default function Index() {
           <div className="whyjoin-cards">
             <div className="cards-image">
               <img
-                src="https://i.pinimg.com/736x/e4/64/74/e4647499e09315448135619108ee3a09.jpg"
+                src={v3}
                 alt="GoKart"
               />
             </div>
@@ -452,6 +473,19 @@ export default function Index() {
         </div>
       </div>
       {/* Carousel Section - Autoplay */}
+      <div className="Joinme">
+        <h2 className="learn-more-line">
+          <span
+            style={{
+              fontWeight: "bold",
+              lineHeight: "0",
+              fontSize: "30px",
+            }}
+          >
+            OUR FLEET
+          </span>
+        </h2>
+      </div>
       <section className="py-10">
         <Carousel
           slides={[slideImg1, slideImg2, slideImg3]}
@@ -496,7 +530,7 @@ export default function Index() {
             <div className="card-content">
               <div className="card-image">
                 <img
-                  src="https://i.pinimg.com/736x/e4/64/74/e4647499e09315448135619108ee3a09.jpg"
+                  src={ev}
                   alt="REEV"
                 />
               </div>
@@ -546,7 +580,7 @@ export default function Index() {
             <div className="card-content">
               <div className="card-image">
                 <img
-                  src="https://i.pinimg.com/736x/e4/64/74/e4647499e09315448135619108ee3a09.jpg"
+                  src={go}
                   alt="GoKart"
                 />
               </div>
@@ -583,183 +617,191 @@ export default function Index() {
       {/* End of Gokart / OUR FLEET Section */}
 
       {/* End of Gokart */}
+      <div className="JoineUs">
+        <h2 className="learn-more-line">
+          <span
+            style={{
+              fontWeight: "bold",
+              lineHeight: "0",
+              fontSize: "30px",
+              marginBottom: "20%",
+            }}
+          >
+            Sponsors
+          </span>
+        </h2>
 
-      <div
-        id="VISION"
-        className="relative text-center w-full py-[10px] pt-0"
-      ></div>
+        {/* Work Section */}
 
-      {/* Work Section */}
-
-     
-      {/* Footer Section */}
-      {/* Footer Section */}
-      <div className="marquee-box">
-        <marquee behavior="alternate" direction="">
-          <div className="marquee-content flex flex-row gap-[200px]">
-            <div className="flex items-center gap-3">
-              <img src={slideImg1} className="w-20 h-20 invert" alt="" />
-              <div>
-                <h2 className="text-4xl ">
-                  <span
-                    style={{
-                      fontFamily: "cursive",
-                      color: "red",
-                    }}
-                  >
-                    Connectivity{" "}
-                  </span>
-                </h2>
-                <p className="text-md">Collaborate with others</p>
+        {/* Footer Section */}
+        {/* Footer Section */}
+        <div className="marquee-box">
+          <marquee behavior="alternate" direction="">
+            <div className="marquee-content flex flex-row gap-[200px]">
+              <div className="flex items-center gap-3">
+                <img src={slideImg1} className="w-20 h-20 invert" alt="" />
+                <div>
+                  <h2 className="text-4xl ">
+                    <span
+                      style={{
+                        fontFamily: "cursive",
+                        color: "red",
+                      }}
+                    >
+                      Connectivity{" "}
+                    </span>
+                  </h2>
+                  <p className="text-md">Collaborate with others</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <img src={slideImg2} className="w-20 h-20 invert" alt="" />
+                <div>
+                  <h2 className="text-4xl">
+                    <span
+                      style={{
+                        fontFamily: "cursive",
+                        color: "red",
+                      }}
+                    >
+                      Graphic Designing{" "}
+                    </span>
+                  </h2>
+                  <p className="text-md">To create effectiveness</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <img src={slideImg3} className="w-20 h-20 invert" alt="" />
+                <div>
+                  <h2 className="text-4xl">
+                    <span
+                      style={{
+                        fontFamily: "cursive",
+                        color: "red",
+                      }}
+                    >
+                      Readability
+                    </span>
+                  </h2>
+                  <p className="text-md">Proper spacing & font</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <img src={slideImg4} className="w-20 h-20 invert" alt="" />
+                <div>
+                  <h2 className="text-4xl">
+                    <span
+                      style={{
+                        fontFamily: "cursive",
+                        color: "red",
+                      }}
+                    >
+                      Professional Branding
+                    </span>
+                  </h2>
+                  <p className="text-md">Consistent tone & voice</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <img src={slideImg5} className="w-20 h-20 invert" alt="" />
+                <div>
+                  <h2 className="text-4xl">
+                    <span
+                      style={{
+                        fontFamily: "cursive",
+                        color: "red",
+                      }}
+                    >
+                      User-friendliness
+                    </span>
+                  </h2>
+                  <p className="text-md">Quick to get into</p>
+                </div>
+              </div>
+              {/* Repeat for seamless scrolling */}
+              <div className="flex items-center gap-3">
+                <img src={slideImg1} className="w-20 h-20 invert" alt="" />
+                <div>
+                  <h2 className="text-4xl">
+                    <span
+                      style={{
+                        fontFamily: "cursive",
+                        color: "red",
+                      }}
+                    >
+                      Connectivity
+                    </span>
+                  </h2>
+                  <p className="text-md">Collaborate with others</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <img src={slideImg2} className="w-20 h-20 invert" alt="" />
+                <div>
+                  <h2 className="text-4xl">
+                    <span
+                      style={{
+                        fontFamily: "cursive",
+                        color: "red",
+                      }}
+                    >
+                      Graphic Designing
+                    </span>
+                  </h2>
+                  <p className="text-md">To create effectiveness</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <img src={slideImg3} className="w-20 h-20 invert" alt="" />
+                <div>
+                  <h2 className="text-4xl">
+                    <span
+                      style={{
+                        fontFamily: "cursive",
+                        color: "red",
+                      }}
+                    >
+                      Readability
+                    </span>
+                  </h2>
+                  <p className="text-md">Proper spacing & font</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <img src={slideImg4} className="w-20 h-20 invert" alt="" />
+                <div>
+                  <h2 className="text-4xl">
+                    <span
+                      style={{
+                        fontFamily: "cursive",
+                        color: "red",
+                      }}
+                    >
+                      Professional Branding
+                    </span>
+                  </h2>
+                  <p className="text-md">Consistent tone & voice</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <img src={slideImg5} className="w-20 h-20 invert" alt="" />
+                <div>
+                  <h2 className="text-4xl">
+                    <span
+                      style={{
+                        fontFamily: "cursive",
+                        color: "red",
+                      }}
+                    >
+                      User-friendliness
+                    </span>
+                  </h2>
+                  <p className="text-md">Quick to get into</p>
+                </div>
               </div>
             </div>
-            <div className="flex items-center gap-3">
-              <img src={slideImg2} className="w-20 h-20 invert" alt="" />
-              <div>
-                <h2 className="text-4xl">
-                  <span
-                    style={{
-                      fontFamily: "cursive",
-                      color: "red",
-                    }}
-                  >
-                    Graphic Designing{" "}
-                  </span>
-                </h2>
-                <p className="text-md">To create effectiveness</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <img src={slideImg3} className="w-20 h-20 invert" alt="" />
-              <div>
-                <h2 className="text-4xl">
-                  <span
-                    style={{
-                      fontFamily: "cursive",
-                      color: "red",
-                    }}
-                  >
-                    Readability
-                  </span>
-                </h2>
-                <p className="text-md">Proper spacing & font</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <img src={slideImg4} className="w-20 h-20 invert" alt="" />
-              <div>
-                <h2 className="text-4xl">
-                  <span
-                    style={{
-                      fontFamily: "cursive",
-                      color: "red",
-                    }}
-                  >
-                    Professional Branding
-                  </span>
-                </h2>
-                <p className="text-md">Consistent tone & voice</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <img src={slideImg5} className="w-20 h-20 invert" alt="" />
-              <div>
-                <h2 className="text-4xl">
-                  <span
-                    style={{
-                      fontFamily: "cursive",
-                      color: "red",
-                    }}
-                  >
-                    User-friendliness
-                  </span>
-                </h2>
-                <p className="text-md">Quick to get into</p>
-              </div>
-            </div>
-            {/* Repeat for seamless scrolling */}
-            <div className="flex items-center gap-3">
-              <img src={slideImg1} className="w-20 h-20 invert" alt="" />
-              <div>
-                <h2 className="text-4xl">
-                  <span
-                    style={{
-                      fontFamily: "cursive",
-                      color: "red",
-                    }}
-                  >
-                    Connectivity
-                  </span>
-                </h2>
-                <p className="text-md">Collaborate with others</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <img src={slideImg2} className="w-20 h-20 invert" alt="" />
-              <div>
-                <h2 className="text-4xl">
-                  <span
-                    style={{
-                      fontFamily: "cursive",
-                      color: "red",
-                    }}
-                  >
-                    Graphic Designing
-                  </span>
-                </h2>
-                <p className="text-md">To create effectiveness</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <img src={slideImg3} className="w-20 h-20 invert" alt="" />
-              <div>
-                <h2 className="text-4xl">
-                  <span
-                    style={{
-                      fontFamily: "cursive",
-                      color: "red",
-                    }}
-                  >
-                    Readability
-                  </span>
-                </h2>
-                <p className="text-md">Proper spacing & font</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <img src={slideImg4} className="w-20 h-20 invert" alt="" />
-              <div>
-                <h2 className="text-4xl">
-                  <span
-                    style={{
-                      fontFamily: "cursive",
-                      color: "red",
-                    }}
-                  >
-                    Professional Branding
-                  </span>
-                </h2>
-                <p className="text-md">Consistent tone & voice</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <img src={slideImg5} className="w-20 h-20 invert" alt="" />
-              <div>
-                <h2 className="text-4xl">
-                  <span
-                    style={{
-                      fontFamily: "cursive",
-                      color: "red",
-                    }}
-                  >
-                    User-friendliness
-                  </span>
-                </h2>
-                <p className="text-md">Quick to get into</p>
-              </div>
-            </div>
-          </div>
-        </marquee>
+          </marquee>
+        </div>
       </div>
     </div>
   );

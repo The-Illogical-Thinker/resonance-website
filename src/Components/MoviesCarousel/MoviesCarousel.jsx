@@ -1,9 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
 import "./MoviesCarousel.css";
-import Work from "../../assets/Work.png";
-import NF from "../../assets/NF.png";
-import CF from "../../assets/CF.png";
-import GM from "../../assets/GM.png";
 
 const movies = [
   {
