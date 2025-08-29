@@ -20,6 +20,41 @@ body {
   color: var(--white-color);
 }
 
+/* Text selection styling */
+::selection {
+  background-color: #ff0000;
+  color: #ffffff;
+}
+
+::-moz-selection {
+  background-color: #ff0000;
+  color: #ffffff;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ff0000;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #cc0000;
+}
+
+/* For Firefox */
+html {
+  scrollbar-width: auto;
+  scrollbar-color: #ff0000 #000000;
+}
+
 :root {
   --primary-color: #ec4634;
   --body-color: #000000;
