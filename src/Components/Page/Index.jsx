@@ -109,6 +109,7 @@ export default function Index() {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
+        whileHover="hovered"
       >
           {/* Image Section */}
         <motion.div
@@ -127,12 +128,7 @@ export default function Index() {
               src={Img}
             />
           {/* Hover underline effect */}
-          <motion.div
-            className="absolute bottom-0 left-1/2 transform -translate-x-1/2 h-1 bg-gradient-to-r from-transparent via-red-600 to-transparent"
-            initial={{ width: 0 }}
-            whileHover={{ width: "100%" }}
-            transition={{ duration: 0.3 }}
-          />
+          
         </motion.div>
 
           {/* Text Section */}
@@ -143,9 +139,18 @@ export default function Index() {
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <h2 className="text-5xl font-black text-white mb-6 tracking-wide font-mono uppercase">
+          <h2 className="text-5xl font-black text-white mb-6 tracking-wide font-mono uppercase relative inline-block">
               About REEV
-            </h2>
+            <motion.div
+            className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 h-[0.1rem] bg-gradient-to-r from-transparent via-red-600 to-transparent"
+            initial={{ width: 0 }}
+            variants={{
+              rest: { width: 0 },
+              hovered: { width: "100%" },
+            }}
+            transition={{ duration: 0.3 }}
+          />
+          </h2>
           <p className="text-lg lg:text-xl leading-relaxed text-gray-300 font-light max-w-2xl">
               "Globally we are witnessing a technology shift in the automotive
               industry from conventional fuel-powered vehicles to alternative
@@ -160,25 +165,28 @@ export default function Index() {
       {/* Why Join Us Section */}
       <motion.section 
         className="py-20 bg-black"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            initial="rest"
+            whileInView="rest"
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
+            whileHover="hovered"
           >
-            <motion.div 
+            <div 
           className="text-center mb-16 group cursor-pointer"
-          whileHover={{ scale: 1.05 }}
         >
           <h2 className="text-5xl font-black text-white mb-4 tracking-wide font-mono uppercase relative inline-block">
             Why Join Us ?
             <motion.div
-              className="absolute bottom-0 left-1/2 transform -translate-x-1/2 h-1 bg-gradient-to-r from-transparent via-red-600 to-transparent"
+              className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 h-[0.1rem] bg-gradient-to-r from-transparent via-red-600 to-transparent"
               initial={{ width: 0 }}
-              whileHover={{ width: "100%" }}
+              variants={{
+                rest: { width: 0 },
+                hovered: { width: "100%" },
+              }}
               transition={{ duration: 0.3 }}
             />
           </h2>
-        </motion.div>
+        </div>
 
         <motion.div 
           className="grid lg:grid-cols-3 gap-[3rem] px-6 lg:px-[17rem]"
@@ -229,25 +237,28 @@ export default function Index() {
       {/* Carousel Section */}
       <motion.section 
         className="py-20 bg-black"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
+        whileInView="rest"
+        initial="rest"
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
+        whileHover="hovered"
       >
-        <motion.div 
+        <div 
           className="text-center mb-16 group cursor-pointer"
-          whileHover={{ scale: 1.05 }}
         >
           <h2 className="text-5xl font-black text-white mb-4 tracking-wide font-mono uppercase relative inline-block">
             OUR FLEET
             <motion.div
-              className="absolute bottom-0 left-1/2 transform -translate-x-1/2 h-1 bg-gradient-to-r from-transparent via-red-600 to-transparent"
+              className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 h-[0.1rem] bg-gradient-to-r from-transparent via-red-600 to-transparent"
               initial={{ width: 0 }}
-              whileHover={{ width: "100%" }}
+              variants={{
+                rest: { width: 0 },
+                hovered: { width: "100%" },
+              }}
               transition={{ duration: 0.3 }}
             />
         </h2>
-        </motion.div>
+        </div>
         <div className="py-10">
         <Carousel
           slides={[slideImg1, slideImg2, slideImg3]}
@@ -260,10 +271,11 @@ export default function Index() {
       {/* Fleet Showcase Section */}
       <motion.section 
         className="bg-black py-20"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
+        whileInView="rest"
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
+        whileHover="hovered"
+        initial="rest"  
       >
         <div className="w-full ">
           {/* Section Header */}
@@ -273,14 +285,16 @@ export default function Index() {
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            whileHover={{ scale: 1.05 }}
           >
             <h2 className="text-5xl font-black text-white mb-4 tracking-wide font-mono uppercase relative inline-block">
                 Our Fleet
               <motion.div
-                className="absolute bottom-0 left-1/2 transform -translate-x-1/2 h-1 bg-gradient-to-r from-transparent via-red-600 to-transparent"
+                className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 h-[0.1rem] bg-gradient-to-r from-transparent via-red-600 to-transparent"
                 initial={{ width: 0 }}
-                whileHover={{ width: "100%" }}
+                variants={{
+                  rest: { width: 0 },
+                  hovered: { width: "100%" },
+                }}
                 transition={{ duration: 0.3 }}
               />
             </h2>
@@ -305,27 +319,20 @@ export default function Index() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
                 
                 {/* Content Overlay */}
-                <div className="absolute bottom-0 left-0 right-0 p-8">
-                  <h3 className="text-4xl font-light text-white mb-3 font-mono tracking-wide group-hover:text-red-600 transition-colors duration-300">
-                    <span className="text-red-600 font-black italic">REEV</span> Racer
-                  </h3>
-                  <p className="text-gray-300 text-base mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    High-Performance Electric Racing Vehicle
-                  </p>
-                  <div className="flex items-center text-white text-sm font-light group-hover:text-red-600 transition-colors duration-300">
-                    <span>Discover</span>
-                    <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </div>
-              </div>
-                {/* Hover underline effect */}
-                <motion.div
-                  className="absolute bottom-0 left-1/2 transform -translate-x-1/2 h-1 bg-gradient-to-r from-transparent via-red-600 to-transparent"
-                  initial={{ width: 0 }}
-                  whileHover={{ width: "100%" }}
-                  transition={{ duration: 0.3 }}
-                />
+                  <div className="absolute bottom-0 left-0 right-0 p-8">
+                    <h3 className="text-4xl font-light text-white mb-3 font-mono tracking-wide group-hover:text-red-600 transition-colors duration-300">
+                      <span className="text-red-600 font-black italic">REEV</span> Racer
+                    </h3>
+                    <p className="text-gray-300 text-base mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                      High-Performance Electric Racing Vehicle
+                    </p>
+                    <div className="flex items-center text-white text-sm font-light group-hover:text-red-600 transition-colors duration-300">
+                      <span>Discover</span>
+                      <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                    </div>
+                </div>
               </div>
             </motion.div>
 
@@ -336,6 +343,7 @@ export default function Index() {
               whileInView={{ x: 0, opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: 0.4 }}
+              whileHover="hovered"
             >
               <div className="relative overflow-hidden bg-black h-[40rem]">
                 <motion.img 
@@ -346,27 +354,20 @@ export default function Index() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
                 
                 {/* Content Overlay */}
-                <div className="absolute bottom-0 left-0 right-0 p-8">
-                  <h3 className="text-4xl font-light text-white mb-3 font-mono tracking-wide group-hover:text-red-600 transition-colors duration-300">
-                    <span className="text-red-600 font-black italic">REEV</span> GoCar
-                  </h3>
-                  <p className="text-gray-300 text-base mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    Urban Electric Mobility Solution
-                  </p>
-                  <div className="flex items-center text-white text-sm font-light group-hover:text-red-600 transition-colors duration-300">
-                    <span>Discover</span>
-                    <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </div>
-              </div>
-                {/* Hover underline effect */}
-                <motion.div
-                  className="absolute bottom-0 left-1/2 transform -translate-x-1/2 h-1 bg-gradient-to-r from-transparent via-red-600 to-transparent"
-                  initial={{ width: 0 }}
-                  whileHover={{ width: "100%" }}
-                  transition={{ duration: 0.3 }}
-                />
+                  <div className="absolute bottom-0 left-0 right-0 p-8">
+                    <h3 className="text-4xl font-light text-white mb-3 font-mono tracking-wide group-hover:text-red-600 transition-colors duration-300">
+                      <span className="text-red-600 font-black italic">REEV</span> GoCar
+                    </h3>
+                    <p className="text-gray-300 text-base mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                      Urban Electric Mobility Solution
+                    </p>
+                    <div className="flex items-center text-white text-sm font-light group-hover:text-red-600 transition-colors duration-300">
+                      <span>Discover</span>
+                      <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                    </div>
+                </div>
               </div>
             </motion.div>
           </div>
@@ -376,25 +377,29 @@ export default function Index() {
       {/* Sponsors Section */}
       <motion.section 
         className="py-20 bg-black"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
+        whileInView="rest"
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
+        whileHover="hovered"
+        initial="rest"  
       >
-        <motion.div 
+        <div 
           className="text-center mb-16 group cursor-pointer"
           whileHover={{ scale: 1.05 }}
         >
           <h2 className="text-5xl font-black text-white mb-4 tracking-wide font-mono uppercase relative inline-block">
             Sponsors
             <motion.div
-              className="absolute bottom-0 left-1/2 transform -translate-x-1/2 h-1 bg-gradient-to-r from-transparent via-red-600 to-transparent"
+              className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 h-[0.1rem] bg-gradient-to-r from-transparent via-red-600 to-transparent"
               initial={{ width: 0 }}
-              whileHover={{ width: "100%" }}
+              variants={{
+                rest: { width: 0 },
+                hovered: { width: "100%" },
+              }}
               transition={{ duration: 0.3 }}
             />
         </h2>
-        </motion.div>
+        </div>
 
         {/* Animated Marquee */}
         <motion.div 
