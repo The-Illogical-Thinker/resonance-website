@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
+import { motion } from "motion/react";
 import "./MoviesCarousel.css";
 
 const movies = [

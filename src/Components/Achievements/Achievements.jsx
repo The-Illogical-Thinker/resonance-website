@@ -2,16 +2,18 @@ import React from "react";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 import { AutoScroll } from "@splidejs/splide-extension-auto-scroll";
-import "./Achievements.css";
+import { motion } from "motion/react";
 import MoviesCarousel from "../../Components/MoviesCarousel/MoviesCarousel";
 
 const Achievements = () => {
   return (
-    <>
-      <div
+    <div className="bg-black min-h-screen">
+      <motion.div
         id="ACHIEVEMENTS"
-        className="relative text-center w-full py-[10px] pt-0 mt-[80px]"
-        
+        className="relative text-center w-full py-20 pt-24"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
       >
         <Splide
           options={{
@@ -30,27 +32,42 @@ const Achievements = () => {
           aria-label="Smooth Scrolling Work Slider"
         >
           <SplideSlide>
-            <div className="section-title">ACHIEVEMENTS</div>
+            <div className="text-6xl md:text-9xl font-bold text-gray-800 font-mono select-none pointer-events-none overflow-hidden opacity-20">
+              ACHIEVEMENTS
+            </div>
           </SplideSlide>
           <SplideSlide>
-            <div className="section-title">ACHIEVEMENTS</div>
+            <div className="text-6xl md:text-9xl font-bold text-gray-800 font-mono select-none pointer-events-none overflow-hidden opacity-20">
+              ACHIEVEMENTS
+            </div>
           </SplideSlide>
           <SplideSlide>
-            <div className="section-title">ACHIEVEMENTS</div>
+            <div className="text-6xl md:text-9xl font-bold text-gray-800 font-mono select-none pointer-events-none overflow-hidden opacity-20">
+              ACHIEVEMENTS
+            </div>
           </SplideSlide>
           <SplideSlide>
-            <div className="section-title">ACHIEVEMENTS</div>
+            <div className="text-6xl md:text-9xl font-bold text-gray-800 font-mono select-none pointer-events-none overflow-hidden opacity-20">
+              ACHIEVEMENTS
+            </div>
           </SplideSlide>
           <SplideSlide>
-            <div className="section-title">ACHIEVEMENTS</div>
+            <div className="text-6xl md:text-9xl font-bold text-gray-800 font-mono select-none pointer-events-none overflow-hidden opacity-20">
+              ACHIEVEMENTS
+            </div>
           </SplideSlide>
         </Splide>
-      </div>
+      </motion.div>
 
-      <section className="py-10">
+      <motion.section 
+        className="py-10"
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.3 }}
+      >
         <MoviesCarousel autoplay={true} interval={2500} />
-      </section>
-    </>
+      </motion.section>
+    </div>
   );
 };
 
