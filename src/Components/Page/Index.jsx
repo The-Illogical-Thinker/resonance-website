@@ -11,12 +11,12 @@ import Img from "../../assets/why.jpg";
 import videoFile from "../../assets/video.mp4";
 
 // Assets
-import slideImg1 from "../../assets/slide-icon-1.svg";
-import slideImg2 from "../../assets/slide-icon-2.svg";
-import slideImg3 from "../../assets/slide-icon-3.svg";
-
-import slideImg4 from "../../assets/slide-icon-4.svg";
-import slideImg5 from "../../assets/slide-icon-5.svg";
+import asset13  from "../../assets/Asset 13.svg?react";
+import slideImg2 from "../../assets/Dynamic Lazer.svg?react";
+import slideImg3 from "../../assets/Poweron.svg?react";
+import slideImg4 from "../../assets/Rafftar logo.svg?react";
+import slideImg5 from "../../assets/ansys.svg?react";
+import slideImg6 from "../../assets/Kapras Automation.svg?react";
 
 // Splide imports
 import { Splide, SplideSlide } from "@splidejs/react-splide";
@@ -36,23 +36,7 @@ export default function Index() {
   const [heroTextVisible, setHeroTextVisible] = useState(false);
   const [currentReviewIndex, setCurrentReviewIndex] = useState(0);
   const [isReviewHovered, setIsReviewHovered] = useState(false);
-  const [isScrolling, setIsScrolling] = useState(false);
-  const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
-  const [scrollAttempts, setScrollAttempts] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(false);
-  const [sectionScrollPositions, setSectionScrollPositions] = useState({});
   const [isMobile, setIsMobile] = useState(false);
-  const [visibleSections, setVisibleSections] = useState({
-    hero: true,
-    about: false,
-    whyJoin: false,
-    fleet: false,
-    reviews: false,
-    sponsors: false,
-  });
-
-  const sectionRefs = [heroRef, aboutRef, whyJoinRef, fleetRef, reviewsRef, sponsorsRef];
-  const sectionNames = ['hero', 'about', 'whyJoin', 'fleet', 'reviews', 'sponsors'];
 
   useEffect(() => {
     // Detect mobile device
@@ -83,251 +67,18 @@ export default function Index() {
     }
   }, [isReviewHovered]);
 
-  // Apple-like scroll behavior with section pinning (desktop only)
-  useEffect(() => {
-    // Skip Apple-like scroll behavior on mobile
-    if (isMobile) {
-      // On mobile, enable all sections immediately for normal scrolling
-      setVisibleSections({
-        hero: true,
-        about: true,
-        whyJoin: true,
-        fleet: true,
-        reviews: true,
-        sponsors: true,
-      });
-      return;
-    }
-
-    let scrollTimeout;
-    let lastScrollTime = 0;
-    const scrollDelay = 150;
-    const requiredScrollAttempts = 3; // Number of scroll attempts needed to move to next section
-
-    const canScrollInSection = (direction) => {
-      const currentSection = sectionRefs[currentSectionIndex]?.current;
-      if (!currentSection) return false;
-
-      const sectionRect = currentSection.getBoundingClientRect();
-      const viewportHeight = window.innerHeight;
-      
-      // If section fits in viewport, no internal scrolling needed
-      if (sectionRect.height <= viewportHeight) return false;
-
-      const currentScrollTop = window.pageYOffset;
-      const sectionTop = currentSection.offsetTop;
-      const sectionBottom = sectionTop + sectionRect.height;
-      const viewportTop = currentScrollTop;
-      const viewportBottom = currentScrollTop + viewportHeight;
-
-      if (direction > 0) {
-        // Scrolling down - check if we can scroll more within the section
-        return viewportBottom < sectionBottom - 50; // 50px buffer
-      } else {
-        // Scrolling up - check if we can scroll more within the section  
-        return viewportTop > sectionTop + 50; // 50px buffer
-      }
-    };
-
-    const handleWheel = (e) => {
-      const currentTime = Date.now();
-      
-      // Prevent rapid scrolling
-      if (currentTime - lastScrollTime < scrollDelay) {
-        e.preventDefault();
-        return;
-      }
-      
-      lastScrollTime = currentTime;
-
-      // If currently transitioning, ignore scroll
-      if (isTransitioning) {
-        e.preventDefault();
-        return;
-      }
-
-      const delta = e.deltaY;
-      const direction = delta > 0 ? 1 : -1;
-
-      // Check if we can scroll within the current section
-      if (canScrollInSection(direction)) {
-        // Allow normal scrolling within the section
-        return;
-      }
-
-      // Prevent default only when we're at section boundaries
-      e.preventDefault();
-
-      const nextIndex = currentSectionIndex + direction;
-
-      // Check if we can move to next/previous section
-      if (nextIndex >= 0 && nextIndex < sectionRefs.length) {
-        setScrollAttempts(prev => prev + 1);
-
-        // If enough scroll attempts, transition to next section
-        if (scrollAttempts >= requiredScrollAttempts - 1) {
-          setIsTransitioning(true);
-          setScrollAttempts(0);
-
-          // Start exit animation for current section
-          setVisibleSections(prev => ({
-            ...prev,
-            [sectionNames[currentSectionIndex]]: false
-          }));
-
-          // After exit animation, scroll to next section
-          setTimeout(() => {
-            setCurrentSectionIndex(nextIndex);
-            
-            // Always scroll to the top of the entering section
-            const targetSection = sectionRefs[nextIndex].current;
-            if (targetSection) {
-              const sectionTop = targetSection.offsetTop;
-              window.scrollTo({
-                top: sectionTop,
-                behavior: 'smooth'
-              });
-            }
-
-            // Start entrance animation for new section
-            setTimeout(() => {
-              setVisibleSections(prev => ({
-                hero: nextIndex === 0,
-                about: nextIndex === 1,
-                whyJoin: nextIndex === 2,
-                fleet: nextIndex === 3,
-                reviews: nextIndex === 4,
-                sponsors: nextIndex === 5,
-              }));
-
-              // Release transition lock
-              setTimeout(() => {
-                setIsTransitioning(false);
-              }, 1500);
-            }, 600);
-          }, 1000);
-        }
-      } else {
-        // Reset scroll attempts if trying to go beyond bounds
-        setScrollAttempts(0);
-      }
-    };
-
-    // Keyboard navigation
-    const handleKeyDown = (e) => {
-      if (e.key === 'ArrowDown' || e.key === 'PageDown') {
-        e.preventDefault();
-        // For keyboard navigation, ensure we're at section boundary before triggering transition
-        const nextIndex = currentSectionIndex + 1;
-        if (nextIndex < sectionRefs.length) {
-          if (!canScrollInSection(1)) {
-            handleWheel({ deltaY: 1, preventDefault: () => {} });
-          }
-        }
-      } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
-        e.preventDefault();
-        // For keyboard navigation, ensure we're at section boundary before triggering transition
-        const prevIndex = currentSectionIndex - 1;
-        if (prevIndex >= 0) {
-          if (!canScrollInSection(-1)) {
-            handleWheel({ deltaY: -1, preventDefault: () => {} });
-          }
-        }
-      }
-    };
-
-    // Reset scroll attempts after inactivity
-    const resetScrollAttempts = () => {
-      setScrollAttempts(0);
-    };
-
-    let resetTimeout;
-    const handleScrollReset = () => {
-      clearTimeout(resetTimeout);
-      resetTimeout = setTimeout(resetScrollAttempts, 2000); // Reset after 2 seconds of no scrolling
-    };
-
-    // Track scroll position to update current section
-    const handleScroll = () => {
-      if (isTransitioning) return;
-
-      const scrollTop = window.pageYOffset;
-      const viewportHeight = window.innerHeight;
-      const viewportCenter = scrollTop + viewportHeight / 2;
-
-      // Find which section is currently in the center of the viewport
-      let newSectionIndex = currentSectionIndex;
-      
-      sectionRefs.forEach((ref, index) => {
-        if (ref.current) {
-          const sectionTop = ref.current.offsetTop;
-          const sectionHeight = ref.current.offsetHeight;
-          const sectionCenter = sectionTop + sectionHeight / 2;
-          
-          if (Math.abs(viewportCenter - sectionCenter) < sectionHeight / 2) {
-            newSectionIndex = index;
-          }
-        }
-      });
-
-      // Update current section if it changed
-      if (newSectionIndex !== currentSectionIndex) {
-        setCurrentSectionIndex(newSectionIndex);
-        setScrollAttempts(0); // Reset scroll attempts when section changes naturally
-        
-        // Update visible sections
-        setVisibleSections({
-          hero: newSectionIndex === 0,
-          about: newSectionIndex === 1,
-          whyJoin: newSectionIndex === 2,
-          fleet: newSectionIndex === 3,
-          reviews: newSectionIndex === 4,
-          sponsors: newSectionIndex === 5,
-        });
-      }
-    };
-
-    document.addEventListener('wheel', handleWheel, { passive: false });
-    document.addEventListener('keydown', handleKeyDown);
-    document.addEventListener('wheel', handleScrollReset, { passive: true });
-    document.addEventListener('scroll', handleScroll, { passive: true });
-
-    return () => {
-      document.removeEventListener('wheel', handleWheel);
-      document.removeEventListener('keydown', handleKeyDown);
-      document.removeEventListener('wheel', handleScrollReset);
-      document.removeEventListener('scroll', handleScroll);
-      clearTimeout(resetTimeout);
-    };
-  }, [currentSectionIndex, scrollAttempts, isTransitioning, isMobile]);
-
-
-
-
-
-  // sponsors
-
-  
 
 
   return (
-    <div className="w-full bg-black">
-      {/* Hero Section */}
-       <motion.section
+    <div className="w-full bg-black overflow-x-hidden">
+            {/* Hero Section */}
+      <motion.section
         ref={heroRef}
-         data-section="hero"
-         className="relative w-screen h-screen flex items-center justify-center bg-black overflow-hidden"
-         initial={{ opacity: 0, scale: 0.8, y: 100 }}
-         animate={{ 
-           opacity: isMobile ? 1 : (visibleSections.hero ? 1 : 0),
-           scale: isMobile ? 1 : (visibleSections.hero ? 1 : 0.8),
-           y: isMobile ? 0 : (visibleSections.hero ? 0 : (currentSectionIndex > 0 ? -100 : 100))
-         }}
-         transition={{ 
-           duration: 1.5, 
-           ease: "easeInOut",
-           staggerChildren: 0.3
-         }}
+        data-section="hero"
+        className="relative w-screen h-screen flex items-center justify-center bg-black overflow-hidden"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.2, ease: "easeOut" }}
       >
         <video
           src={videoFile}
@@ -340,13 +91,9 @@ export default function Index() {
 
                  <motion.div
            className="absolute text-center text-white z-10"
-           initial={{ opacity: 0, y: 50, scale: 0.9 }}
-           animate={{ 
-             opacity: isMobile ? 1 : (visibleSections.hero ? 1 : 0), 
-             y: isMobile ? 0 : (visibleSections.hero ? 0 : 50),
-             scale: isMobile ? 1 : (visibleSections.hero ? 1 : 0.9)
-           }}
-           transition={{ duration: 1.2, delay: 0.4, ease: "easeOut" }}
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 1.5, delay: 0.5, ease: "easeOut" }}
          >
           <motion.h1
             className="text-6xl md:text-9xl font-bold italic text-red-600 font-mono mb-4"
@@ -379,25 +126,25 @@ export default function Index() {
          ref={aboutRef}
          data-section="about"
          className="flex flex-col lg:flex-row items-center gap-10 px-6 lg:px-20 py-20 bg-black min-h-screen"
-         initial={{ opacity: 0, y: 100, scale: 0.8 }}
-         animate={{ 
-           opacity: isMobile ? 1 : (visibleSections.about ? 1 : 0),
-           y: isMobile ? 0 : (visibleSections.about ? 0 : (currentSectionIndex > 1 ? -100 : 100)),
-           scale: isMobile ? 1 : (visibleSections.about ? 1 : 0.8)
+        initial={{ y: isMobile ? 0 : 120, opacity: 0 }}
+         whileInView={{ 
+          y: 0,
+          opacity: 1
          }}
-         transition={{ duration: 1.4, ease: "easeInOut", staggerChildren: 0.2 }}
+        viewport={{ once: true, amount: 0.15 }}
+        transition={{ duration: 1.2, ease: "easeOut", staggerChildren: 0.3 }}
          whileHover="hovered"
        >
           {/* Image Section */}
                  <motion.div
            className="flex-1 relative overflow-hidden rounded-2xl shadow-2xl group cursor-pointer"
-           initial={{ x: -120, opacity: 0, scale: 0.9 }}
-           animate={{ 
-             x: isMobile ? 0 : (visibleSections.about ? 0 : -120), 
-             opacity: isMobile ? 1 : (visibleSections.about ? 1 : 0),
-             scale: isMobile ? 1 : (visibleSections.about ? 1 : 0.9)
+          initial={{ y: isMobile ? 0 : 100, opacity: 0 }}
+           whileInView={{ 
+            y: 0,
+            opacity: 1
            }}
-           transition={{ duration: 1.0, delay: 0.3, ease: "easeOut" }}
+           viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 1.0, delay: 0.2, ease: "easeOut" }}
            whileHover={{ scale: 1.02 }}
           >
             <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-transparent to-black/30 z-10 group-hover:from-black/40 transition-all duration-500"></div>
@@ -414,34 +161,44 @@ export default function Index() {
           {/* Text Section */}
                  <motion.div
            className="flex-1 text-center lg:text-left"
-           initial={{ x: 120, opacity: 0, scale: 0.9 }}
-           animate={{ 
-             x: isMobile ? 0 : (visibleSections.about ? 0 : 120), 
-             opacity: isMobile ? 1 : (visibleSections.about ? 1 : 0),
-             scale: isMobile ? 1 : (visibleSections.about ? 1 : 0.9)
+          initial={{ y: isMobile ? 0 : 100, opacity: 0 }}
+           whileInView={{ 
+            y: 0,
+            opacity: 1
            }}
-           transition={{ duration: 1.0, delay: 0.5, ease: "easeOut" }}
+           viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 1.0, delay: 0.5, ease: "easeOut" }}
          >
           <h2 className="text-5xl font-black text-white mb-6 tracking-wide font-mono uppercase relative inline-block">
               About REEV
             <motion.div
             className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 h-[0.1rem] bg-gradient-to-r from-transparent via-red-600 to-transparent"
-            initial={{ width: 0 }}
+            initial={{ width: isMobile ? "100%" : 0 }}
+            animate={{ width: isMobile ? "100%" : 0 }}
             variants={{
-              rest: { width: 0 },
+              rest: { width: isMobile ? "100%" : 0 },
               hovered: { width: "100%" },
             }}
             transition={{ duration: 0.3 }}
           />
             </h2>
-          <p className="text-lg lg:text-xl leading-relaxed text-gray-300 font-light max-w-2xl">
+          <motion.p 
+            className="text-lg lg:text-xl leading-relaxed text-gray-300 font-light max-w-2xl"
+            initial={{ y: isMobile ? 0 : 80, opacity: 0 }}
+            whileInView={{ 
+              y: 0,
+              opacity: 1
+            }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 1.0, delay: 0.8, ease: "easeOut" }}
+          >
               "Globally we are witnessing a technology shift in the automotive
               industry from conventional fuel-powered vehicles to alternative
               fuel-powered vehicles. With the Indian government's initiative
               towards faster adoption of EVs through FAME-II policy, we are
               aligned to take this opportunity to develop indigenous solutions
               for the Indian market."
-            </p>
+            </motion.p>
                  </motion.div>
        </motion.section>
 
@@ -450,31 +207,33 @@ export default function Index() {
          ref={whyJoinRef}
          data-section="whyJoin"
          className="py-20 bg-black min-h-screen"
-         initial={{ opacity: 0, y: 120, scale: 0.8 }}
-         animate={{ 
-           opacity: isMobile ? 1 : (visibleSections.whyJoin ? 1 : 0),
-           y: isMobile ? 0 : (visibleSections.whyJoin ? 0 : (currentSectionIndex > 2 ? -120 : 120)),
-           scale: isMobile ? 1 : (visibleSections.whyJoin ? 1 : 0.8)
+        initial={{ y: isMobile ? 0 : 150, opacity: 0 }}
+         whileInView={{ 
+          y: 0,
+          opacity: 1
          }}
-         transition={{ duration: 1.4, ease: "easeInOut", staggerChildren: 0.15 }}
+        viewport={{ once: true, amount: 0.1 }}
+        transition={{ duration: 1.3, ease: "easeOut", staggerChildren: 0.2 }}
          whileHover="hovered"
        >
             <motion.div 
           className="text-center mb-16 group cursor-pointer"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ 
-            opacity: isMobile ? 1 : (visibleSections.whyJoin ? 1 : 0),
-            y: isMobile ? 0 : (visibleSections.whyJoin ? 0 : 50)
+          initial={{ y: isMobile ? 0 : 80, opacity: 0 }}
+          whileInView={{ 
+            y: 0,
+            opacity: 1
           }}
+          viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 1.0, delay: 0.2, ease: "easeOut" }}
         >
           <h2 className="text-5xl font-black text-white mb-4 tracking-wide font-mono uppercase relative inline-block">
             Why Join Us?
             <motion.div
               className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 h-[0.1rem] bg-gradient-to-r from-transparent via-red-600 to-transparent"
-              initial={{ width: 0 }}
+              initial={{ width: isMobile ? "100%" : 0 }}
+              animate={{ width: isMobile ? "100%" : 0 }}
               variants={{
-                rest: { width: 0 },
+                rest: { width: isMobile ? "100%" : 0 },
                 hovered: { width: "100%" },
               }}
               transition={{ duration: 0.3 }}
@@ -484,13 +243,13 @@ export default function Index() {
 
           <motion.div 
            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[1rem] lg:gap-[3rem] px-6 lg:px-[17rem]"
-           initial={{ y: 80, opacity: 0, scale: 0.9 }}
-           animate={{ 
-             y: isMobile ? 0 : (visibleSections.whyJoin ? 0 : 80), 
-             opacity: isMobile ? 1 : (visibleSections.whyJoin ? 1 : 0),
-             scale: isMobile ? 1 : (visibleSections.whyJoin ? 1 : 0.9)
+          initial={{ y: isMobile ? 0 : 120, opacity: 0 }}
+           whileInView={{ 
+            y: 0,
+            opacity: 1
            }}
-           transition={{ duration: 1.2, delay: 0.4, ease: "easeOut" }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 1.0, delay: 0.5, ease: "easeOut" }}
              >
           {[
             {
@@ -528,15 +287,15 @@ export default function Index() {
             <motion.div 
                key={index}
                className="bg-white/5 backdrop-blur-sm col-span-1 rounded-lg p-6 mb-[3rem] border border-red-600/20 group cursor-pointer grid h-[20rem] md:h-[25rem]"
-               initial={{ y: 60, opacity: 0, scale: 0.8 }}
-               animate={{ 
-                 y: isMobile ? 0 : (visibleSections.whyJoin ? 0 : 60), 
-                 opacity: isMobile ? 1 : (visibleSections.whyJoin ? 1 : 0),
-                 scale: isMobile ? 1 : (visibleSections.whyJoin ? 1 : 0.8)
+              initial={{ y: isMobile ? 0 : 100, opacity: 0 }}
+               whileInView={{ 
+                y: 0,
+                opacity: 1
                }}
+               viewport={{ once: true, amount: 0.3 }}
                transition={{ 
-                 duration: 0.8, 
-                 delay: visibleSections.whyJoin ? 0.6 + (index * 0.15) : 0,
+                duration: 1.0, 
+                delay: 0.8 + (index * 0.2),
                  ease: "easeOut"
                }}
                whileHover={{ 
@@ -566,33 +325,35 @@ export default function Index() {
          ref={fleetRef}
          data-section="fleet"
          className="bg-black py-20 min-h-screen"
-         initial={{ opacity: 0, y: 120, scale: 0.8 }}
-         animate={{ 
-           opacity: isMobile ? 1 : (visibleSections.fleet ? 1 : 0),
-           y: isMobile ? 0 : (visibleSections.fleet ? 0 : (currentSectionIndex > 3 ? -120 : 120)),
-           scale: isMobile ? 1 : (visibleSections.fleet ? 1 : 0.8)
+        initial={{ y: isMobile ? 0 : 150, opacity: 0 }}
+         whileInView={{ 
+          y: 0,
+          opacity: 1
          }}
-         transition={{ duration: 1.4, ease: "easeInOut", staggerChildren: 0.2 }}
+        viewport={{ once: true, amount: 0.1 }}
+        transition={{ duration: 1.4, ease: "easeOut", staggerChildren: 0.3 }}
          whileHover="hovered"
        >
         <div className="w-full ">
           {/* Section Header */}
           <motion.div 
             className="text-center mb-16 group cursor-pointer"
-            initial={{ y: 50, opacity: 0 }}
-            animate={{ 
-              y: visibleSections.fleet ? 0 : 50, 
-              opacity: visibleSections.fleet ? 1 : 0 
+            initial={{ y: isMobile ? 0 : 80, opacity: 0 }}
+            whileInView={{ 
+              y: 0,
+              opacity: 1
             }}
-            transition={{ duration: 1.0, delay: 0.2, ease: "easeOut" }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 1.0, delay: 0.3, ease: "easeOut" }}
           >
             <h2 className="text-5xl font-black text-white mb-4 tracking-wide font-mono uppercase relative inline-block">
                 OUR FLEET
               <motion.div
                 className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 h-[0.1rem] bg-gradient-to-r from-transparent via-red-600 to-transparent"
-                initial={{ width: 0 }}
+                initial={{ width: isMobile ? "100%" : 0 }}
+                animate={{ width: isMobile ? "100%" : 0 }}
                 variants={{
-                  rest: { width: 0 },
+                  rest: { width: isMobile ? "100%" : 0 },
                   hovered: { width: "100%" },
                 }}
                 transition={{ duration: 0.3 }}
@@ -605,12 +366,13 @@ export default function Index() {
             {/* REEV Racer */}
             <motion.div 
               className="group cursor-pointer col-span-1 h-[40rem]"
-              initial={{ x: -100, opacity: 0 }}
-              animate={{ 
-                x: visibleSections.fleet ? 0 : -100, 
-                opacity: visibleSections.fleet ? 1 : 0 
+              initial={{ x: isMobile ? 0 : -120, opacity: 0 }}
+              whileInView={{ 
+                x: 0, 
+                opacity: 1 
               }}
-              transition={{ duration: 0.7, delay: 0.4 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 1.2, delay: 0.6, ease: "easeOut" }}
             >
               <div className="relative overflow-hidden bg-black h-[40rem]">
                 <motion.img 
@@ -641,12 +403,13 @@ export default function Index() {
             {/* REEV GoCar */}
             <motion.div 
               className="group cursor-pointer col-span-1"
-              initial={{ x: 100, opacity: 0 }}
-              animate={{ 
-                x: visibleSections.fleet ? 0 : 100, 
-                opacity: visibleSections.fleet ? 1 : 0 
+              initial={{ x: isMobile ? 0 : 120, opacity: 0 }}
+              whileInView={{ 
+                x: 0, 
+                opacity: 1 
               }}
-              transition={{ duration: 0.7, delay: 0.6 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 1.2, delay: 0.9, ease: "easeOut" }}
               whileHover="hovered"
             >
               <div className="relative overflow-hidden bg-black h-[40rem]">
@@ -683,31 +446,33 @@ export default function Index() {
          ref={reviewsRef}
          data-section="reviews"
          className="py-20 bg-black min-h-screen"
-         initial={{ opacity: 0, y: 120, scale: 0.8 }}
-         animate={{ 
-           opacity: isMobile ? 1 : (visibleSections.reviews ? 1 : 0),
-           y: isMobile ? 0 : (visibleSections.reviews ? 0 : (currentSectionIndex > 4 ? -120 : 120)),
-           scale: isMobile ? 1 : (visibleSections.reviews ? 1 : 0.8)
+        initial={{ y: isMobile ? 0 : 150, opacity: 0 }}
+         whileInView={{ 
+          y: 0,
+          opacity: 1
          }}
-         transition={{ duration: 1.4, ease: "easeInOut" }}
+        viewport={{ once: true, amount: 0.1 }}
+        transition={{ duration: 1.5, ease: "easeOut" }}
          whileHover="hovered"
        >
         <motion.div 
           className="text-center mb-16 group cursor-pointer"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ 
-            opacity: visibleSections.reviews ? 1 : 0,
-            y: visibleSections.reviews ? 0 : 50
+          initial={{ y: isMobile ? 0 : 80, opacity: 0 }}
+          whileInView={{ 
+            y: 0,
+            opacity: 1
           }}
-          transition={{ duration: 1.0, delay: 0.2, ease: "easeOut" }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 1.0, delay: 0.3, ease: "easeOut" }}
         >
           <h2 className="text-5xl font-black text-white mb-4 tracking-wide font-mono uppercase relative inline-block">
             Reviews
             <motion.div
               className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 h-[0.1rem] bg-gradient-to-r from-transparent via-red-600 to-transparent"
-              initial={{ width: 0 }}
+              initial={{ width: isMobile ? "100%" : 0 }}
+              animate={{ width: isMobile ? "100%" : 0 }}
               variants={{
-                rest: { width: 0 },
+                rest: { width: isMobile ? "100%" : 0 },
                 hovered: { width: "100%" },
               }}
               transition={{ duration: 0.3 }}
@@ -810,16 +575,16 @@ export default function Index() {
                  return (
                    <motion.div
                      key={`${index}-${review.name}`}
-                     className={`absolute bg-white/10 backdrop-blur-sm rounded-xl p-8 border-2 transition-all duration-700 ${
+                     className={`absolute bg-white/10 rounded-xl p-8 border-2 transition-all duration-700 ${
                        isCenter 
                          ? 'border-red-600 w-[28rem] h-96 z-30' 
                          : isAdjacent 
-                           ? 'border-white/20 w-72 h-56 z-20'
-                           : 'border-white/10 w-64 h-48 z-10'
+                           ? 'border-white/20 w-[28rem] h-96 z-20'
+                           : 'border-white/10 w-[28rem] h-96 z-10'
                      }`}
                      initial={false}
                      animate={{
-                       x: position * 380, // Increased spacing for better infinite effect
+                       x: position * 450, // Increased spacing for better infinite effect
                        scale: isCenter ? 1 : isAdjacent ? 0.8 : 0.6,
                        opacity: isVisible ? (isCenter ? 1 : isAdjacent ? 0.5 : 0.2) : 0,
                        filter: isCenter ? 'blur(0px)' : isAdjacent ? 'blur(1px)' : 'blur(3px)',
@@ -870,17 +635,6 @@ export default function Index() {
               </div>
 
           {/* Indicators */}
-          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-            {[0, 1, 2, 3].map((index) => (
-              <button
-                key={index}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  index === currentReviewIndex ? 'bg-red-600' : 'bg-white/30'
-                }`}
-                onClick={() => setCurrentReviewIndex(index)}
-              />
-            ))}
-                </div>
               </div>
       </motion.section>
           
@@ -889,32 +643,34 @@ export default function Index() {
          ref={sponsorsRef}
          data-section="sponsors"
          className="py-20 bg-black min-h-screen"
-         initial={{ opacity: 0, y: 120, scale: 0.8 }}
-         animate={{ 
-           opacity: isMobile ? 1 : (visibleSections.sponsors ? 1 : 0),
-           y: isMobile ? 0 : (visibleSections.sponsors ? 0 : (currentSectionIndex > 5 ? -120 : 120)),
-           scale: isMobile ? 1 : (visibleSections.sponsors ? 1 : 0.8)
+        initial={{ y: isMobile ? 0 : 150, opacity: 0 }}
+         whileInView={{ 
+          y: 0,
+          opacity: 1
          }}
-         transition={{ duration: 1.4, ease: "easeInOut" }}
+        viewport={{ once: true, amount: 0.1 }}
+        transition={{ duration: 1.6, ease: "easeOut" }}
          whileHover="hovered"
        >
         {/* Sponsors Content */}
         <motion.div 
           className="text-center mb-16 group cursor-pointer"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ 
-            opacity: visibleSections.sponsors ? 1 : 0,
-            y: visibleSections.sponsors ? 0 : 50
+          initial={{ y: isMobile ? 0 : 80, opacity: 0 }}
+          whileInView={{ 
+            y: 0,
+            opacity: 1
           }}
-          transition={{ duration: 1.0, delay: 0.2, ease: "easeOut" }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 1.0, delay: 0.3, ease: "easeOut" }}
         >
           <h2 className="text-5xl font-black text-white mb-4 tracking-wide font-mono uppercase relative inline-block">
             Sponsors
             <motion.div
               className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 h-[0.1rem] bg-gradient-to-r from-transparent via-red-600 to-transparent"
-              initial={{ width: 0 }}
+              initial={{ width: isMobile ? "100%" : 0 }}
+              animate={{ width: isMobile ? "100%" : 0 }}
               variants={{
-                rest: { width: 0 },
+                rest: { width: isMobile ? "100%" : 0 },
                 hovered: { width: "100%" },
               }}
               transition={{ duration: 0.3 }}
@@ -930,36 +686,54 @@ export default function Index() {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <motion.div 
-            className="flex gap-32 whitespace-nowrap"
-            animate={{ x: ["-100%", "0%"] }}
-            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+          <div 
+            className="flex gap-8 md:gap-16 whitespace-nowrap will-change-transform"
+            style={{
+              animation: 'marquee 30s linear infinite',
+            }}
           >
+            {/* First set of sponsors */}
             {[
-              { img: slideImg1, title: "Connectivity", desc: "Collaborate with others" },
-              { img: slideImg2, title: "Graphic Designing", desc: "To create effectiveness" },
-              { img: slideImg3, title: "Readability", desc: "Proper spacing & font" },
-              { img: slideImg4, title: "Professional Branding", desc: "Consistent tone & voice" },
-              { img: slideImg5, title: "User-friendliness", desc: "Quick to get into" },
-              { img: slideImg1, title: "Connectivity", desc: "Collaborate with others" },
-              { img: slideImg2, title: "Graphic Designing", desc: "To create effectiveness" }
+              { Icon: asset13, name: "Asset 13", class: "w-[6rem] h-[6rem] md:w-[12rem] md:h-[12rem] mx-[4rem] md:mx-[6rem]" },
+              { Icon: slideImg2, name: "Dynamic Lazer", class: "w-[6rem] h-[6rem] md:w-[8rem] md:h-[8rem] mx-[4rem] md:mx-[6rem]" },
+              { Icon: slideImg3, name: "Poweron", class: "w-[6rem] h-[6rem] md:w-[8rem] md:h-[8rem] mx-[4rem] md:mx-[6rem]" },
+              { Icon: slideImg5, name: "Ansys", class: "w-[8rem] h-[8rem] md:w-[12rem] md:h-[12rem] mx-[4rem] md:mx-[6rem]" },
+              { Icon: slideImg6, name: "Kapras Automation", class: "w-[6rem] h-[6rem] md:w-[12rem] md:h-[12rem] mx-[4rem] md:mx-[6rem]" },
+              { Icon: slideImg4, name: "Rafftar logo", class: "w-[6rem] h-[6rem] md:w-[8rem] md:h-[8rem] mx-[4rem] md:mx-[6rem]" },
             ].map((item, index) => (
               <motion.div 
-                key={index}
-                className="flex items-center gap-4 flex-shrink-0"
-                whileHover={{ scale: 1.05 }}
+                key={`first-${index}`}
+                className="flex items-center justify-center flex-shrink-0"
+                whileHover={{ scale: 1.1 }}
+                transition={{ duration: 0.2 }}
               >
-                <img src={item.img} className="w-20 h-20 invert" alt="" />
-                <div>
-                  <h2 className="text-4xl font-mono text-red-600">
-                    {item.title}
-                  </h2>
-                  <p className="text-base text-gray-300">{item.desc}</p>
-                </div>
+                <item.Icon className={`${item.class} invert opacity-80 hover:opacity-100 transition-opacity duration-300`} />
               </motion.div>
             ))}
-          </motion.div>
+            
+            {/* Second set for seamless loop */}
+            {[
+              { Icon: asset13, name: "Asset 13", class: "w-[8rem] h-[8rem] md:w-[8rem] md:h-[8rem] mx-[4rem] md:mx-[6rem]" },
+              { Icon: slideImg2, name: "Dynamic Lazer", class: "w-[8rem] h-[8rem] md:w-[8rem] md:h-[8rem] mx-[4rem] md:mx-[6rem]" },
+              { Icon: slideImg3, name: "Poweron", class: "w-[8rem] h-[8rem] md:w-[8rem] md:h-[8rem] mx-[4rem] md:mx-[6rem]" },
+              { Icon: slideImg5, name: "Ansys", class: "w-[8rem] h-[8rem] md:w-[8rem] md:h-[8rem] mx-[4rem] md:mx-[6rem]" },
+              { Icon: slideImg6, name: "Kapras Automation", class: "w-[8rem] h-[8rem] md:w-[8rem] md:h-[8rem] mx-[4rem] md:mx-[6rem]" },
+              { Icon: slideImg4, name: "Rafftar logo", class: "w-[8rem] h-[8rem] md:w-[8rem] md:h-[8rem] mx-[4rem] md:mx-[6rem]" },
+            ].map((item, index) => (
+              <motion.div 
+                key={`second-${index}`}
+                className="flex items-center justify-center flex-shrink-0"
+                whileHover={{ scale: 1.1 }}
+                transition={{ duration: 0.2 }}
+              >
+                <item.Icon className={`${item.class} invert opacity-80 hover:opacity-100 transition-opacity duration-300`} />
+              </motion.div>
+            ))}
+
+
+          </div>
         </motion.div>
+
 
         {/* Footer Content Integrated */}
         <footer className="bg-black border-t border-red-600 text-white px-[8%] lg:px-[12%] pt-8 font-mono">
