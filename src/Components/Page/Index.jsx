@@ -11,12 +11,12 @@ import Img from "../../assets/why.jpg";
 import videoFile from "../../assets/video.mp4";
 
 // Assets
-import asset13  from "../../assets/Asset 13.svg?react";
-import slideImg2 from "../../assets/Dynamic Lazer.svg?react";
-import slideImg3 from "../../assets/Poweron.svg?react";
-import slideImg4 from "../../assets/Rafftar logo.svg?react";
-import slideImg5 from "../../assets/ansys.svg?react";
-import slideImg6 from "../../assets/Kapras Automation.svg?react";
+import slideImg1  from "../../assets/Asset_13_img.png";
+import slideImg2 from "../../assets/Dynamic_Lazer_img.png";
+import slideImg3 from "../../assets/Poweron .png";
+import slideImg4 from "../../assets/Rafftar logo.jpg";
+import slideImg5 from "../../assets/ansys_img.png";
+import slideImg6 from "../../assets/Kapres_Automation_img.png";
 
 // Splide imports
 import { Splide, SplideSlide } from "@splidejs/react-splide";
@@ -693,11 +693,11 @@ export default function Index() {
           >
             {/* First set of sponsors */}
             {[
-              { Icon: asset13, name: "Asset 13", class: "w-[6rem] h-[6rem] md:w-[12rem] md:h-[12rem] mx-[4rem] md:mx-[6rem]" },
-              { Icon: slideImg2, name: "Dynamic Lazer", class: "w-[6rem] h-[6rem] md:w-[8rem] md:h-[8rem] mx-[4rem] md:mx-[6rem]" },
-              { Icon: slideImg3, name: "Poweron", class: "w-[6rem] h-[6rem] md:w-[8rem] md:h-[8rem] mx-[4rem] md:mx-[6rem]" },
-              { Icon: slideImg5, name: "Ansys", class: "w-[8rem] h-[8rem] md:w-[12rem] md:h-[12rem] mx-[4rem] md:mx-[6rem]" },
-              { Icon: slideImg6, name: "Kapras Automation", class: "w-[6rem] h-[6rem] md:w-[12rem] md:h-[12rem] mx-[4rem] md:mx-[6rem]" },
+              { Icon: slideImg1, name: "Asset 13", class: "w-[8rem] h-[8rem] md:w-[12rem] md:h-[10rem] mx-[4rem] md:mx-[6rem] invert" },
+              { Icon: slideImg2, name: "Dynamic Lazer", class: "w-[8rem] h-[8rem] md:w-[10rem] md:h-[10rem] mx-[4rem] md:mx-[6rem]" },
+              { Icon: slideImg3, name: "Poweron", class: "w-[8rem] h-[8rem] md:w-[10rem] md:h-[10rem] mx-[4rem] md:mx-[6rem]" },
+              { Icon: slideImg5, name: "Ansys", class: "w-[8rem] h-[8rem] md:w-[12rem] md:h-[8rem] mx-[4rem] md:mx-[6rem] invert" },
+              { Icon: slideImg6, name: "Kapras Automation", class: "w-[6rem] h-[6rem] md:w-[10rem] md:h-[10rem] mx-[4rem] md:mx-[6rem]" },
               { Icon: slideImg4, name: "Rafftar logo", class: "w-[6rem] h-[6rem] md:w-[8rem] md:h-[8rem] mx-[4rem] md:mx-[6rem]" },
             ].map((item, index) => (
               <motion.div 
@@ -706,17 +706,17 @@ export default function Index() {
                 whileHover={{ scale: 1.1 }}
                 transition={{ duration: 0.2 }}
               >
-                <item.Icon className={`${item.class} invert opacity-80 hover:opacity-100 transition-opacity duration-300`} />
+                <img src={item.Icon} draggable="false" className={`${item.class} opacity-80 hover:opacity-100 transition-opacity duration-300`} />
               </motion.div>
             ))}
             
             {/* Second set for seamless loop */}
             {[
-              { Icon: asset13, name: "Asset 13", class: "w-[8rem] h-[8rem] md:w-[12rem] md:h-[12rem] mx-[4rem] md:mx-[6rem]" },
+              { Icon: slideImg1, name: "Asset 13", class: "w-[8rem] h-[8rem] md:w-[10rem] md:h-[10rem] mx-[4rem] md:mx-[6rem] invert" },
               { Icon: slideImg2, name: "Dynamic Lazer", class: "w-[8rem] h-[8rem] md:w-[8rem] md:h-[8rem] mx-[4rem] md:mx-[6rem]" },
               { Icon: slideImg3, name: "Poweron", class: "w-[8rem] h-[8rem] md:w-[8rem] md:h-[8rem] mx-[4rem] md:mx-[6rem]" },
-              { Icon: slideImg5, name: "Ansys", class: "w-[8rem] h-[8rem] md:w-[12rem] md:h-[12rem] mx-[4rem] md:mx-[6rem]" },
-              { Icon: slideImg6, name: "Kapras Automation", class: "w-[8rem] h-[8rem] md:w-[12rem] md:h-[12rem] mx-[4rem] md:mx-[6rem]" },
+              { Icon: slideImg5, name: "Ansys", class: "w-[8rem] h-[8rem] md:w-[10rem] md:h-[8rem] mx-[4rem] md:mx-[6rem] invert" },
+              { Icon: slideImg6, name: "Kapras Automation", class: "w-[8rem] h-[8rem] md:w-[10rem] md:h-[10rem] mx-[4rem] md:mx-[6rem]" },
               { Icon: slideImg4, name: "Rafftar logo", class: "w-[8rem] h-[8rem] md:w-[8rem] md:h-[8rem] mx-[4rem] md:mx-[6rem]" },
             ].map((item, index) => (
               <motion.div 
@@ -725,7 +725,7 @@ export default function Index() {
                 whileHover={{ scale: 1.1 }}
                 transition={{ duration: 0.2 }}
               >
-                <item.Icon className={`${item.class} invert opacity-80 hover:opacity-100 transition-opacity duration-300`} />
+                <img src={item.Icon} draggable="false" className={`${item.class} opacity-80 hover:opacity-100 transition-opacity duration-300`} />
               </motion.div>
             ))}
 
