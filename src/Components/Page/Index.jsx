@@ -75,7 +75,7 @@ export default function Index() {
       <motion.section
         ref={heroRef}
         data-section="hero"
-        className="relative w-screen h-screen flex items-center justify-center bg-black overflow-hidden"
+        className="relative w-full   h-screen flex items-center justify-center bg-black overflow-hidden"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1.2, ease: "easeOut" }}
@@ -294,8 +294,7 @@ export default function Index() {
                }}
                viewport={{ once: true, amount: 0.3 }}
                transition={{ 
-                duration: 1.0, 
-                delay: 0.8 + (index * 0.2),
+                duration: 0.3, 
                  ease: "easeOut"
                }}
                whileHover={{ 
@@ -713,11 +712,11 @@ export default function Index() {
             
             {/* Second set for seamless loop */}
             {[
-              { Icon: asset13, name: "Asset 13", class: "w-[8rem] h-[8rem] md:w-[8rem] md:h-[8rem] mx-[4rem] md:mx-[6rem]" },
+              { Icon: asset13, name: "Asset 13", class: "w-[8rem] h-[8rem] md:w-[12rem] md:h-[12rem] mx-[4rem] md:mx-[6rem]" },
               { Icon: slideImg2, name: "Dynamic Lazer", class: "w-[8rem] h-[8rem] md:w-[8rem] md:h-[8rem] mx-[4rem] md:mx-[6rem]" },
               { Icon: slideImg3, name: "Poweron", class: "w-[8rem] h-[8rem] md:w-[8rem] md:h-[8rem] mx-[4rem] md:mx-[6rem]" },
-              { Icon: slideImg5, name: "Ansys", class: "w-[8rem] h-[8rem] md:w-[8rem] md:h-[8rem] mx-[4rem] md:mx-[6rem]" },
-              { Icon: slideImg6, name: "Kapras Automation", class: "w-[8rem] h-[8rem] md:w-[8rem] md:h-[8rem] mx-[4rem] md:mx-[6rem]" },
+              { Icon: slideImg5, name: "Ansys", class: "w-[8rem] h-[8rem] md:w-[12rem] md:h-[12rem] mx-[4rem] md:mx-[6rem]" },
+              { Icon: slideImg6, name: "Kapras Automation", class: "w-[8rem] h-[8rem] md:w-[12rem] md:h-[12rem] mx-[4rem] md:mx-[6rem]" },
               { Icon: slideImg4, name: "Rafftar logo", class: "w-[8rem] h-[8rem] md:w-[8rem] md:h-[8rem] mx-[4rem] md:mx-[6rem]" },
             ].map((item, index) => (
               <motion.div 
