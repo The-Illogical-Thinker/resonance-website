@@ -33,7 +33,6 @@ function App() {
         <Route path="/" element={<Index />} />
         <Route path="/achievements" element={<Achievements />} />
       </Routes>
-      <Footer />
     </>
   );
 }
