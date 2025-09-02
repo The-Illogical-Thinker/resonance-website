@@ -23,8 +23,6 @@ import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 import { AutoScroll } from "@splidejs/splide-extension-auto-scroll";
 
-
-
 export default function Index() {
   const heroRef = useRef(null);
   const aboutRef = useRef(null);
@@ -37,6 +35,54 @@ export default function Index() {
   const [currentReviewIndex, setCurrentReviewIndex] = useState(0);
   const [isReviewHovered, setIsReviewHovered] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+
+  // Animation variants
+  const sectionVariants = {
+    hidden: { y: 150, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 1.3,
+        ease: "easeOut",
+        staggerChildren: 0.6, // increased stagger delay between children
+        delayChildren: 0.3, // delay before first child starts
+      },
+    },
+    hovered: {
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0,
+      },
+    },
+    exit: {
+      y: -150,
+      opacity: 0,
+      transition: {
+        duration: 1.0,
+        ease: "easeIn",
+        staggerChildren: 0.4, // reverse stagger when exiting
+        staggerDirection: -1, // reverse direction
+      },
+    },
+  };
+
+  const childVariants = {
+    hidden: { y: 80, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { duration: 1.0, ease: "easeOut" },
+    },
+    hovered: {
+      transition: { duration: 0.3, ease: "easeOut" },
+    },
+    exit: {
+      y: -80,
+      opacity: 0,
+      transition: { duration: 0.8, ease: "easeIn" },
+    },
+  };
 
   useEffect(() => {
     // Detect mobile device
@@ -67,15 +113,13 @@ export default function Index() {
     }
   }, [isReviewHovered]);
 
-
-
   return (
-    <div className="w-full bg-black overflow-x-hidden">
-            {/* Hero Section */}
+    <div className="w-full bg-[#101010] overflow-x-hidden">
+      {/* Hero Section */}
       <motion.section
         ref={heroRef}
         data-section="hero"
-        className="relative w-full   h-screen flex items-center justify-center bg-black overflow-hidden"
+        className="relative w-full h-screen flex items-center justify-center bg-[#101010] overflow-hidden"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1.2, ease: "easeOut" }}
@@ -89,12 +133,12 @@ export default function Index() {
           className="absolute inset-0 w-full h-full object-cover object-center"
         />
 
-                 <motion.div
-           className="absolute text-center text-white z-10"
+        <motion.div
+          className="absolute text-center text-white z-10"
           initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 1.5, delay: 0.5, ease: "easeOut" }}
-         >
+        >
           <motion.h1
             className="text-6xl md:text-9xl font-bold italic text-red-600 font-mono mb-4"
             transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
@@ -121,143 +165,104 @@ export default function Index() {
       {/* Spacer */}
       <div id="about" className="h-20"></div>
 
-             {/* About Section */}
-       <motion.section
-         ref={aboutRef}
-         data-section="about"
-         className="flex flex-col lg:flex-row items-center gap-10 px-6 lg:px-20 py-20 bg-black min-h-screen"
-        initial={{ y: isMobile ? 0 : 120, opacity: 0 }}
-         whileInView={{ 
-          y: 0,
-          opacity: 1
-         }}
-        viewport={{ once: true, amount: 0.15 }}
-        transition={{ duration: 1.2, ease: "easeOut", staggerChildren: 0.3 }}
-         whileHover="hovered"
-       >
-          {/* Image Section */}
-                 <motion.div
-           className="flex-1 relative overflow-hidden rounded-2xl shadow-2xl group cursor-pointer"
-          initial={{ y: isMobile ? 0 : 100, opacity: 0 }}
-           whileInView={{ 
-            y: 0,
-            opacity: 1
-           }}
-           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 1.0, delay: 0.2, ease: "easeOut" }}
-           whileHover={{ scale: 1.02 }}
-          >
-            <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-transparent to-black/30 z-10 group-hover:from-black/40 transition-all duration-500"></div>
-            <img
-              alt="About REEV"
+      {/* About Section */}
+      <motion.section
+        ref={aboutRef}
+        data-section="about"
+        className="flex flex-col lg:flex-row items-center gap-10 px-6 lg:px-20 py-20 bg-[#101010] min-h-screen"
+        variants={sectionVariants}
+        initial="hidden"
+        whileInView="visible"
+        whileHover="hovered"
+        exit="exit"
+        viewport={{ once: false, amount: 0.15 }}
+      >
+        {/* Image Section */}
+        <motion.div
+          className="flex-1 relative overflow-hidden rounded-2xl shadow-2xl group cursor-pointer"
+          variants={childVariants}
+          whileHover={{ scale: 1.02 }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-transparent to-black/30 z-10 group-hover:from-black/40 transition-all duration-500"></div>
+          <img
+            alt="About REEV"
             className="w-full h-80 lg:h-96 object-cover group-hover:scale-110 transition-transform duration-500"
-              loading="lazy"
-              src={Img}
-            />
-          {/* Hover underline effect */}
-          
+            loading="lazy"
+            src={Img}
+          />
         </motion.div>
 
-          {/* Text Section */}
-                 <motion.div
-           className="flex-1 text-center lg:text-left"
-          initial={{ y: isMobile ? 0 : 100, opacity: 0 }}
-           whileInView={{ 
-            y: 0,
-            opacity: 1
-           }}
-           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 1.0, delay: 0.5, ease: "easeOut" }}
-         >
+        {/* Text Section */}
+        <motion.div
+          className="flex-1 text-center lg:text-left"
+          variants={childVariants}
+        >
           <h2 className="text-5xl font-black text-white mb-6 tracking-wide font-mono uppercase relative inline-block">
-              About REEV
+            About REEV
             <motion.div
-            className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 h-[0.1rem] bg-gradient-to-r from-transparent via-red-600 to-transparent"
-            initial={{ width: isMobile ? "100%" : 0 }}
-            animate={{ width: isMobile ? "100%" : 0 }}
-            variants={{
-              rest: { width: isMobile ? "100%" : 0 },
-              hovered: { width: "100%" },
-            }}
-            transition={{ duration: 0.3 }}
-          />
-            </h2>
+              className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 h-[0.1rem] bg-gradient-to-r from-transparent via-red-600 to-transparent"
+              initial={{ width: 0 }}
+              variants={{
+                visible: { width: 0 },
+                hovered: { width: "100%" },
+              }}
+              transition={{ duration: 0.3 }}
+            />
+          </h2>
           <motion.p 
             className="text-lg lg:text-xl leading-relaxed text-gray-300 font-light max-w-2xl"
-            initial={{ y: isMobile ? 0 : 80, opacity: 0 }}
-            whileInView={{ 
-              y: 0,
-              opacity: 1
-            }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 1.0, delay: 0.8, ease: "easeOut" }}
+            variants={childVariants}
           >
-              "Globally we are witnessing a technology shift in the automotive
-              industry from conventional fuel-powered vehicles to alternative
-              fuel-powered vehicles. With the Indian government's initiative
-              towards faster adoption of EVs through FAME-II policy, we are
-              aligned to take this opportunity to develop indigenous solutions
-              for the Indian market."
-            </motion.p>
-                 </motion.div>
-       </motion.section>
+            "Globally we are witnessing a technology shift in the automotive
+            industry from conventional fuel-powered vehicles to alternative
+            fuel-powered vehicles. With the Indian government's initiative
+            towards faster adoption of EVs through FAME-II policy, we are
+            aligned to take this opportunity to develop indigenous solutions
+            for the Indian market."
+          </motion.p>
+        </motion.div>
+      </motion.section>
 
-            {/* Why Join Us Section */}
-             <motion.section 
-         ref={whyJoinRef}
-         data-section="whyJoin"
-         className="py-20 bg-black min-h-screen"
-        initial={{ y: isMobile ? 0 : 150, opacity: 0 }}
-         whileInView={{ 
-          y: 0,
-          opacity: 1
-         }}
-        viewport={{ once: true, amount: 0.1 }}
-        transition={{ duration: 1.3, ease: "easeOut", staggerChildren: 0.2 }}
-         whileHover="hovered"
-       >
-            <motion.div 
+      {/* Why Join Us Section */}
+      <motion.section 
+        ref={whyJoinRef}
+        data-section="whyJoin"
+        className="py-20 bg-[#101010] min-h-screen"
+        variants={sectionVariants}
+        initial="hidden"
+        whileInView="visible"
+        whileHover="hovered"
+        exit="exit"
+        viewport={{ once: false, amount: 0.1 }}
+      >
+        <motion.div 
           className="text-center mb-16 group cursor-pointer"
-          initial={{ y: isMobile ? 0 : 80, opacity: 0 }}
-          whileInView={{ 
-            y: 0,
-            opacity: 1
-          }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 1.0, delay: 0.2, ease: "easeOut" }}
+          variants={childVariants}
         >
           <h2 className="text-5xl font-black text-white mb-4 tracking-wide font-mono uppercase relative inline-block">
             Why Join Us?
             <motion.div
               className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 h-[0.1rem] bg-gradient-to-r from-transparent via-red-600 to-transparent"
-              initial={{ width: isMobile ? "100%" : 0 }}
-              animate={{ width: isMobile ? "100%" : 0 }}
+              initial={{ width: 0 }}
               variants={{
-                rest: { width: isMobile ? "100%" : 0 },
+                visible: { width: 0 },
                 hovered: { width: "100%" },
               }}
               transition={{ duration: 0.3 }}
             />
-        </h2>
-      </motion.div>
+          </h2>
+        </motion.div>
 
-          <motion.div 
-           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[1rem] lg:gap-[3rem] px-6 lg:px-[17rem]"
-          initial={{ y: isMobile ? 0 : 120, opacity: 0 }}
-           whileInView={{ 
-            y: 0,
-            opacity: 1
-           }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 1.0, delay: 0.5, ease: "easeOut" }}
-             >
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[1rem] lg:gap-[3rem] px-6 lg:px-[17rem]"
+          variants={childVariants}
+        >
           {[
             {
               title: "Innovation",
               description: "Work on cutting-edge electric vehicle technology and sustainable transportation solutions.",
               symbol: <TbBulbFilled className="size-10 fill-black"/>
             },
-
             {
               title: "Skill Development",
               description: "Develop your skills in automotive technology, motorsports, and sustainable engineering.",
@@ -285,23 +290,14 @@ export default function Index() {
             }
           ].map((item, index) => (
             <motion.div 
-               key={index}
-               className="bg-white/5 backdrop-blur-sm col-span-1 rounded-lg p-6 mb-[3rem] border border-red-600/20 group cursor-pointer grid h-[20rem] md:h-[25rem]"
-              initial={{ y: isMobile ? 0 : 100, opacity: 0 }}
-               whileInView={{ 
-                y: 0,
-                opacity: 1
-               }}
-               viewport={{ once: true, amount: 0.3 }}
-               transition={{ 
-                duration: 0.3, 
-                 ease: "easeOut"
-               }}
-               whileHover={{ 
-                 scale: 1.05,
-                 boxShadow: "0 0 20px rgba(220, 38, 38, 0.3)"
-               }}
-             >
+              key={index}
+              className="bg-white/5 backdrop-blur-sm col-span-1 rounded-lg p-6 mb-[3rem] border border-red-600/20 group cursor-pointer grid h-[20rem] md:h-[25rem]"
+              variants={childVariants}
+              whileHover={{ 
+                scale: 1.05,
+                boxShadow: "0 0 20px rgba(220, 38, 38, 0.3)"
+              }}
+            >
               <div className="justify-self-center grid bg-red-500 w-20 items-center justify-items-center h-20 rounded-full mt-[1.5rem]">
                 {item.symbol}
               </div>
@@ -316,43 +312,34 @@ export default function Index() {
               />
             </motion.div>
           ))}
-          </motion.div>
+        </motion.div>
       </motion.section>
 
       {/* Fleet Showcase Section */}
-             <motion.section 
-         ref={fleetRef}
-         data-section="fleet"
-         className="bg-black py-20 min-h-screen"
-        initial={{ y: isMobile ? 0 : 150, opacity: 0 }}
-         whileInView={{ 
-          y: 0,
-          opacity: 1
-         }}
-        viewport={{ once: true, amount: 0.1 }}
-        transition={{ duration: 1.4, ease: "easeOut", staggerChildren: 0.3 }}
-         whileHover="hovered"
-       >
-        <div className="w-full ">
+      <motion.section 
+        ref={fleetRef}
+        data-section="fleet"
+        className="bg-[#101010] py-20 min-h-screen"
+        variants={sectionVariants}
+        initial="hidden"
+        whileInView="visible"
+        whileHover="hovered"
+        exit="exit"
+        viewport={{ once: false, amount: 0.1 }}
+      >
+        <div className="w-full">
           {/* Section Header */}
           <motion.div 
             className="text-center mb-16 group cursor-pointer"
-            initial={{ y: isMobile ? 0 : 80, opacity: 0 }}
-            whileInView={{ 
-              y: 0,
-              opacity: 1
-            }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 1.0, delay: 0.3, ease: "easeOut" }}
+            variants={childVariants}
           >
             <h2 className="text-5xl font-black text-white mb-4 tracking-wide font-mono uppercase relative inline-block">
-                OUR FLEET
+              OUR FLEET
               <motion.div
                 className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 h-[0.1rem] bg-gradient-to-r from-transparent via-red-600 to-transparent"
-                initial={{ width: isMobile ? "100%" : 0 }}
-                animate={{ width: isMobile ? "100%" : 0 }}
+                initial={{ width: 0 }}
                 variants={{
-                  rest: { width: isMobile ? "100%" : 0 },
+                  visible: { width: 0 },
                   hovered: { width: "100%" },
                 }}
                 transition={{ duration: 0.3 }}
@@ -361,19 +348,13 @@ export default function Index() {
           </motion.div>
 
           {/* Fleet Grid */}
-                     <div className="grid grid-cols-1 lg:grid-cols-2">
+          <div className="grid grid-cols-1 lg:grid-cols-2">
             {/* REEV Racer */}
             <motion.div 
               className="group cursor-pointer col-span-1 h-[40rem]"
-              initial={{ x: isMobile ? 0 : -120, opacity: 0 }}
-              whileInView={{ 
-                x: 0, 
-                opacity: 1 
-              }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 1.2, delay: 0.6, ease: "easeOut" }}
+              variants={childVariants}
             >
-              <div className="relative overflow-hidden bg-black h-[40rem]">
+              <div className="relative overflow-hidden bg-[#101010] h-[40rem]">
                 <motion.img 
                   src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
                   alt="REEV Racer"
@@ -383,35 +364,28 @@ export default function Index() {
                 
                 {/* Content Overlay */}
                 <div className="absolute bottom-0 left-0 right-0 p-8">
-                    <h3 className="text-4xl font-light text-white mb-3 font-mono tracking-wide group-hover:text-red-600 transition-colors duration-300">
+                  <h3 className="text-4xl font-light text-white mb-3 font-mono tracking-wide group-hover:text-red-600 transition-colors duration-300">
                     <span className="text-red-600 font-black italic">REEV</span> Racer
-                    </h3>
-                    <p className="text-gray-300 text-base mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  </h3>
+                  <p className="text-gray-300 text-base mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                     High-Performance Electric Racing Vehicle
-                    </p>
-                    <div className="flex items-center text-white text-sm font-light group-hover:text-red-600 transition-colors duration-300">
+                  </p>
+                  <div className="flex items-center text-white text-sm font-light group-hover:text-red-600 transition-colors duration-300">
                     <span>Discover</span>
-                      <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                      </svg>
-                    </div>
-              </div>
+                    </svg>
+                  </div>
+                </div>
               </div>
             </motion.div>
 
             {/* REEV GoCar */}
             <motion.div 
               className="group cursor-pointer col-span-1"
-              initial={{ x: isMobile ? 0 : 120, opacity: 0 }}
-              whileInView={{ 
-                x: 0, 
-                opacity: 1 
-              }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 1.2, delay: 0.9, ease: "easeOut" }}
-              whileHover="hovered"
+              variants={childVariants}
             >
-              <div className="relative overflow-hidden bg-black h-[40rem]">
+              <div className="relative overflow-hidden bg-[#101010] h-[40rem]">
                 <motion.img 
                   src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
                   alt="REEV GoCar"
@@ -421,19 +395,19 @@ export default function Index() {
                 
                 {/* Content Overlay */}
                 <div className="absolute bottom-0 left-0 right-0 p-8">
-                    <h3 className="text-4xl font-light text-white mb-3 font-mono tracking-wide group-hover:text-red-600 transition-colors duration-300">
+                  <h3 className="text-4xl font-light text-white mb-3 font-mono tracking-wide group-hover:text-red-600 transition-colors duration-300">
                     <span className="text-red-600 font-black italic">REEV</span> GoCar
-                    </h3>
-                    <p className="text-gray-300 text-base mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  </h3>
+                  <p className="text-gray-300 text-base mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                     Urban Electric Mobility Solution
-                    </p>
-                    <div className="flex items-center text-white text-sm font-light group-hover:text-red-600 transition-colors duration-300">
+                  </p>
+                  <div className="flex items-center text-white text-sm font-light group-hover:text-red-600 transition-colors duration-300">
                     <span>Discover</span>
-                      <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                      </svg>
-                    </div>
-              </div>
+                    </svg>
+                  </div>
+                </div>
               </div>
             </motion.div>
           </div>
@@ -441,51 +415,41 @@ export default function Index() {
       </motion.section>
 
       {/* Review Section */}
-             <motion.section 
-         ref={reviewsRef}
-         data-section="reviews"
-         className="py-20 bg-black min-h-screen"
-        initial={{ y: isMobile ? 0 : 150, opacity: 0 }}
-         whileInView={{ 
-          y: 0,
-          opacity: 1
-         }}
-        viewport={{ once: true, amount: 0.1 }}
-        transition={{ duration: 1.5, ease: "easeOut" }}
-         whileHover="hovered"
-       >
+      <motion.section 
+        ref={reviewsRef}
+        data-section="reviews"
+        className="py-20 bg-[#101010] min-h-screen"
+        variants={sectionVariants}
+        initial="hidden"
+        whileInView="visible"
+        whileHover="hovered"
+        exit="exit"
+        viewport={{ once: false, amount: 0.1 }}
+      >
         <motion.div 
           className="text-center mb-16 group cursor-pointer"
-          initial={{ y: isMobile ? 0 : 80, opacity: 0 }}
-          whileInView={{ 
-            y: 0,
-            opacity: 1
-          }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 1.0, delay: 0.3, ease: "easeOut" }}
+          variants={childVariants}
         >
           <h2 className="text-5xl font-black text-white mb-4 tracking-wide font-mono uppercase relative inline-block">
             Reviews
             <motion.div
               className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 h-[0.1rem] bg-gradient-to-r from-transparent via-red-600 to-transparent"
-              initial={{ width: isMobile ? "100%" : 0 }}
-              animate={{ width: isMobile ? "100%" : 0 }}
+              initial={{ width: 0 }}
               variants={{
-                rest: { width: isMobile ? "100%" : 0 },
+                visible: { width: 0 },
                 hovered: { width: "100%" },
               }}
               transition={{ duration: 0.3 }}
             />
-                  </h2>
-      </motion.div>
+          </h2>
+        </motion.div>
 
         {/* Review Carousel */}
-        <div 
+        <motion.div 
           className="relative h-[28rem] overflow-hidden"
+          variants={childVariants}
           onMouseEnter={() => setIsReviewHovered(true)}
-                      style={{
-            cursor: 'none'
-          }}
+          style={{ cursor: 'none' }}
           onMouseMove={(e) => {
             const rect = e.currentTarget.getBoundingClientRect();
             const x = e.clientX - rect.left;
@@ -527,170 +491,151 @@ export default function Index() {
             style={{ display: 'none' }}
           ></div>
 
-                     <div className="flex items-center justify-center h-full relative">
-             {(() => {
-               const reviews = [
-                 {
-                   name: "Dr. Sarah Johnson",
-                   position: "Head of Engineering, Tesla",
-                   review: "REEV's innovative approach to electric vehicle technology is truly remarkable. Their commitment to sustainability and performance sets them apart in the industry.",
-                   image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
-                 },
-                 {
-                   name: "Michael Chen",
-                   position: "Racing Engineer, Formula E",
-                   review: "Working with REEV has been an incredible experience. Their attention to detail and passion for electric motorsports is unmatched.",
-                   image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
-                 },
-                 {
-                   name: "Emily Rodriguez",
-                   position: "Automotive Journalist",
-                   review: "REEV represents the future of automotive technology. Their vehicles combine cutting-edge innovation with environmental responsibility.",
-                   image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
-                 },
-                 {
-                   name: "Professor David Kim",
-                   position: "MIT Energy Systems Lab",
-                   review: "The research collaboration with REEV has yielded breakthrough results in battery efficiency and electric motor optimization.",
-                   image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
-                 }
-               ];
+          <div className="flex items-center justify-center h-full relative">
+            {(() => {
+              const reviews = [
+                {
+                  name: "Dr. Sarah Johnson",
+                  position: "Head of Engineering, Tesla",
+                  review: "REEV's innovative approach to electric vehicle technology is truly remarkable. Their commitment to sustainability and performance sets them apart in the industry.",
+                  image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
+                },
+                {
+                  name: "Michael Chen",
+                  position: "Racing Engineer, Formula E",
+                  review: "Working with REEV has been an incredible experience. Their attention to detail and passion for electric motorsports is unmatched.",
+                  image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
+                },
+                {
+                  name: "Emily Rodriguez",
+                  position: "Automotive Journalist",
+                  review: "REEV represents the future of automotive technology. Their vehicles combine cutting-edge innovation with environmental responsibility.",
+                  image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+                },
+                {
+                  name: "Professor David Kim",
+                  position: "MIT Energy Systems Lab",
+                  review: "The research collaboration with REEV has yielded breakthrough results in battery efficiency and electric motor optimization.",
+                  image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+                }
+              ];
 
-               // Create extended array for infinite loop effect
-               const extendedReviews = [
-                 ...reviews.slice(-2), // Last 2 items at the beginning
-                 ...reviews,           // Original items
-                 ...reviews.slice(0, 2) // First 2 items at the end
-               ];
+              // Create extended array for infinite loop effect
+              const extendedReviews = [
+                ...reviews.slice(-2), // Last 2 items at the beginning
+                ...reviews,           // Original items
+                ...reviews.slice(0, 2) // First 2 items at the end
+              ];
 
-               return extendedReviews.map((review, index) => {
-                 // Adjust position calculation for infinite loop
-                 const adjustedIndex = index - 2; // Account for prepended items
-                 const position = adjustedIndex - currentReviewIndex;
-                 const isCenter = position === 0;
-                 const isAdjacent = Math.abs(position) === 1;
-                 const isVisible = Math.abs(position) <= 2; // Show more cards for infinite effect
+              return extendedReviews.map((review, index) => {
+                // Adjust position calculation for infinite loop
+                const adjustedIndex = index - 2; // Account for prepended items
+                const position = adjustedIndex - currentReviewIndex;
+                const isCenter = position === 0;
+                const isAdjacent = Math.abs(position) === 1;
+                const isVisible = Math.abs(position) <= 2; // Show more cards for infinite effect
 
-                 return (
-                   <motion.div
-                     key={`${index}-${review.name}`}
-                     className={`absolute bg-white/10 rounded-xl p-8 border-2 transition-all duration-700 ${
-                       isCenter 
-                         ? 'border-red-600 w-[28rem] h-96 z-30' 
-                         : isAdjacent 
-                           ? 'border-white/20 w-[28rem] h-96 z-20'
-                           : 'border-white/10 w-[28rem] h-96 z-10'
-                     }`}
-                     initial={false}
-                     animate={{
-                       x: position * 450, // Increased spacing for better infinite effect
-                       scale: isCenter ? 1 : isAdjacent ? 0.8 : 0.6,
-                       opacity: isVisible ? (isCenter ? 1 : isAdjacent ? 0.5 : 0.2) : 0,
-                       filter: isCenter ? 'blur(0px)' : isAdjacent ? 'blur(1px)' : 'blur(3px)',
-                     }}
-                     transition={{ duration: 0.7, ease: "easeInOut" }}
-                      style={{
-                       display: isVisible ? 'block' : 'none'
-                     }}
-                   >
-                     <div className="flex flex-col items-center text-center h-full">
-                       <motion.img
-                         src={review.image}
-                         alt={review.name}
-                         className="w-20 h-20 rounded-full object-cover mb-4 border-2 border-red-600"
-                         initial={{ scale: 0 }}
-                         animate={{ scale: isCenter ? 1 : 0.8 }}
-                         transition={{ duration: 0.5, delay: isCenter ? 0.2 : 0 }}
-                       />
-                       <motion.h3
-                         className="text-xl font-bold text-white mb-2 font-mono"
-                         initial={{ y: 20, opacity: 0 }}
-                         animate={{ y: 0, opacity: isCenter ? 1 : 0.8 }}
-                         transition={{ duration: 0.5, delay: isCenter ? 0.3 : 0 }}
-                       >
-                         {review.name}
-                       </motion.h3>
-                       <motion.p
-                         className="text-red-600 text-sm mb-4 font-medium"
-                         initial={{ y: 20, opacity: 0 }}
-                         animate={{ y: 0, opacity: isCenter ? 1 : 0.8 }}
-                         transition={{ duration: 0.5, delay: isCenter ? 0.4 : 0 }}
-                       >
-                         {review.position}
-                       </motion.p>
-                       <motion.p
-                         className="text-gray-300 text-sm leading-relaxed"
-                         initial={{ y: 20, opacity: 0 }}
-                         animate={{ y: 0, opacity: isCenter ? 1 : 0.6 }}
-                         transition={{ duration: 0.5, delay: isCenter ? 0.5 : 0 }}
-                       >
-                         "{review.review}"
-                       </motion.p>
-                </div>
-                   </motion.div>
-                 );
-               });
-             })()}
-              </div>
-
-          {/* Indicators */}
-              </div>
+                return (
+                  <motion.div
+                    key={`${index}-${review.name}`}
+                    className={`absolute bg-white/10 rounded-xl p-8 border-2 transition-all duration-700 ${
+                      isCenter 
+                        ? 'border-red-600 w-[28rem] h-96 z-30' 
+                        : isAdjacent 
+                          ? 'border-white/20 w-[28rem] h-96 z-20'
+                          : 'border-white/10 w-[28rem] h-96 z-10'
+                    }`}
+                    initial={false}
+                    animate={{
+                      x: position * 450, // Increased spacing for better infinite effect
+                      scale: isCenter ? 1 : isAdjacent ? 0.8 : 0.6,
+                      opacity: isVisible ? (isCenter ? 1 : isAdjacent ? 0.5 : 0.2) : 0,
+                      filter: isCenter ? 'blur(0px)' : isAdjacent ? 'blur(1px)' : 'blur(3px)',
+                    }}
+                    transition={{ duration: 0.7, ease: "easeInOut" }}
+                    style={{
+                      display: isVisible ? 'block' : 'none'
+                    }}
+                  >
+                    <div className="flex flex-col items-center text-center h-full">
+                      <motion.img
+                        src={review.image}
+                        alt={review.name}
+                        className="w-20 h-20 rounded-full object-cover mb-4 border-2 border-red-600"
+                        initial={{ scale: 0 }}
+                        animate={{ scale: isCenter ? 1 : 0.8 }}
+                        transition={{ duration: 0.5, delay: isCenter ? 0.2 : 0 }}
+                      />
+                      <motion.h3
+                        className="text-xl font-bold text-white mb-2 font-mono"
+                        initial={{ y: 20, opacity: 0 }}
+                        animate={{ y: 0, opacity: isCenter ? 1 : 0.8 }}
+                        transition={{ duration: 0.5, delay: isCenter ? 0.3 : 0 }}
+                      >
+                        {review.name}
+                      </motion.h3>
+                      <motion.p
+                        className="text-red-600 text-sm mb-4 font-medium"
+                        initial={{ y: 20, opacity: 0 }}
+                        animate={{ y: 0, opacity: isCenter ? 1 : 0.8 }}
+                        transition={{ duration: 0.5, delay: isCenter ? 0.4 : 0 }}
+                      >
+                        {review.position}
+                      </motion.p>
+                      <motion.p
+                        className="text-gray-300 text-sm leading-relaxed"
+                        initial={{ y: 20, opacity: 0 }}
+                        animate={{ y: 0, opacity: isCenter ? 1 : 0.6 }}
+                        transition={{ duration: 0.5, delay: isCenter ? 0.5 : 0 }}
+                      >
+                        "{review.review}"
+                      </motion.p>
+                    </div>
+                  </motion.div>
+                );
+              });
+            })()}
+          </div>
+        </motion.div>
       </motion.section>
           
       {/* Sponsors & Footer Section */}
-             <motion.section 
-         ref={sponsorsRef}
-         data-section="sponsors"
-         className="py-20 bg-black min-h-screen"
-        initial={{ y: isMobile ? 0 : 150, opacity: 0 }}
-         whileInView={{ 
-          y: 0,
-          opacity: 1
-         }}
-        viewport={{ once: true, amount: 0.1 }}
-        transition={{ duration: 1.6, ease: "easeOut" }}
-         whileHover="hovered"
-       >
+      <motion.section 
+        ref={sponsorsRef}
+        data-section="sponsors"
+        className="pt-20 bg-[#101010]"
+        variants={sectionVariants}
+        initial="hidden"
+        whileInView="visible"
+        whileHover="hovered"
+        exit="exit"
+        viewport={{ once: false, amount: 0.1 }}
+      >
         {/* Sponsors Content */}
         <motion.div 
           className="text-center mb-16 group cursor-pointer"
-          initial={{ y: isMobile ? 0 : 80, opacity: 0 }}
-          whileInView={{ 
-            y: 0,
-            opacity: 1
-          }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 1.0, delay: 0.3, ease: "easeOut" }}
+          variants={childVariants}
         >
           <h2 className="text-5xl font-black text-white mb-4 tracking-wide font-mono uppercase relative inline-block">
             Sponsors
             <motion.div
               className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 h-[0.1rem] bg-gradient-to-r from-transparent via-red-600 to-transparent"
-              initial={{ width: isMobile ? "100%" : 0 }}
-              animate={{ width: isMobile ? "100%" : 0 }}
+              initial={{ width: 0 }}
               variants={{
-                rest: { width: isMobile ? "100%" : 0 },
+                visible: { width: 0 },
                 hovered: { width: "100%" },
               }}
               transition={{ duration: 0.3 }}
             />
-                  </h2>
+          </h2>
         </motion.div>
 
         {/* Animated Marquee */}
         <motion.div 
-          className="relative w-full overflow-hidden py-8 backdrop-blur-sm mb-16"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+          className="marquee-container"
+          variants={childVariants}
         >
-          <div 
-            className="flex gap-8 md:gap-16 whitespace-nowrap will-change-transform"
-            style={{
-              animation: 'marquee 30s linear infinite',
-            }}
-          >
+          <div className="marquee-content">
             {/* First set of sponsors */}
             {[
               { Icon: slideImg1, name: "Asset 13", class: "w-[8rem] h-[8rem] md:w-[12rem] md:h-[10rem] mx-[4rem] md:mx-[6rem] invert" },
@@ -700,42 +645,58 @@ export default function Index() {
               { Icon: slideImg6, name: "Kapras Automation", class: "w-[6rem] h-[6rem] md:w-[10rem] md:h-[10rem] mx-[4rem] md:mx-[6rem]" },
               { Icon: slideImg4, name: "Rafftar logo", class: "w-[6rem] h-[6rem] md:w-[8rem] md:h-[8rem] mx-[4rem] md:mx-[6rem]" },
             ].map((item, index) => (
-              <motion.div 
-                key={`first-${index}`}
-                className="flex items-center justify-center flex-shrink-0"
-                whileHover={{ scale: 1.1 }}
-                transition={{ duration: 0.2 }}
-              >
-                <img src={item.Icon} draggable="false" className={`${item.class} opacity-80 hover:opacity-100 transition-opacity duration-300`} />
-              </motion.div>
+              <img
+                key={index}
+                src={item.Icon}
+                alt={item.name}
+                draggable="false"
+                className={`${item.class} opacity-80 hover:opacity-100 transition-opacity duration-300`}
+              />
             ))}
-            
-            {/* Second set for seamless loop */}
+
+            {/* Second set for seamless loop - exact duplicate */}
             {[
-              { Icon: slideImg1, name: "Asset 13", class: "w-[8rem] h-[8rem] md:w-[10rem] md:h-[10rem] mx-[4rem] md:mx-[6rem] invert" },
-              { Icon: slideImg2, name: "Dynamic Lazer", class: "w-[8rem] h-[8rem] md:w-[8rem] md:h-[8rem] mx-[4rem] md:mx-[6rem]" },
-              { Icon: slideImg3, name: "Poweron", class: "w-[8rem] h-[8rem] md:w-[8rem] md:h-[8rem] mx-[4rem] md:mx-[6rem]" },
-              { Icon: slideImg5, name: "Ansys", class: "w-[8rem] h-[8rem] md:w-[10rem] md:h-[8rem] mx-[4rem] md:mx-[6rem] invert" },
-              { Icon: slideImg6, name: "Kapras Automation", class: "w-[8rem] h-[8rem] md:w-[10rem] md:h-[10rem] mx-[4rem] md:mx-[6rem]" },
-              { Icon: slideImg4, name: "Rafftar logo", class: "w-[8rem] h-[8rem] md:w-[8rem] md:h-[8rem] mx-[4rem] md:mx-[6rem]" },
+              { Icon: slideImg1, name: "Asset 13", class: "w-[8rem] h-[8rem] md:w-[12rem] md:h-[10rem] mx-[4rem] md:mx-[6rem] invert" },
+              { Icon: slideImg2, name: "Dynamic Lazer", class: "w-[8rem] h-[8rem] md:w-[10rem] md:h-[10rem] mx-[4rem] md:mx-[6rem]" },
+              { Icon: slideImg3, name: "Poweron", class: "w-[8rem] h-[8rem] md:w-[10rem] md:h-[10rem] mx-[4rem] md:mx-[6rem]" },
+              { Icon: slideImg5, name: "Ansys", class: "w-[8rem] h-[8rem] md:w-[12rem] md:h-[8rem] mx-[4rem] md:mx-[6rem] invert" },
+              { Icon: slideImg6, name: "Kapras Automation", class: "w-[6rem] h-[6rem] md:w-[10rem] md:h-[10rem] mx-[4rem] md:mx-[6rem]" },
+              { Icon: slideImg4, name: "Rafftar logo", class: "w-[6rem] h-[6rem] md:w-[8rem] md:h-[8rem] mx-[4rem] md:mx-[6rem]" },
             ].map((item, index) => (
-              <motion.div 
-                key={`second-${index}`}
-                className="flex items-center justify-center flex-shrink-0"
-                whileHover={{ scale: 1.1 }}
-                transition={{ duration: 0.2 }}
-              >
-                <img src={item.Icon} draggable="false" className={`${item.class} opacity-80 hover:opacity-100 transition-opacity duration-300`} />
-              </motion.div>
+              <img
+                key={`dup-${index}`}
+                src={item.Icon}
+                alt={item.name}
+                draggable="false"
+                className={`${item.class} opacity-80 hover:opacity-100 transition-opacity duration-300`}
+              />
             ))}
 
-
+            {/* Third set for extra smoothness */}
+            {[
+              { Icon: slideImg1, name: "Asset 13", class: "w-[8rem] h-[8rem] md:w-[12rem] md:h-[10rem] mx-[4rem] md:mx-[6rem] invert" },
+              { Icon: slideImg2, name: "Dynamic Lazer", class: "w-[8rem] h-[8rem] md:w-[10rem] md:h-[10rem] mx-[4rem] md:mx-[6rem]" },
+              { Icon: slideImg3, name: "Poweron", class: "w-[8rem] h-[8rem] md:w-[10rem] md:h-[10rem] mx-[4rem] md:mx-[6rem]" },
+              { Icon: slideImg5, name: "Ansys", class: "w-[8rem] h-[8rem] md:w-[12rem] md:h-[8rem] mx-[4rem] md:mx-[6rem] invert" },
+              { Icon: slideImg6, name: "Kapras Automation", class: "w-[6rem] h-[6rem] md:w-[10rem] md:h-[10rem] mx-[4rem] md:mx-[6rem]" },
+              { Icon: slideImg4, name: "Rafftar logo", class: "w-[6rem] h-[6rem] md:w-[8rem] md:h-[8rem] mx-[4rem] md:mx-[6rem]" },
+            ].map((item, index) => (
+              <img
+                key={`third-${index}`}
+                src={item.Icon}
+                alt={item.name}
+                draggable="false"
+                className={`${item.class} opacity-80 hover:opacity-100 transition-opacity duration-300`}
+              />
+            ))}
           </div>
         </motion.div>
 
-
         {/* Footer Content Integrated */}
-        <footer className="bg-black border-t border-red-600 text-white px-[8%] lg:px-[12%] pt-8 font-mono">
+        <motion.footer 
+          className="bg-black w-full border-t border-red-600 text-white px-[8%] lg:px-[12%] pt-8 mt-20 grid items-center py-[5rem] font-mono"
+          variants={childVariants}
+        >
           {/* Navigation Links */}
           <div className="mx-auto flex flex-wrap justify-center items-center gap-4 text-base py-6">
             {["Home", "Achievements", "Team", "Go-Kart", "Reev", "Join Us"].map(
@@ -750,7 +711,7 @@ export default function Index() {
                 </Fragment>
               )
             )}
-                </div>
+          </div>
 
           {/* Social Icons */}
           <div className="flex justify-center gap-4 mb-4">
@@ -770,13 +731,13 @@ export default function Index() {
                 <i className={`${icon} text-3xl`}></i>
               </a>
             ))}
-                </div>
+          </div>
 
           {/* Copyright */}
           <div className="text-center text-gray-400 text-sm pb-8">
             © 2025 <span className="text-red-600 font-bold">REEV</span> Racing Club. All rights reserved.
-              </div>
-        </footer>
+          </div>
+        </motion.footer>
       </motion.section>
     </div>
   );
