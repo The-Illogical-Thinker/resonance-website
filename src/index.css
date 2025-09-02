@@ -9,6 +9,23 @@
   100% { transform: translateX(-50%); }
 }
 
+/* Infinite marquee container */
+.marquee-container {
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+}
+
+.marquee-content {
+  display: flex;
+  animation: marquee 30s linear infinite;
+  width: max-content;
+}
+
+.marquee-content:hover {
+  animation-play-state: paused;
+}
+
 * {
   margin: 0;
   padding: 0;
