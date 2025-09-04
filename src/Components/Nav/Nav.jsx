@@ -18,15 +18,34 @@ function Nav() {
 
   // Disable background scrolling when mobile menu is open
   useEffect(() => {
+    const originalStyle = window.getComputedStyle(document.body).overflow;
+    const scrollY = window.scrollY;
+
     if (menuOpen) {
+      // Save current scroll position and prevent scrolling
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.position = 'fixed';
+      document.body.style.width = '100%';
       document.body.style.overflow = 'hidden';
+      document.body.style.touchAction = 'none';
     } else {
-      document.body.style.overflow = 'auto';
+      // Restore scroll position and styles
+      const scrollYToRestore = parseInt(document.body.style.top || '0') * -1;
+      document.body.style.position = '';
+      document.body.style.width = '';
+      document.body.style.top = '';
+      document.body.style.overflow = originalStyle;
+      document.body.style.touchAction = '';
+      window.scrollTo(0, scrollYToRestore);
     }
 
     // Cleanup on unmount
     return () => {
-      document.body.style.overflow = 'auto';
+      document.body.style.position = '';
+      document.body.style.width = '';
+      document.body.style.top = '';
+      document.body.style.overflow = originalStyle;
+      document.body.style.touchAction = '';
     };
   }, [menuOpen]);
 

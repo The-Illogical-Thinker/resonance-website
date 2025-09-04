@@ -292,7 +292,6 @@ export default function Index() {
             <motion.div 
               key={index}
               className="bg-white/5 backdrop-blur-sm col-span-1 rounded-lg p-6 mb-[3rem] border border-red-600/20 group cursor-pointer grid h-[20rem] md:h-[25rem]"
-              variants={childVariants}
               whileHover={{ 
                 scale: 1.05,
                 boxShadow: "0 0 20px rgba(220, 38, 38, 0.3)"
@@ -352,7 +351,6 @@ export default function Index() {
             {/* REEV Racer */}
             <motion.div 
               className="group cursor-pointer col-span-1 h-[40rem]"
-              variants={childVariants}
             >
               <div className="relative overflow-hidden bg-[#101010] h-[40rem]">
                 <motion.img 
@@ -383,7 +381,6 @@ export default function Index() {
             {/* REEV GoCar */}
             <motion.div 
               className="group cursor-pointer col-span-1"
-              variants={childVariants}
             >
               <div className="relative overflow-hidden bg-[#101010] h-[40rem]">
                 <motion.img 
@@ -456,8 +453,8 @@ export default function Index() {
             const y = e.clientY - rect.top;
             const cursor = document.getElementById('custom-cursor');
             if (cursor) {
-              cursor.style.left = `${x}px`;
-              cursor.style.top = `${y}px`;
+              cursor.style.left = `${x - cursor.offsetWidth / 2}px`;
+              cursor.style.top = `${y - cursor.offsetHeight / 2}px`;
               cursor.style.display = 'block';
               
               // Change cursor based on position
@@ -520,20 +517,25 @@ export default function Index() {
                 }
               ];
 
-              // Create extended array for infinite loop effect
+              // Extended array for rendering
               const extendedReviews = [
-                ...reviews.slice(-2), // Last 2 items at the beginning
-                ...reviews,           // Original items
-                ...reviews.slice(0, 2) // First 2 items at the end
+                ...reviews.slice(-2),
+                ...reviews,
+                ...reviews.slice(0, 2),
               ];
 
               return extendedReviews.map((review, index) => {
-                // Adjust position calculation for infinite loop
-                const adjustedIndex = index - 2; // Account for prepended items
+                const adjustedIndex = index - 2; // account for prepended
                 const position = adjustedIndex - currentReviewIndex;
-                const isCenter = position === 0;
-                const isAdjacent = Math.abs(position) === 1;
-                const isVisible = Math.abs(position) <= 2; // Show more cards for infinite effect
+
+                // Wrap positions to simulate infinite loop
+                let wrappedPos = position;
+                if (wrappedPos < -reviews.length / 2) wrappedPos += reviews.length;
+                if (wrappedPos > reviews.length / 2) wrappedPos -= reviews.length;
+
+                const isCenter = wrappedPos === 0;
+                const isAdjacent = Math.abs(wrappedPos) === 1;
+                const isVisible = Math.abs(wrappedPos) <= 2;
 
                 return (
                   <motion.div
@@ -547,15 +549,13 @@ export default function Index() {
                     }`}
                     initial={false}
                     animate={{
-                      x: position * 450, // Increased spacing for better infinite effect
+                      x: wrappedPos * 450,
                       scale: isCenter ? 1 : isAdjacent ? 0.8 : 0.6,
                       opacity: isVisible ? (isCenter ? 1 : isAdjacent ? 0.5 : 0.2) : 0,
                       filter: isCenter ? 'blur(0px)' : isAdjacent ? 'blur(1px)' : 'blur(3px)',
                     }}
                     transition={{ duration: 0.7, ease: "easeInOut" }}
-                    style={{
-                      display: isVisible ? 'block' : 'none'
-                    }}
+                    style={{ display: isVisible ? "block" : "none" }}
                   >
                     <div className="flex flex-col items-center text-center h-full">
                       <motion.img
