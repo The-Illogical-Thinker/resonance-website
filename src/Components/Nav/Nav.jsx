@@ -94,7 +94,7 @@ function Nav() {
 
         {/* Right Brand */}
         <div className="ml-auto text-4xl font-black italic tracking-wide cursor-pointer font-mono">
-          <span className="text-red-500">REEV</span> - SAEINDIA
+          <img src="/a-removebg-preview.png" alt="REEV" className="w-[13rem] h-[6rem]"/>
         </div>
 
         {/* Mobile Hamburger Menu Button */}

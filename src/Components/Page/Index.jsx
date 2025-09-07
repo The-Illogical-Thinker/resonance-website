@@ -4,7 +4,7 @@ import { BsFillPeopleFill, BsFillLaptopFill } from "react-icons/bs";
 import { TbBulbFilled } from "react-icons/tb";
 import { FaTools, FaHandsHelping } from "react-icons/fa";
 import { motion } from "motion/react"
-
+import TailwindSlideshow from "./Slideshow";
 import Img from "../../assets/why.jpg";
 
 // Video
@@ -124,14 +124,7 @@ export default function Index() {
         animate={{ opacity: 1 }}
         transition={{ duration: 1.2, ease: "easeOut" }}
       >
-        <video
-          src={videoFile}
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover object-center"
-        />
+        <TailwindSlideshow />
 
         <motion.div
           className="absolute text-center text-white z-10"
@@ -140,16 +133,16 @@ export default function Index() {
           transition={{ duration: 1.5, delay: 0.5, ease: "easeOut" }}
         >
           <motion.h1
-            className="text-6xl md:text-9xl font-bold italic text-red-600 font-mono mb-4"
+            className="text-3xl md:text-6xl font-bold italic text-red-600 font-mono mb-4"
             transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
           >
-            REEV
+            Resonance Racing REEV and gokart
           </motion.h1>
           <motion.h2
-            className="text-4xl md:text-7xl text-white font-mono mb-8"
+            className="text-2xl md:text-5xl text-white font-mono mb-8"
             transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
           >
-            SAEINDIA
+            Transforming will power into horsepower
           </motion.h2>
           <motion.a
             href="#about"
@@ -188,7 +181,7 @@ export default function Index() {
             alt="About REEV"
             className="w-full h-80 lg:h-96 object-cover group-hover:scale-110 transition-transform duration-500"
             loading="lazy"
-            src={Img}
+            src="/banner 5.jpg"
           />
         </motion.div>
 
@@ -354,7 +347,7 @@ export default function Index() {
             >
               <div className="relative overflow-hidden bg-[#101010] h-[40rem]">
                 <motion.img 
-                  src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                  src="PNG_image-removebg-preview.png"
                   alt="REEV Racer"
                   className="w-full h-full object-cover brightness-90 group-hover:scale-110 transition-transform duration-700"
                 />
@@ -384,7 +377,7 @@ export default function Index() {
             >
               <div className="relative overflow-hidden bg-[#101010] h-[40rem]">
                 <motion.img 
-                  src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                  src="/gokart cad 3d.png"
                   alt="REEV GoCar"
                   className="w-full h-full object-cover brightness-90 group-hover:scale-110 transition-transform duration-700"
                 />
