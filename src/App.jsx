@@ -32,6 +32,17 @@ function App() {
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/achievements" element={<Achievements />} />
+         <Route
+          path="/"
+          element={
+            <>
+              <About />
+              <Carousl />
+              <Timeline />
+            </>
+          }
+        />
+          <Route path="/reev" element={<Reev />} />
       </Routes>
       <Footer />
     </>
