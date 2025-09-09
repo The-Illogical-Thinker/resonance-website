@@ -1017,6 +1017,39 @@ nav {
 
 }
 
+/* Custom circular cursor */
+.custom-cursor {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  border: 2px solid white;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s ease, height 0.2s ease;
+}
+
+/* Cursor hover effect */
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+  scroll-behavior: smooth;
+  cursor: none !important;
+}
+
+.custom-cursor.hover {
+  width: 40px;
+  height: 40px;
+  background-color: rgba(220, 38, 38, 0.2);
+  border: 2px solid #dc2626;
+}
+
 .Joinme:hover .learn-more-line::after {
   width: 100%;
 }

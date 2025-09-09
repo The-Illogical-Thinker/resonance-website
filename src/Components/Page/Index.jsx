@@ -6,6 +6,7 @@ import { FaTools, FaHandsHelping } from "react-icons/fa";
 import { motion } from "motion/react"
 import TailwindSlideshow from "./Slideshow";
 import Img from "../../assets/why.jpg";
+import Footer from "../../Components/Footer/Footer.jsx";
 
 // Video
 import videoFile from "../../assets/video.mp4";
@@ -36,51 +37,57 @@ export default function Index() {
   const [isReviewHovered, setIsReviewHovered] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
-  // Animation variants
+  // Animation variants - Spring-like cubic-bezier timing, no opacity
   const sectionVariants = {
-    hidden: { y: 150, opacity: 0 },
+    hidden: { y: 150 },
     visible: {
       y: 0,
-      opacity: 1,
       transition: {
-        duration: 1.3,
-        ease: "easeOut",
-        staggerChildren: 0.6, // increased stagger delay between children
-        delayChildren: 0.3, // delay before first child starts
+        duration: 1.2,
+        ease: [0.34, 1.56, 0.64, 1], // Spring-like cubic-bezier
+        staggerChildren: 0.4, // stagger delay between children
+        delayChildren: 0.2, // delay before first child starts
       },
     },
     hovered: {
       transition: {
-        staggerChildren: 0.1,
+        staggerChildren: 0.08,
         delayChildren: 0,
+        ease: [0.34, 1.56, 0.64, 1],
       },
     },
     exit: {
       y: -150,
-      opacity: 0,
       transition: {
-        duration: 1.0,
-        ease: "easeIn",
-        staggerChildren: 0.4, // reverse stagger when exiting
+        duration: 0.8,
+        ease: [0.6, 0.04, 0.98, 0.34], // Reverse spring curve
+        staggerChildren: 0.3, // reverse stagger when exiting
         staggerDirection: -1, // reverse direction
       },
     },
   };
 
   const childVariants = {
-    hidden: { y: 80, opacity: 0 },
+    hidden: { y: 60 },
     visible: {
       y: 0,
-      opacity: 1,
-      transition: { duration: 1.0, ease: "easeOut" },
+      transition: { 
+        duration: 0.8, 
+        ease: [0.34, 1.56, 0.64, 1] // Bouncy spring-like timing
+      },
     },
     hovered: {
-      transition: { duration: 0.3, ease: "easeOut" },
+      transition: { 
+        duration: 0.25, 
+        ease: [0.34, 1.56, 0.64, 1] 
+      },
     },
     exit: {
-      y: -80,
-      opacity: 0,
-      transition: { duration: 0.8, ease: "easeIn" },
+      y: -60,
+      transition: { 
+        duration: 0.6, 
+        ease: [0.6, 0.04, 0.98, 0.34] 
+      },
     },
   };
 
@@ -120,35 +127,43 @@ export default function Index() {
         ref={heroRef}
         data-section="hero"
         className="relative w-full h-screen flex items-center justify-center bg-[#101010] overflow-hidden"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1.2, ease: "easeOut" }}
+        initial={{ y: 50 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 1.0, ease: [0.34, 1.56, 0.64, 1] }}
       >
         <TailwindSlideshow />
 
         <motion.div
           className="absolute text-center text-white z-10"
-          initial={{ y: 50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 1.5, delay: 0.5, ease: "easeOut" }}
+          initial={{ y: 80 }}
+          animate={{ y: 0 }}
+          transition={{ duration: 1.2, delay: 0.3, ease: [0.34, 1.56, 0.64, 1] }}
         >
           <motion.h1
-            className="text-3xl md:text-6xl font-bold italic text-red-600 font-mono mb-4"
-            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl drop-shadow-lg font-bold italic text-red-600 font-mono mb-4 px-4"
+            initial={{ y: 30 }}
+            animate={{ y: 0 }}
+            transition={{ duration: 1.0, delay: 0.5, ease: [0.34, 1.56, 0.64, 1] }}
           >
-            Resonance Racing REEV and gokart
+            Resonance Racing REEV and GOKART
           </motion.h1>
           <motion.h2
-            className="text-2xl md:text-5xl text-white font-mono mb-8"
-            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+            className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-5xl drop-shadow-lg text-white font-mono mb-8 px-4"
+            initial={{ y: 30 }}
+            animate={{ y: 0 }}
+            transition={{ duration: 1.0, delay: 0.7, ease: [0.34, 1.56, 0.64, 1] }}
           >
-            Transforming will power into horsepower
+            Transforming Will Power into Horsepower
           </motion.h2>
           <motion.a
             href="#about"
             className="text-red-600 font-mono text-lg hover:text-white transition-colors duration-300"
+            initial={{ y: 30 }}
             animate={{ y: [0, 5, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            transition={{ 
+              y: { duration: 2, repeat: Infinity, ease: [0.34, 1.56, 0.64, 1] },
+              initial: { duration: 1.0, delay: 0.9, ease: [0.34, 1.56, 0.64, 1] }
+            }}
           >
             Scroll Down
           </motion.a>
@@ -162,7 +177,7 @@ export default function Index() {
       <motion.section
         ref={aboutRef}
         data-section="about"
-        className="flex flex-col lg:flex-row items-center gap-10 px-6 lg:px-20 py-20 bg-[#101010] min-h-screen"
+        className="flex flex-col lg:flex-row items-center gap-6 lg:gap-10 px-4 sm:px-6 lg:px-20 py-12 lg:py-20 bg-[#101010] min-h-screen"
         variants={sectionVariants}
         initial="hidden"
         whileInView="visible"
@@ -181,7 +196,7 @@ export default function Index() {
             alt="About REEV"
             className="w-full h-80 lg:h-96 object-cover group-hover:scale-110 transition-transform duration-500"
             loading="lazy"
-            src="/banner 5.jpg"
+            src="/banner 2.png"
           />
         </motion.div>
 
@@ -247,7 +262,7 @@ export default function Index() {
         </motion.div>
 
         <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[1rem] lg:gap-[3rem] px-6 lg:px-[17rem]"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-[3rem] px-4 sm:px-6 lg:px-[17rem]"
           variants={childVariants}
         >
           {[
@@ -284,7 +299,7 @@ export default function Index() {
           ].map((item, index) => (
             <motion.div 
               key={index}
-              className="bg-white/5 backdrop-blur-sm col-span-1 rounded-lg p-6 mb-[3rem] border border-red-600/20 group cursor-pointer grid h-[20rem] md:h-[25rem]"
+              className="bg-white/5 backdrop-blur-sm col-span-1 rounded-lg p-4 sm:p-6 mb-6 lg:mb-[3rem] border border-red-600/20 group cursor-pointer grid h-auto min-h-[18rem] sm:h-[20rem] md:h-[25rem]"
               whileHover={{ 
                 scale: 1.05,
                 boxShadow: "0 0 20px rgba(220, 38, 38, 0.3)"
@@ -340,12 +355,12 @@ export default function Index() {
           </motion.div>
 
           {/* Fleet Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-2">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-0">
             {/* REEV Racer */}
             <motion.div 
-              className="group cursor-pointer col-span-1 h-[40rem]"
+              className="group cursor-pointer col-span-1 h-[30rem] sm:h-[35rem] lg:h-[40rem]"
             >
-              <div className="relative overflow-hidden bg-[#101010] h-[40rem]">
+              <div className="relative overflow-hidden bg-[#101010] h-[30rem] sm:h-[35rem] lg:h-[40rem]">
                 <motion.img 
                   src="PNG_image-removebg-preview.png"
                   alt="REEV Racer"
@@ -373,9 +388,9 @@ export default function Index() {
 
             {/* REEV GoCar */}
             <motion.div 
-              className="group cursor-pointer col-span-1"
+              className="group cursor-pointer col-span-1 h-[30rem] sm:h-[35rem] lg:h-[40rem]"
             >
-              <div className="relative overflow-hidden bg-[#101010] h-[40rem]">
+              <div className="relative overflow-hidden bg-[#101010] h-[30rem] sm:h-[35rem] lg:h-[40rem]">
                 <motion.img 
                   src="/gokart cad 3d.png"
                   alt="REEV GoCar"
@@ -436,50 +451,29 @@ export default function Index() {
 
         {/* Review Carousel */}
         <motion.div 
-          className="relative h-[28rem] overflow-hidden"
+          className="relative h-[24rem] sm:h-[26rem] lg:h-[28rem] overflow-hidden"
           variants={childVariants}
           onMouseEnter={() => setIsReviewHovered(true)}
-          style={{ cursor: 'none' }}
-          onMouseMove={(e) => {
-            const rect = e.currentTarget.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            const cursor = document.getElementById('custom-cursor');
-            if (cursor) {
-              cursor.style.left = `${x - cursor.offsetWidth / 2}px`;
-              cursor.style.top = `${y - cursor.offsetHeight / 2}px`;
-              cursor.style.display = 'block';
-              
-              // Change cursor based on position
-              const isLeftSide = x < rect.width / 2;
-              cursor.innerHTML = isLeftSide 
-                ? '<svg width="24" height="24" fill="white" viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>'
-                : '<svg width="24" height="24" fill="white" viewBox="0 0 24 24"><path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/></svg>';
-            }
-          }}
-          onMouseLeave={() => {
-            setIsReviewHovered(false)
-            const cursor = document.getElementById('custom-cursor');
-            if (cursor) cursor.style.display = 'none';
-          }}
-          onClick={(e) => {
-            const rect = e.currentTarget.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const isLeftSide = x < rect.width / 2;
-            
-            if (isLeftSide) {
-              setCurrentReviewIndex((prev) => (prev - 1 + 4) % 4);
-            } else {
-              setCurrentReviewIndex((prev) => (prev + 1) % 4);
-            }
-          }}
+          onMouseLeave={() => setIsReviewHovered(false)}
         >
-          {/* Custom Cursor */}
-          <div
-            id="custom-cursor"
-            className="absolute w-12 h-12 bg-red-600 rounded-full flex items-center justify-center pointer-events-none transform -translate-x-1/2 -translate-y-1/2 z-60"
-            style={{ display: 'none' }}
-          ></div>
+          {/* Navigation Buttons */}
+          <button
+            className="absolute left-4 top-1/2 transform -translate-y-1/2 z-50 w-12 h-12 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-700 transition-colors duration-300"
+            onClick={() => setCurrentReviewIndex((prev) => (prev - 1 + 4) % 4)}
+          >
+            <svg width="24" height="24" fill="white" viewBox="0 0 24 24">
+              <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+            </svg>
+          </button>
+          
+          <button
+            className="absolute right-4 top-1/2 transform -translate-y-1/2 z-50 w-12 h-12 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-700 transition-colors duration-300"
+            onClick={() => setCurrentReviewIndex((prev) => (prev + 1) % 4)}
+          >
+            <svg width="24" height="24" fill="white" viewBox="0 0 24 24">
+              <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/>
+            </svg>
+          </button>
 
           <div className="flex items-center justify-center h-full relative">
             {(() => {
@@ -533,21 +527,20 @@ export default function Index() {
                 return (
                   <motion.div
                     key={`${index}-${review.name}`}
-                    className={`absolute bg-white/10 rounded-xl p-8 border-2 transition-all duration-700 ${
+                    className={`absolute bg-white/10 rounded-xl p-4 sm:p-6 lg:p-8 border-2 transition-all duration-700 ${
                       isCenter 
-                        ? 'border-red-600 w-[28rem] h-96 z-30' 
+                        ? 'border-red-600 w-[20rem] sm:w-[24rem] lg:w-[28rem] h-80 sm:h-88 lg:h-96 z-30' 
                         : isAdjacent 
-                          ? 'border-white/20 w-[28rem] h-96 z-20'
-                          : 'border-white/10 w-[28rem] h-96 z-10'
+                          ? 'border-white/20 w-[20rem] sm:w-[24rem] lg:w-[28rem] h-80 sm:h-88 lg:h-96 z-20'
+                          : 'border-white/10 w-[20rem] sm:w-[24rem] lg:w-[28rem] h-80 sm:h-88 lg:h-96 z-10'
                     }`}
                     initial={false}
                     animate={{
-                      x: wrappedPos * 450,
-                      scale: isCenter ? 1 : isAdjacent ? 0.8 : 0.6,
-                      opacity: isVisible ? (isCenter ? 1 : isAdjacent ? 0.5 : 0.2) : 0,
-                      filter: isCenter ? 'blur(0px)' : isAdjacent ? 'blur(1px)' : 'blur(3px)',
+                      x: wrappedPos * (isMobile ? 280 : 450),
+                      scale: isCenter ? 1 : isAdjacent ? 0.85 : 0.7,
+                      filter: isCenter ? 'blur(0px)' : isAdjacent ? 'blur(1px)' : 'blur(2px)',
                     }}
-                    transition={{ duration: 0.7, ease: "easeInOut" }}
+                    transition={{ duration: 0.7, ease: [0.34, 1.56, 0.64, 1] }}
                     style={{ display: isVisible ? "block" : "none" }}
                   >
                     <div className="flex flex-col items-center text-center h-full">
@@ -555,31 +548,31 @@ export default function Index() {
                         src={review.image}
                         alt={review.name}
                         className="w-20 h-20 rounded-full object-cover mb-4 border-2 border-red-600"
-                        initial={{ scale: 0 }}
-                        animate={{ scale: isCenter ? 1 : 0.8 }}
-                        transition={{ duration: 0.5, delay: isCenter ? 0.2 : 0 }}
+                        initial={{ scale: 0, y: 20 }}
+                        animate={{ scale: isCenter ? 1 : 0.8, y: 0 }}
+                        transition={{ duration: 0.6, delay: isCenter ? 0.1 : 0, ease: [0.34, 1.56, 0.64, 1] }}
                       />
                       <motion.h3
                         className="text-xl font-bold text-white mb-2 font-mono"
-                        initial={{ y: 20, opacity: 0 }}
-                        animate={{ y: 0, opacity: isCenter ? 1 : 0.8 }}
-                        transition={{ duration: 0.5, delay: isCenter ? 0.3 : 0 }}
+                        initial={{ y: 30 }}
+                        animate={{ y: 0 }}
+                        transition={{ duration: 0.5, delay: isCenter ? 0.2 : 0, ease: [0.34, 1.56, 0.64, 1] }}
                       >
                         {review.name}
                       </motion.h3>
                       <motion.p
                         className="text-red-600 text-sm mb-4 font-medium"
-                        initial={{ y: 20, opacity: 0 }}
-                        animate={{ y: 0, opacity: isCenter ? 1 : 0.8 }}
-                        transition={{ duration: 0.5, delay: isCenter ? 0.4 : 0 }}
+                        initial={{ y: 30 }}
+                        animate={{ y: 0 }}
+                        transition={{ duration: 0.5, delay: isCenter ? 0.3 : 0, ease: [0.34, 1.56, 0.64, 1] }}
                       >
                         {review.position}
                       </motion.p>
                       <motion.p
                         className="text-gray-300 text-sm leading-relaxed"
-                        initial={{ y: 20, opacity: 0 }}
-                        animate={{ y: 0, opacity: isCenter ? 1 : 0.6 }}
-                        transition={{ duration: 0.5, delay: isCenter ? 0.5 : 0 }}
+                        initial={{ y: 30 }}
+                        animate={{ y: 0 }}
+                        transition={{ duration: 0.5, delay: isCenter ? 0.4 : 0, ease: [0.34, 1.56, 0.64, 1] }}
                       >
                         "{review.review}"
                       </motion.p>
@@ -687,49 +680,10 @@ export default function Index() {
 
         {/* Footer Content Integrated */}
         <motion.footer 
-          className="bg-black w-full border-t border-red-600 text-white px-[8%] lg:px-[12%] pt-8 mt-20 grid items-center py-[5rem] font-mono"
-          variants={childVariants}
+          className="bg-black w-full border-t border-red-600 text-white px-[8%] lg:px-[12%] pt-1 mt-20 grid items-center py-[1rem] font-mono"
         >
-          {/* Navigation Links */}
-          <div className="mx-auto flex flex-wrap justify-center items-center gap-4 text-base py-6">
-            {["Home", "Achievements", "Team", "Go-Kart", "Reev", "Join Us"].map(
-              (link, i) => (
-                <Fragment key={i}>
-                  <a
-                    href="#"
-                    className="hover:text-red-600 transition-colors mx-3 text-white"
-                  >
-                    {link}
-                  </a>
-                </Fragment>
-              )
-            )}
-          </div>
-
-          {/* Social Icons */}
-          <div className="flex justify-center gap-4 mb-4">
-            {[
-              { icon: "ri-instagram-line", url: "#" },
-              { icon: "ri-facebook-circle-fill", url: "#" },
-              { icon: "ri-linkedin-fill", url: "#" },
-              { icon: "ri-youtube-fill ", url: "#" },
-            ].map(({ icon, url }, idx) => (
-              <a
-                key={idx}
-                href={url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-20 h-20 flex items-center justify-center text-white hover:text-red-600 transition-all duration-300"
-              >
-                <i className={`${icon} text-3xl`}></i>
-              </a>
-            ))}
-          </div>
-
-          {/* Copyright */}
-          <div className="text-center text-gray-400 text-sm pb-8">
-            © 2025 <span className="text-red-600 font-bold">REEV</span> Racing Club. All rights reserved.
-          </div>
+          <Footer />
+          
         </motion.footer>
       </motion.section>
     </div>

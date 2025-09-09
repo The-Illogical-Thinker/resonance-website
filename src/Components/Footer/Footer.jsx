@@ -3,7 +3,7 @@ import React from "react";
 function Footer() {
   return (
     <>
-      <footer className="bg-black border-t border-red-600 text-white px-[8%] lg:px-[12%] pt-8 py-[5%] font-mono">
+      <footer className="bg-black text-white px-[8%] lg:px-[12%] pt-8 py-[5%] font-mono">
         {/* Navigation Links */}
         <div className="mx-auto flex flex-wrap justify-center items-center gap-4 text-base py-6 mt-10">
           {["Home", "Achievements", "Team", "Go-Kart", "Reev", "Join Us"].map(
