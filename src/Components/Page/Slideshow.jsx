@@ -29,7 +29,7 @@ const TailwindSlideshow = () => {
             key={i}
             src={src}
             alt={`Slide ${i}`}
-            className="w-full h-full flex-shrink-0 object-cover"
+            className="w-full h-full opacity-40 flex-shrink-0 object-cover"
           />
         ))}
       </div>

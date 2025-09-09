@@ -2,14 +2,13 @@ import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Nav from "./Components/Nav/Nav";
 import Index from "./Components/Page/Index";
-import Footer from "./Components/Footer/Footer";
 import Achievements from "./Components/Achievements/Achievements";
 import logo from "./assets/logo.png";
 import applogo from "./assets/gears-138199.gif";
-import About from "./Components/About";
-import Carousl from "./Components/Carousl";
-import Timeline from "./Components/Timeline";
-import Reev from "./Reev";
+import About from "./Components/GoKart/About";
+import Carousl from "./Components/GoKart/Carousl";
+import Timeline from "./Components/GoKart/Timeline";
+import Reev from "./Components/Reev/Reev";
 
 
 
@@ -35,6 +34,7 @@ function App() {
     const cursor = document.createElement('div');
     cursor.className = 'custom-cursor';
     document.body.appendChild(cursor);
+    document.body.classList.add('custom-cursor-active');
 
     const moveCursor = (e) => {
       cursor.style.left = e.clientX + 'px';
@@ -79,6 +79,7 @@ function App() {
       if (cursor && cursor.parentNode) {
         cursor.parentNode.removeChild(cursor);
       }
+      document.body.classList.remove('custom-cursor-active');
     };
   }, [loading]);
 
@@ -98,7 +99,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/achievements" element={<Achievements />} />
-         <Route
+        <Route
           path="/gokart"
           element={
             <>
@@ -108,7 +109,7 @@ function App() {
             </>
           }
         />
-          <Route path="/reev" element={<Reev />} />
+        <Route path="/reev" element={<Reev />} />
       </Routes>
     </>
   );

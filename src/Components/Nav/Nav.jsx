@@ -9,13 +9,59 @@ function Nav() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPosition = window.scrollY;
+      // Check both window scroll and main container scroll
+      const windowScroll = window.scrollY;
+      const mainContainer = document.querySelector('main');
+      const containerScroll = mainContainer ? mainContainer.scrollTop : 0;
+      
+      // Use the larger of the two scroll values
+      const scrollPosition = Math.max(windowScroll, containerScroll);
+      
       // Change background when scrolled past 50px for better mobile experience
       setIsScrolled(scrollPosition > 50);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    // Initial check
+    handleScroll();
+
+    // Listen to scroll on both window and main container
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    const mainContainer = document.querySelector('main');
+    if (mainContainer) {
+      mainContainer.addEventListener('scroll', handleScroll, { passive: true });
+    }
+    
+    // Also use intersection observer as backup
+    const heroSection = document.querySelector('[data-section="hero"]');
+    if (heroSection) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            // If hero section is not intersecting (scrolled past), show background
+            setIsScrolled(!entry.isIntersecting);
+          });
+        },
+        { threshold: 0.1, rootMargin: '-50px 0px 0px 0px' }
+      );
+      
+      observer.observe(heroSection);
+      
+      return () => {
+        window.removeEventListener('scroll', handleScroll);
+        if (mainContainer) {
+          mainContainer.removeEventListener('scroll', handleScroll);
+        }
+        observer.disconnect();
+      };
+    }
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (mainContainer) {
+        mainContainer.removeEventListener('scroll', handleScroll);
+      }
+    };
   }, []);
 
   // Disable background scrolling when mobile menu is open
@@ -69,7 +115,7 @@ function Nav() {
       <motion.nav 
         className={`fixed top-0 left-0 z-50 w-full transition-all duration-500 ${
           isScrolled 
-            ? 'bg-black/95 backdrop-blur-md shadow-lg' 
+            ? 'bg-black border-b border-red-600 backdrop-blur-md shadow-lg' 
             : 'bg-transparent'
         }`}
         initial={{ y: -100 }}

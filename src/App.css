@@ -1,14 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&display=swap');
 
-body {
-  margin: 0;
-  font-family: "Rajdhani", sans-serif;
-  background-color: black;
-  color: white;
-  overflow-x: hidden;
-  box-sizing: border-box;
-}
-
 .App {
   text-align: center;
 }
@@ -85,8 +76,8 @@ body {
   padding: 30px 20px;
   gap: 20px;
   width: 97vw;
-  max-width: 1200px; 
-  margin: 0 auto;
+  max-width: 1200px;
+  margin: 100px auto;
 }
 
 .about img {
