@@ -33,7 +33,7 @@ function Footer() {
               href={url}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-20 h-20 flex items-center justify-center text-white hover:text-red-600 transition-all duration-300 border border-red-600/20 rounded-lg hover:border-red-600"
+              className="w-20 h-20 flex items-center justify-center text-white hover:text-red-600 transition-all duration-300"
             >
               <i className={`${icon} text-3xl`}></i>
             </a>

@@ -18,15 +18,34 @@ function Nav() {
 
   // Disable background scrolling when mobile menu is open
   useEffect(() => {
+    const originalStyle = window.getComputedStyle(document.body).overflow;
+    const scrollY = window.scrollY;
+
     if (menuOpen) {
+      // Save current scroll position and prevent scrolling
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.position = 'fixed';
+      document.body.style.width = '100%';
       document.body.style.overflow = 'hidden';
+      document.body.style.touchAction = 'none';
     } else {
-      document.body.style.overflow = 'unset';
+      // Restore scroll position and styles
+      const scrollYToRestore = parseInt(document.body.style.top || '0') * -1;
+      document.body.style.position = '';
+      document.body.style.width = '';
+      document.body.style.top = '';
+      document.body.style.overflow = originalStyle;
+      document.body.style.touchAction = '';
+      window.scrollTo(0, scrollYToRestore);
     }
 
     // Cleanup on unmount
     return () => {
-      document.body.style.overflow = 'unset';
+      document.body.style.position = '';
+      document.body.style.width = '';
+      document.body.style.top = '';
+      document.body.style.overflow = originalStyle;
+      document.body.style.touchAction = '';
     };
   }, [menuOpen]);
 
@@ -75,7 +94,7 @@ function Nav() {
 
         {/* Right Brand */}
         <div className="ml-auto text-4xl font-black italic tracking-wide cursor-pointer font-mono">
-          <span className="text-red-500">REEV</span> - SAEINDIA
+          <img src="/a-removebg-preview.png" alt="REEV" className="w-[13rem] h-[6rem]"/>
         </div>
 
         {/* Mobile Hamburger Menu Button */}

@@ -44,7 +44,6 @@ function App() {
         />
           <Route path="/reev" element={<Reev />} />
       </Routes>
-      <Footer />
     </>
   );
 }

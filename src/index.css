@@ -4,6 +4,28 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Infinite marquee container */
+.marquee-container {
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+}
+
+.marquee-content {
+  display: flex;
+  animation: marquee 30s linear infinite;
+  width: max-content;
+}
+
+.marquee-content:hover {
+  animation-play-state: paused;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -16,8 +38,11 @@
 html,
 body {
   overflow-x: hidden !important;
+  overflow-y: auto !important;
   background-color: var(--black-color);
   color: var(--white-color);
+  /* Ensure smooth scrolling works */
+  scroll-behavior: smooth;
 }
 
 /* Text selection styling */
@@ -31,28 +56,28 @@ body {
   color: #ffffff;
 }
 
-/* Scrollbar styling */
+/* Hide scrollbars but keep functionality */
 ::-webkit-scrollbar {
-  width: 12px;
+  width: 0px;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-track {
-  background: #000000;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #ff0000;
-  border-radius: 6px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #cc0000;
+  background: transparent;
 }
 
 /* For Firefox */
 html {
-  scrollbar-width: auto;
-  scrollbar-color: #ff0000 #000000;
+  scrollbar-width: none;
+}
+
+/* Ensure mouse wheel scrolling works */
+* {
+  scroll-behavior: smooth;
 }
 
 :root {
