@@ -1053,7 +1053,8 @@ nav {
   pointer-events: none;
   z-index: 9999;
   transform: translate(-50%, -50%);
-  transition: width 0.2s ease, height 0.2s ease;
+  transition: width 0.2s ease, height 0.2s ease, opacity 0.3s ease;
+  opacity: 1;
 }
 
 /* Cursor hover effect */
@@ -1070,7 +1071,20 @@ nav {
 
 /* Hide cursor only on desktop when custom cursor is active */
 @media (min-width: 769px) {
-  body.custom-cursor-active * {
+  body.custom-cursor-active {
+    cursor: none !important;
+  }
+  
+  body.custom-cursor-active *,
+  body.custom-cursor-active *:hover,
+  body.custom-cursor-active *:focus,
+  body.custom-cursor-active *:active,
+  body.custom-cursor-active .cursor-pointer,
+  body.custom-cursor-active .cursor-pointer:hover,
+  body.custom-cursor-active button,
+  body.custom-cursor-active button:hover,
+  body.custom-cursor-active a,
+  body.custom-cursor-active a:hover {
     cursor: none !important;
   }
 }

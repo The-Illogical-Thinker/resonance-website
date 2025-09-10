@@ -49,7 +49,17 @@ function App() {
       cursor.classList.remove('hover');
     };
 
+    const hideCursor = () => {
+      cursor.style.opacity = '0';
+    };
+
+    const showCursor = () => {
+      cursor.style.opacity = '1';
+    };
+
     document.addEventListener('mousemove', moveCursor);
+    document.addEventListener('mouseleave', hideCursor);
+    document.addEventListener('mouseenter', showCursor);
     
     // Add hover effects to interactive elements
     const interactiveElements = document.querySelectorAll('a, button, [role="button"], .cursor-pointer');
@@ -71,6 +81,8 @@ function App() {
 
     return () => {
       document.removeEventListener('mousemove', moveCursor);
+      document.removeEventListener('mouseleave', hideCursor);
+      document.removeEventListener('mouseenter', showCursor);
       interactiveElements.forEach(el => {
         el.removeEventListener('mouseenter', addHoverEffect);
         el.removeEventListener('mouseleave', removeHoverEffect);
@@ -102,11 +114,11 @@ function App() {
         <Route
           path="/gokart"
           element={
-            <>
+            <div className="bg-[#101010] min-h-screen">
               <About />
               <Carousl />
               <Timeline />
-            </>
+            </div>
           }
         />
         <Route path="/reev" element={<Reev />} />
