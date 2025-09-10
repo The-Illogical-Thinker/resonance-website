@@ -55,7 +55,7 @@ export default function Timeline() {
 
       {/* Moving Ball */}
       <motion.div
-        className="moving-ball"
+        className="moving-ball bg-[#101010]"
         style={{ top: `${scrollPercent}%` }}
       ></motion.div>
 

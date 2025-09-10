@@ -5,7 +5,7 @@ export default function About() {
   return (
     <>
     <motion.section
-      className="about"
+      className="about bg-[#101010]"
       initial={{ opacity: 0, y: 100 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
