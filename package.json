@@ -10,9 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@gsap/react": "^2.1.2",
     "@splidejs/react-splide": "^0.7.12",
     "@splidejs/splide-extension-auto-scroll": "^0.5.3",
     "@vercel/speed-insights": "^1.2.0",
+    "gsap": "^3.13.0",
     "motion": "^12.23.12",
     "react": "^19.1.0",
     "react-countup": "^6.5.3",
