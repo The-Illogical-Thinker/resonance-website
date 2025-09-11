@@ -113,7 +113,7 @@ function Nav() {
   return (
     <>
       <motion.nav 
-        className={`fixed-navbar fixed top-0 left-0 z-50 w-full transition-all duration-500 ${
+        className={`fixed-navbar fixed top-0 left-0 h-24 grid items-center z-50 w-full transition-all duration-500 ${
           location.pathname === "/" 
             ? (isScrolled ? 'bg-black backdrop-blur-md shadow-lg' : 'bg-transparent')
             : 'bg-black backdrop-blur-md shadow-lg'
@@ -180,7 +180,7 @@ function Nav() {
                 <img 
                   src="/a-removebg-preview.png" 
                   alt="REEV" 
-                  className="h-8 w-auto sm:h-10 lg:h-12 transition-transform duration-300 hover:scale-110"
+                  className="h-12 w-auto sm:h-20 lg:h-24 transition-transform duration-300 hover:scale-110"
                 />
               </Link>
             </motion.div>

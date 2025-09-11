@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import "./Reev2.css";
+import Footer from "../Footer/Footer";
 
 // Swiper imports
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -91,6 +92,7 @@ REEV is a competition that has primary focus on range and fuel efficiency. The c
 
         </div>
       </div>
+      <Footer />
     </main>
   );
 }

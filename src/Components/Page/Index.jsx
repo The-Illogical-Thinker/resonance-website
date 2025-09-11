@@ -414,13 +414,13 @@ export default function Index() {
           </motion.div>
 
           {/* Fleet Grid */}
-          <div className={`grid gap-4 ${isMobile ? 'grid-cols-1 px-4' : 'grid-cols-1 lg:grid-cols-2 lg:gap-0'}`}>
+          <div className={` mt-32 grid gap-4 ${isMobile ? 'grid-cols-1 px-4' : 'grid-cols-1 lg:grid-cols-2 lg:gap-0'}`}>
             {/* REEV Racer */}
             <motion.div 
-              className={`group cursor-pointer col-span-1 ${isMobile ? 'h-[20rem]' : 'h-[30rem] sm:h-[35rem] lg:h-[40rem]'}`}
+              className={`group cursor-pointer col-span-1 ${isMobile ? 'h-[20rem]' : 'h-[25rem] sm:h-[25rem] lg:h-[30rem]'}`}
               variants={!isMobile ? childVariants : {}}
             >
-              <div className={`relative overflow-hidden bg-[#101010] ${isMobile ? 'h-[20rem] rounded-lg' : 'h-[30rem] sm:h-[35rem] lg:h-[40rem]'}`}>
+              <div className={`relative overflow-hidden bg-[#101010] ${isMobile ? 'h-[20rem] rounded-lg' : 'h-[25rem] sm:h-[25rem] lg:h-[30rem]'}`}>
                 <motion.img 
                   src="PNG_image-removebg-preview.png"
                   alt="REEV Racer"
@@ -449,10 +449,10 @@ export default function Index() {
 
             {/* REEV GoCar */}
             <motion.div 
-              className={`group cursor-pointer col-span-1 ${isMobile ? 'h-[20rem]' : 'h-[30rem] sm:h-[35rem] lg:h-[40rem]'}`}
+              className={`group cursor-pointer col-span-1 ${isMobile ? 'h-[20rem]' : 'h-[25rem] sm:h-[25rem] lg:h-[30rem]'}`}
               variants={!isMobile ? childVariants : {}}
             >
-              <div className={`relative overflow-hidden bg-[#101010] ${isMobile ? 'h-[20rem] rounded-lg' : 'h-[30rem] sm:h-[35rem] lg:h-[40rem]'}`}>
+              <div className={`relative overflow-hidden bg-[#101010] ${isMobile ? 'h-[20rem] rounded-lg' : 'h-[25rem] sm:h-[25rem] lg:h-[30rem]'}`}>
                 <motion.img 
                   src="/gokart cad 3d.png"
                   alt="REEV GoCar"
