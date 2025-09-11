@@ -1,0 +1,64 @@
+.section-subtitle {
+    text-shadow: 0 0 0.2em var(--primary-color);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    z-index: 1;
+  }
+  
+  .section-title {
+    font-size: clamp(3rem, 8vw + 1rem, 12rem); 
+    font-weight: bold;
+    color: var(--text-light);
+    white-space: nowrap;
+    text-transform: capitalize;
+    line-height: 1.1;
+    margin-right: 5rem;
+    user-select: none;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+  }
+  
+  .Jointe {
+    margin: 0 0 4% 0;
+    text-align: center;
+    display: inline-block;
+    position: relative;
+  }
+  
+  .section-heading {
+    font-weight: 500;
+    line-height: 1.1;
+    font-size: clamp(1.75rem, 5vw, 4rem); 
+    text-transform: uppercase;
+    color: white;
+  }
+  
+  .learn-mo-line {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+  }
+  
+  
+  .Jointe:hover .learn-mo-line::after {
+    width: 100%; 
+  }
+  .learn-mo-line::after {
+    content: "";
+    display: block;
+    width: 0%; 
+    height: 2px; 
+    margin: clamp(0.5rem, 1vw, 1.5rem) auto 0 auto; 
+    background: linear-gradient(to right, transparent, red, transparent);
+    transition: width 0.8s ease-in-out; /* slower, smoother */
+  }
+  
+  /* 👇 this will trigger on page load */
+  .learn-mo-line.active::after {
+    width: 100%;
+  }

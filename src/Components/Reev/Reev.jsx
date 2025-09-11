@@ -42,8 +42,9 @@ REEV is a competition that has primary focus on range and fuel efficiency. The c
   ];
 
   return (
-    <div className="reev-container">
-      <div className="reev-sections">
+    <main className="w-full bg-[#101010] min-h-screen overflow-y-scroll pt-20 lg:pt-24" style={{ position: 'relative', zIndex: 1 }}>
+      <div className="reev-container">
+        <div className="reev-sections">
         {sections.map((section, index) => (
           <Section
             key={section.title}
@@ -55,7 +56,6 @@ REEV is a competition that has primary focus on range and fuel efficiency. The c
           />
         ))}
 
-        {/* Carousel Inline Code */}
         {/* Carousel Inline Code */}
 <div className="carousel-container">
   <Swiper
@@ -89,8 +89,9 @@ REEV is a competition that has primary focus on range and fuel efficiency. The c
   </Swiper>
 </div>
 
+        </div>
       </div>
-    </div>
+    </main>
   );
 }
 

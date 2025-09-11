@@ -115,6 +115,7 @@
   height: 2px;
   width: 100%;
   background: linear-gradient(to right, transparent, red, transparent);
+  transform-origin: left;
 }
 
 .section-text-content {

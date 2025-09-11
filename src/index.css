@@ -134,8 +134,53 @@ html {
 }
 
 
+/* FORCE navbar to be fixed - maximum priority */
+nav[class*="fixed"] {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100vw !important;
+  z-index: 99999 !important;
+  transform: none !important;
+  margin: 0 !important;
+  padding: 0;
+  box-sizing: border-box;
+  /* Force it to be relative to viewport only */
+  inset: 0 auto auto 0 !important;
+}
+
+/* Backup selectors with even higher specificity */
+nav.fixed-navbar,
+motion.nav.fixed-navbar,
+.fixed-navbar {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 99999 !important;
+  width: 100vw !important;
+  transform: none !important;
+  margin: 0 !important;
+  inset: 0 auto auto 0 !important;
+}
+
+/* Ensure no parent container creates stacking context for navbar */
+body, html, #root {
+  transform: none !important;
+  will-change: auto !important;
+}
+
+/* Nuclear option - force navbar positioning */
 nav {
-  z-index: 9999 !important;
+  contain: none !important;
+  isolation: auto !important;
+}
+
+/* Ensure navbar stays on top of everything */
+nav * {
+  position: relative !important;
+  z-index: inherit !important;
 }
 
 .hero-text {
@@ -636,6 +681,22 @@ nav {
 /* This is what happens on hover */
 .about-reev-heading:hover::after {
   width: 100%;
+}
+
+/* About underline styles to match achievements */
+.about-title {
+  position: relative;
+  display: inline-block;
+}
+
+.about-underline {
+  position: absolute;
+  left: 0;
+  bottom: -0.5rem;
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(to right, transparent, red, transparent);
+  transform-origin: left;
 }
 
 .card-content:hover .about-reev-heading::after {

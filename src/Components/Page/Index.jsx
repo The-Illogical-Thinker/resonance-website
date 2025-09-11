@@ -206,19 +206,18 @@ export default function Index() {
           <h2 className={`font-black text-white mb-6 tracking-wide font-mono uppercase relative inline-block ${isMobile ? 'text-2xl' : 'text-5xl'}`}>
             About REEV
             <motion.div
-              className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 h-[0.1rem]"
+              className="absolute -bottom-1 left-0 h-[2px] w-full"
               style={{
-                background: 'linear-gradient(to right, transparent 0%, transparent 10%, #ef4444 20%, #ef4444 40%, #ef4444 60%, #ef4444 80%, transparent 90%, transparent 100%)'
+                background: 'linear-gradient(to right, transparent, red, transparent)'
               }}
-              initial={!isMobile ? { width: 0, opacity: 0 } : { width: "100%", opacity: 1 }}
+              initial={!isMobile ? { scaleX: 0 } : { scaleX: 1 }}
               variants={!isMobile ? {
-                visible: { width: 0, opacity: 0 },
-                hovered: { width: "100%", opacity: 1 },
-              } : { visible: { width: "100%", opacity: 1 } }}
+                visible: { scaleX: 0 },
+                hovered: { scaleX: 1 },
+              } : { visible: { scaleX: 1 } }}
               transition={!isMobile ? { 
-                duration: 0.4, 
-                ease: [0.25, 0.46, 0.45, 0.94],
-                opacity: { duration: 0.2 }
+                duration: 0.6, 
+                ease: "easeInOut"
               } : {}}
             />
           </h2>
@@ -255,19 +254,18 @@ export default function Index() {
           <h2 className={`font-black text-white mb-4 tracking-wide font-mono uppercase relative inline-block ${isMobile ? 'text-2xl mt-4' : 'text-5xl mt-24'}`}>
             Why Join Us?
             <motion.div
-              className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 h-[0.1rem] w-full origin-center"
+              className="absolute -bottom-1 left-0 h-[2px] w-full"
               style={{
-                background: 'linear-gradient(to right, transparent 0%, transparent 10%, #ef4444 20%, #ef4444 40%, #ef4444 60%, #ef4444 80%, transparent 90%, transparent 100%)'
+                background: 'linear-gradient(to right, transparent, red, transparent)'
               }}
-              initial={!isMobile ? { width: 0, opacity: 0 } : { width: "100%", opacity: 1 }}
+              initial={!isMobile ? { scaleX: 0 } : { scaleX: 1 }}
               variants={!isMobile ? {
-                visible: { width: 0, opacity: 0 },
-                hovered: { width: "100%", opacity: 1 },
-              } : { visible: { width: "100%", opacity: 1 } }}
+                visible: { scaleX: 0 },
+                hovered: { scaleX: 1 },
+              } : { visible: { scaleX: 1 } }}
               transition={!isMobile ? { 
-                duration: 0.4, 
-                ease: [0.25, 0.46, 0.45, 0.94],
-                opacity: { duration: 0.2 }
+                duration: 0.6, 
+                ease: "easeInOut"
               } : {}}
             />
           </h2>
@@ -398,19 +396,18 @@ export default function Index() {
             <h2 className={`font-black text-white mb-4 tracking-wide font-mono uppercase relative inline-block ${isMobile ? 'text-2xl' : 'text-5xl'}`}>
               OUR FLEET
                 <motion.div
-                  className="absolute left-1/2 -translate-x-1/2 -bottom-1 h-[0.1rem]"
+                  className="absolute -bottom-1 left-0 h-[2px] w-full"
                   style={{
-                    background: 'linear-gradient(to right, transparent 0%, transparent 10%, #ef4444 20%, #ef4444 40%, #ef4444 60%, #ef4444 80%, transparent 90%, transparent 100%)'
+                    background: 'linear-gradient(to right, transparent, red, transparent)'
                   }}
-                  initial={!isMobile ? { width: 0, opacity: 0 } : { width: "100%", opacity: 1 }}
+                  initial={!isMobile ? { scaleX: 0 } : { scaleX: 1 }}
                   variants={!isMobile ? {
-                    visible: { width: 0, opacity: 0 },
-                    hovered: { width: "100%", opacity: 1 },
-                  } : { visible: { width: "100%", opacity: 1 } }}
+                    visible: { scaleX: 0 },
+                    hovered: { scaleX: 1 },
+                  } : { visible: { scaleX: 1 } }}
                   transition={!isMobile ? { 
-                    duration: 0.4, 
-                    ease: [0.25, 0.46, 0.45, 0.94],
-                    opacity: { duration: 0.2 }
+                    duration: 0.6, 
+                    ease: "easeInOut"
                   } : {}}
                 />
             </h2>
@@ -504,19 +501,18 @@ export default function Index() {
           <h2 className={`font-black text-white mb-4 tracking-wide font-mono uppercase relative inline-block ${isMobile ? 'text-2xl' : 'text-5xl'}`}>
             Reviews
             <motion.div
-              className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 h-[0.1rem]"
+              className="absolute -bottom-1 left-0 h-[2px] w-full"
               style={{
-                background: 'linear-gradient(to right, transparent 0%, transparent 10%, #ef4444 20%, #ef4444 40%, #ef4444 60%, #ef4444 80%, transparent 90%, transparent 100%)'
+                background: 'linear-gradient(to right, transparent, red, transparent)'
               }}
-              initial={!isMobile ? { width: 0, opacity: 0 } : { width: "100%", opacity: 1 }}
+              initial={!isMobile ? { scaleX: 0 } : { scaleX: 1 }}
               variants={!isMobile ? {
-                visible: { width: 0, opacity: 0 },
-                hovered: { width: "100%", opacity: 1 },
-              } : { visible: { width: "100%", opacity: 1 } }}
+                visible: { scaleX: 0 },
+                hovered: { scaleX: 1 },
+              } : { visible: { scaleX: 1 } }}
               transition={!isMobile ? { 
-                duration: 0.4, 
-                ease: [0.25, 0.46, 0.45, 0.94],
-                opacity: { duration: 0.2 }
+                duration: 0.6, 
+                ease: "easeInOut"
               } : {}}
             />
           </h2>
@@ -714,19 +710,18 @@ export default function Index() {
           <h2 className={`font-black text-white mb-4 tracking-wide font-mono uppercase relative inline-block ${isMobile ? 'text-2xl' : 'text-5xl'}`}>
             Sponsors
             <motion.div
-              className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 h-[0.1rem]"
+              className="absolute -bottom-1 left-0 h-[2px] w-full"
               style={{
-                background: 'linear-gradient(to right, transparent 0%, transparent 10%, #ef4444 20%, #ef4444 40%, #ef4444 60%, #ef4444 80%, transparent 90%, transparent 100%)'
+                background: 'linear-gradient(to right, transparent, red, transparent)'
               }}
-              initial={!isMobile ? { width: 0, opacity: 0 } : { width: "100%", opacity: 1 }}
+              initial={!isMobile ? { scaleX: 0 } : { scaleX: 1 }}
               variants={!isMobile ? {
-                visible: { width: 0, opacity: 0 },
-                hovered: { width: "100%", opacity: 1 },
-              } : { visible: { width: "100%", opacity: 1 } }}
+                visible: { scaleX: 0 },
+                hovered: { scaleX: 1 },
+              } : { visible: { scaleX: 1 } }}
               transition={!isMobile ? { 
-                duration: 0.4, 
-                ease: [0.25, 0.46, 0.45, 0.94],
-                opacity: { duration: 0.2 }
+                duration: 0.6, 
+                ease: "easeInOut"
               } : {}}
             />
           </h2>

@@ -9,21 +9,15 @@ import About from "./Components/GoKart/About";
 import Carousl from "./Components/GoKart/Carousl";
 import Timeline from "./Components/GoKart/Timeline";
 import Reev from "./Components/Reev/Reev";
+import Team1 from "./Components/Team2018-2019/Team1";
+import ScrollToTop from "./Components/ScrollToTop/ScrollToTop";
 
 
 
 function App() {
-   const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 3000);
-    return () => clearTimeout(timer);
-  }, []);
 
   // Custom cursor logic - works on all routes
   useEffect(() => {
-    // Don't initialize cursor during loading
-    if (loading) return;
 
     // Detect mobile device
     const isMobileDevice = window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -93,16 +87,7 @@ function App() {
       }
       document.body.classList.remove('custom-cursor-active');
     };
-  }, [loading]);
-
-  if (loading) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-black">
-        <img src={logo} alt="Resonance Racing" className="w-64 mb-6" />
-        <img src={applogo} alt="Loading animation" className="h-30 w-[120px]" />
-      </div>
-    );
-  }
+  }, []);
 
 
   return (
@@ -114,13 +99,14 @@ function App() {
         <Route
           path="/gokart"
           element={
-            <div className="bg-[#101010] min-h-screen">
+             <main className="w-full bg-[#101010] min-h-screen pt-20 lg:pt-24" style={{ position: 'relative', zIndex: 1 }}>
               <About />
               <Carousl />
               <Timeline />
-            </div>
+            </main>
           }
         />
+        <Route path="/team1" element={<Team1 />} />
         <Route path="/reev" element={<Reev />} />
       </Routes>
     </>

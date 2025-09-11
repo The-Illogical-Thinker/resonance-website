@@ -102,7 +102,7 @@ function Nav() {
     { name: "GOKART", href: "/gokart", isLink: location.pathname === "/gokart" },
     { name: "REEV", href: "/reev", isLink: location.pathname === "/reev" },
     { name: "ACHIEVEMENTS", href: "/achievements", isLink: location.pathname === "/achievements" },
-    { name: "TEAM", href: "/team", isLink: location.pathname === "/team" },
+    { name: "TEAM", href: "/team1", isLink: location.pathname === "/team1" },
     { name: "JOIN US", href: "/joinus", isLink: location.pathname === "/joinus" },
   ];
 
@@ -113,11 +113,23 @@ function Nav() {
   return (
     <>
       <motion.nav 
-        className={`fixed top-0 left-0 z-50 w-full transition-all duration-500 ${
-          isScrolled 
-            ? 'bg-black backdrop-blur-md shadow-lg' 
-            : 'bg-transparent'
+        className={`fixed-navbar fixed top-0 left-0 z-50 w-full transition-all duration-500 ${
+          location.pathname === "/" 
+            ? (isScrolled ? 'bg-black backdrop-blur-md shadow-lg' : 'bg-transparent')
+            : 'bg-black backdrop-blur-md shadow-lg'
         }`}
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 99999,
+          width: '100vw',
+          transform: 'none',
+          margin: 0,
+          contain: 'none',
+          isolation: 'auto'
+        }}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.8, ease: [0.34, 1.56, 0.64, 1] }}
