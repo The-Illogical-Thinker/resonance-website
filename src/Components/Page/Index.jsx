@@ -43,17 +43,17 @@ export default function Index() {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.8,
+        duration: 1.5,
         ease: "easeOut",
-        staggerChildren: 0.2,
-        delayChildren: 0.1,
+        staggerChildren: 0.3,
+        delayChildren: 0.2,
       },
     },
     exit: {
       opacity: 0,
       y: -30,
       transition: {
-        duration: 0.6,
+        duration: 2.5,
         ease: "easeIn",
       },
     },
@@ -68,7 +68,7 @@ export default function Index() {
       opacity: 1,
       y: 0,
       transition: { 
-        duration: 0.6, 
+        duration: 1.0, 
         ease: "easeOut"
       },
     },
@@ -76,7 +76,7 @@ export default function Index() {
       opacity: 0,
       y: -20,
       transition: { 
-        duration: 0.4, 
+        duration: 2.0, 
         ease: "easeIn"
       },
     },
