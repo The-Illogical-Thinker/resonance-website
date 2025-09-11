@@ -1,0 +1,105 @@
+/* Image is clear by default */
+.card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: none;                 /* clear initially */
+    transform: scale(1.05);
+    transition: filter 0.4s ease-in-out;
+  }
+  
+  /* On hover → blur */
+  .card:hover .card-img {
+    filter: blur(5px);
+  }
+  
+  /* ============================= */
+  /* Card Body (hidden initially)  */
+  /* ============================= */
+  .card-body {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    text-align: center;
+    padding: 20px;
+  
+    background: rgba(0, 0, 0, 0);    /* 🔹 transparent by default */
+    opacity: 0;                      /* hidden initially */
+    transition: all 0.5s ease-in-out;
+  }
+  
+  /* Show overlay only on hover */
+  .card:hover .card-body {
+    background: rgba(0, 0, 0, 0.6);  /* 🔹 dark overlay */
+    opacity: 1;
+  }
+  
+  .card-body {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;  /* ✅ centers text & button */
+    gap: 12px;                /* space between items */
+    text-align: center;
+    padding: 20px;
+  
+    background: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+  }
+  
+  /* Title */
+  .name {
+    color: #ff0000;
+    font-size: 2rem;
+    margin: 0;
+    text-transform: capitalize;
+  }
+  
+  /* Description */
+  .des {
+    color: #ffffff;
+    opacity: 0.8;
+    font-weight: 500;
+    font-size: 0.9rem;
+    margin: 0;                /* ✅ removed huge spacing */
+  }
+  
+  /* LinkedIn Button */
+  .watchlist-btn {
+    display: inline-flex;       /* text + icon in row */
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    text-transform: capitalize;
+    border: none;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 0.4rem 0.8rem;
+    background: #0077b5;        /* LinkedIn Blue */
+    color: #fff;
+    text-decoration: none;
+    transition: background 0.3s ease;
+  }
+  
+  .watchlist-btn:hover {
+    background: #005582;        /* Darker LinkedIn Blue */
+    color: #fff;
+  }
