@@ -21,7 +21,7 @@ const TailwindSlideshow = () => {
     <div className="relative w-screen h-screen mx-auto overflow-hidden">
       {/* Slides */}
       <div
-        className="flex transition-transform duration-700"
+        className="flex transition-transform w-screen h-screen duration-700"
         style={{ transform: `translateX(-${current * 100}%)` }}
       >
         {images.map((src, i) => (
@@ -29,23 +29,23 @@ const TailwindSlideshow = () => {
             key={i}
             src={src}
             alt={`Slide ${i}`}
-            className="w-full h-full opacity-40 flex-shrink-0 object-cover"
+            className="w-full h-full opacity-40 flex-shrink-0 object-cover sm:object-cover object-center"
           />
         ))}
       </div>
 
-      {/* Buttons */}
+      {/* Navigation Buttons - Hidden on mobile for better UX */}
       <button
         onClick={() =>
           setCurrent((current - 1 + images.length) % images.length)
         }
-        className="absolute top-1/2 left-3 -translate-y-1/2 bg-black/50 text-white w-14 h-14 flex items-center justify-center text-3xl rounded-full"
+        className="absolute top-1/2 left-3 -translate-y-1/2 bg-black/50 text-white w-14 h-14 items-center justify-center text-3xl rounded-full hidden sm:flex hover:bg-black/70 transition-colors duration-300"
       >
         ‹
       </button>
       <button
         onClick={() => setCurrent((current + 1) % images.length)}
-        className="absolute top-1/2 right-3 -translate-y-1/2 bg-black/50 text-white w-14 h-14 flex items-center justify-center text-3xl rounded-full"
+        className="absolute top-1/2 right-3 -translate-y-1/2 bg-black/50 text-white w-14 h-14 items-center justify-center text-3xl rounded-full hidden sm:flex hover:bg-black/70 transition-colors duration-300"
       >
         ›
       </button>

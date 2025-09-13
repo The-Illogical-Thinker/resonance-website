@@ -9,51 +9,19 @@ function Nav() {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Check both window scroll and main container scroll
       const windowScroll = window.scrollY;
       const mainContainer = document.querySelector('main');
       const containerScroll = mainContainer ? mainContainer.scrollTop : 0;
-      
-      // Use the larger of the two scroll values
       const scrollPosition = Math.max(windowScroll, containerScroll);
-      
-      // Change background when scrolled past 50px for better mobile experience
       setIsScrolled(scrollPosition > 50);
     };
 
-    // Initial check
     handleScroll();
-
-    // Listen to scroll on both window and main container
     window.addEventListener('scroll', handleScroll, { passive: true });
     
     const mainContainer = document.querySelector('main');
     if (mainContainer) {
       mainContainer.addEventListener('scroll', handleScroll, { passive: true });
-    }
-    
-    // Also use intersection observer as backup
-    const heroSection = document.querySelector('[data-section="hero"]');
-    if (heroSection) {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            // If hero section is not intersecting (scrolled past), show background
-            setIsScrolled(!entry.isIntersecting);
-          });
-        },
-        { threshold: 0.1, rootMargin: '-50px 0px 0px 0px' }
-      );
-      
-      observer.observe(heroSection);
-      
-      return () => {
-        window.removeEventListener('scroll', handleScroll);
-        if (mainContainer) {
-          mainContainer.removeEventListener('scroll', handleScroll);
-        }
-        observer.disconnect();
-      };
     }
     
     return () => {
@@ -64,46 +32,83 @@ function Nav() {
     };
   }, []);
 
-  // Disable background scrolling when mobile menu is open
   useEffect(() => {
-    const originalStyle = window.getComputedStyle(document.body).overflow;
-    const scrollY = window.scrollY;
+    const preventTouchMove = (e) => {
+      // Allow touch events only within the mobile menu
+      const mobileMenu = e.target.closest('[data-mobile-menu]');
+      if (!mobileMenu) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    };
 
     if (menuOpen) {
-      // Save current scroll position and prevent scrolling
-      document.body.style.top = `-${scrollY}px`;
+      // Store current scroll position
+      const scrollY = window.scrollY;
+      
+      // Fix body position to prevent scrolling
       document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
       document.body.style.width = '100%';
       document.body.style.overflow = 'hidden';
-      document.body.style.touchAction = 'none';
+      
+      // Add event listeners to prevent all forms of scrolling
+      document.addEventListener('touchmove', preventTouchMove, { passive: false });
+      
+      // Also prevent scrolling on main container
+      const mainContainer = document.querySelector('main');
+      if (mainContainer) {
+        mainContainer.style.overflow = 'hidden';
+      }
     } else {
-      // Restore scroll position and styles
-      const scrollYToRestore = parseInt(document.body.style.top || '0') * -1;
+      // Remove all event listeners
+      document.removeEventListener('touchmove', preventTouchMove);
+      
+      // Get stored scroll position
+      const scrollY = document.body.style.top;
+      
+      // Restore body styles
       document.body.style.position = '';
-      document.body.style.width = '';
       document.body.style.top = '';
-      document.body.style.overflow = originalStyle;
-      document.body.style.touchAction = '';
-      window.scrollTo(0, scrollYToRestore);
+      document.body.style.width = '';
+      document.body.style.overflow = '';
+      
+      // Restore main container
+      const mainContainer = document.querySelector('main');
+      if (mainContainer) {
+        mainContainer.style.overflow = '';
+      }
+      
+      // Restore scroll position
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || '0') * -1);
+      }
     }
 
-    // Cleanup on unmount
     return () => {
+      // Cleanup all event listeners
+      document.removeEventListener('touchmove', preventTouchMove);
+      
+      // Restore styles
       document.body.style.position = '';
-      document.body.style.width = '';
       document.body.style.top = '';
-      document.body.style.overflow = originalStyle;
-      document.body.style.touchAction = '';
+      document.body.style.width = '';
+      document.body.style.overflow = '';
+      
+      const mainContainer = document.querySelector('main');
+      if (mainContainer) {
+        mainContainer.style.overflow = '';
+      }
     };
   }, [menuOpen]);
 
   const navItems = [
-    { name: "HOME", href: "/", isLink: location.pathname === "/" },
-    { name: "GOKART", href: "/gokart", isLink: location.pathname === "/gokart" },
-    { name: "REEV", href: "/reev", isLink: location.pathname === "/reev" },
-    { name: "ACHIEVEMENTS", href: "/achievements", isLink: location.pathname === "/achievements" },
-    { name: "TEAM", href: "/team1", isLink: location.pathname === "/team1" },
-    { name: "JOIN US", href: "/joinus", isLink: location.pathname === "/joinus" },
+    { name: "HOME", href: "/" },
+    { name: "GOKART", href: "/gokart" },
+    { name: "REEV", href: "/reev" },
+    { name: "ACHIEVEMENTS", href: "/achievements" },
+    { name: "TEAM", href: "/team1" },
+    { name: "JOIN US", href: "/joinus" },
   ];
 
   const handleMenuItemClick = () => {
@@ -113,23 +118,11 @@ function Nav() {
   return (
     <>
       <motion.nav 
-        className={`fixed-navbar fixed top-0 left-0 z-50 w-full transition-all duration-500 ${
+        className={`fixed top-0 left-0 h-24 grid items-center z-[99999] w-full transition-all duration-500 ${
           location.pathname === "/" 
             ? (isScrolled ? 'bg-black backdrop-blur-md shadow-lg' : 'bg-transparent')
             : 'bg-black backdrop-blur-md shadow-lg'
         }`}
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          zIndex: 99999,
-          width: '100vw',
-          transform: 'none',
-          margin: 0,
-          contain: 'none',
-          isolation: 'auto'
-        }}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.8, ease: [0.34, 1.56, 0.64, 1] }}
@@ -143,28 +136,21 @@ function Nav() {
               animate={{ x: 0 }}
               transition={{ duration: 0.8, delay: 0.2, ease: [0.34, 1.56, 0.64, 1] }}
             >
-              {navItems.slice(0, 6).map((item, index) => (
+              {navItems.map((item, index) => (
                 <motion.div
                   key={item.name}
                   initial={{ y: -20 }}
                   animate={{ y: 0 }}
                   transition={{ duration: 0.6, delay: 0.1 * index, ease: [0.34, 1.56, 0.64, 1] }}
                 >
-                  {item.isLink ? (
-                    <Link 
-                      to={item.href}
-                      className="text-red-600 font-semibold text-xl xl:text-base hover:text-red-600 transition-colors duration-300 relative group"
-                    >
-                      {item.name}
-                    </Link>
-                  ) : (
-                    <a 
-                      href={item.href}
-                      className="text-white font-semibold text-xl xl:text-base hover:text-red-600 transition-colors duration-300 relative group"
-                    >
-                      {item.name}
-                    </a>
-                  )}
+                  <Link 
+                    to={item.href}
+                    className={`font-semibold text-xl xl:text-base hover:text-red-600 transition-colors duration-300 relative group ${
+                      location.pathname === item.href ? 'text-red-600' : 'text-white'
+                    }`}
+                  >
+                    {item.name}
+                  </Link>
                 </motion.div>
               ))}
             </motion.div>
@@ -180,7 +166,7 @@ function Nav() {
                 <img 
                   src="/a-removebg-preview.png" 
                   alt="REEV" 
-                  className="h-8 w-auto sm:h-10 lg:h-12 transition-transform duration-300 hover:scale-110"
+                  className="h-12 w-auto sm:h-20 lg:h-24 transition-transform duration-300 hover:scale-110"
                 />
               </Link>
             </motion.div>
@@ -223,7 +209,8 @@ function Nav() {
       <AnimatePresence>
         {menuOpen && (
           <motion.div 
-            className="lg:hidden fixed inset-0 z-[10000]"
+            className="lg:hidden w-screen fixed inset-0 z-[10000]"
+            data-mobile-menu
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -239,7 +226,7 @@ function Nav() {
             
             {/* Menu Content */}
             <motion.div 
-              className="relative flex flex-col justify-center items-center h-full text-center px-6"
+              className="relative flex flex-col justify-center w-screen items-center h-full text-center px-6"
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
@@ -272,23 +259,13 @@ function Nav() {
                       ease: [0.34, 1.56, 0.64, 1] 
                     }}
                   >
-                    {item.isLink ? (
-                      <Link 
-                        to={item.href}
-                        onClick={handleMenuItemClick}
-                        className="text-white font-mono font-bold text-2xl sm:text-3xl hover:text-red-600 transition-all duration-300 transform hover:scale-110 block py-2"
-                      >
-                        {item.name}
-                      </Link>
-                    ) : (
-                      <a 
-                        href={item.href}
-                        onClick={handleMenuItemClick}
-                        className="text-white font-mono font-bold text-2xl sm:text-3xl hover:text-red-600 transition-all duration-300 transform hover:scale-110 block py-2"
-                      >
-                        {item.name}
-                      </a>
-                    )}
+                    <Link 
+                      to={item.href}
+                      onClick={handleMenuItemClick}
+                      className="text-white font-mono font-bold text-2xl sm:text-3xl hover:text-red-600 transition-all duration-300 transform hover:scale-110 block py-2"
+                    >
+                      {item.name}
+                    </Link>
                   </motion.li>
                 ))}
               </motion.ul>
