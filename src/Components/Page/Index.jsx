@@ -122,7 +122,7 @@ export default function Index() {
         <section
           ref={aboutRef}
           data-section="about"
-          className="w-full bg-[#101010] flex flex-col items-center justify-center py-8 px-4 gap-4"
+          className="w-full mt-24 bg-[#101010] flex flex-col items-center justify-center py-8 px-4 gap-4"
         >
           {/* Image Section */}
           <div className="relative overflow-hidden rounded-2xl shadow-2xl group cursor-pointer w-full max-w-sm">
@@ -225,7 +225,7 @@ export default function Index() {
         <section
           ref={whyJoinRef}
           data-section="whyJoin"
-          className="w-full bg-[#101010] flex flex-col justify-start py-8"
+          className="w-full bg-[#101010] mt-24 flex flex-col justify-start py-8"
         >
           <div className="text-center group cursor-pointer mb-6">
             <h2 className="font-black text-white mb-4 tracking-wide font-mono uppercase relative inline-block text-2xl mt-4">
@@ -239,7 +239,7 @@ export default function Index() {
             </h2>
           </div>
 
-          <div className="grid gap-4 px-4 grid-cols-1 gap-3">
+          <div className="grid gap-4 px-4">
             {[
               {
                 title: "Innovation",
@@ -424,7 +424,7 @@ export default function Index() {
         <section
           ref={fleetRef}
           data-section="fleet"
-          className="w-full bg-[#101010] flex flex-col justify-start py-8"
+          className="w-full bg-[#101010] mt-24 flex flex-col justify-start py-8"
         >
           <div className="w-full">
             {/* Section Header */}
@@ -615,7 +615,7 @@ export default function Index() {
         <section
           ref={reviewsRef}
           data-section="reviews"
-          className="w-full bg-[#101010] flex flex-col justify-start py-8"
+          className="w-full bg-[#101010] mt-24 flex flex-col justify-start py-8"
         >
           <div className="text-center group cursor-pointer mb-6">
             <h2 className="font-black text-white mb-4 tracking-wide font-mono uppercase relative inline-block text-2xl">
@@ -857,7 +857,7 @@ export default function Index() {
         <section
           ref={sponsorsRef}
           data-section="sponsors"
-          className="w-full bg-[#101010] flex flex-col p-0 justify-start"
+          className="w-full bg-[#101010] mt-24 flex flex-col p-0 justify-start"
         >
           {/* Sponsors Content */}
           <div className="text-center group cursor-pointer mb-6">

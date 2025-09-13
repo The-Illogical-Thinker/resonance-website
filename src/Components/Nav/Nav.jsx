@@ -163,11 +163,11 @@ function Nav() {
               transition={{ duration: 0.8, delay: 0.4, ease: [0.34, 1.56, 0.64, 1] }}
             >
               <Link to="/" className="block">
-                <img 
+                {!menuOpen && <img 
                   src="/a-removebg-preview.png" 
                   alt="REEV" 
                   className="h-12 w-auto sm:h-20 lg:h-24 transition-transform duration-300 hover:scale-110"
-                />
+                />}
               </Link>
             </motion.div>
 
@@ -242,7 +242,7 @@ function Nav() {
                 <img 
                   src="/a-removebg-preview.png" 
                   alt="REEV" 
-                  className="h-16 w-auto mx-auto"
+                  className="h-24 w-auto mx-auto"
                 />
               </motion.div>
 
