@@ -199,3 +199,73 @@
     max-height: 450px;
   }
 }
+
+/* Enhanced Mobile Responsiveness */
+@media (max-width: 768px) {
+  .reev-container {
+    overflow-y: auto !important;
+  }
+  
+  .reev-sections {
+    padding: 2rem 1rem !important;
+    gap: 3rem !important;
+  }
+  
+  .section-container {
+    margin-bottom: 2rem !important;
+  }
+  
+  .section-flex {
+    flex-direction: column !important;
+    gap: 1rem !important;
+  }
+  
+  .section-image-wrapper {
+    min-width: auto !important;
+    width: 100% !important;
+  }
+  
+  .section-image {
+    max-height: 250px !important;
+    width: 100% !important;
+  }
+  
+  .section-text {
+    min-width: auto !important;
+    width: 100% !important;
+    text-align: center !important;
+  }
+  
+  .section-title {
+    font-size: clamp(1.2rem, 5vw, 1.8rem) !important;
+    text-align: center !important;
+  }
+  
+  .section-text-content {
+    font-size: clamp(0.9rem, 3vw, 1rem) !important;
+    line-height: 1.5rem !important;
+    text-align: center !important;
+    padding: 0 !important;
+  }
+  
+  /* Mobile underlines - always visible, no animations */
+  .section-title-underline {
+    opacity: 1 !important;
+    transform: scaleX(1) !important;
+    transition: none !important;
+  }
+  
+  /* Remove hover effects on mobile */
+  .section-image-overlay:hover {
+    transform: none !important;
+  }
+  
+  .slide-img:hover {
+    transform: none !important;
+  }
+  
+  .carousel-container {
+    padding: 15px 5px !important;
+    margin: 2rem auto !important;
+  }
+}
