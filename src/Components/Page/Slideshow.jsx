@@ -18,10 +18,10 @@ const TailwindSlideshow = () => {
   }, [images.length]);
 
   return (
-    <div className="relative w-full h-full mx-auto overflow-hidden">
+    <div className="relative w-screen h-screen mx-auto overflow-hidden">
       {/* Slides */}
       <div
-        className="flex transition-transform duration-700"
+        className="flex transition-transform w-screen h-screen duration-700"
         style={{ transform: `translateX(-${current * 100}%)` }}
       >
         {images.map((src, i) => (
@@ -49,19 +49,6 @@ const TailwindSlideshow = () => {
       >
         ›
       </button>
-      
-      {/* Mobile-friendly dots indicator */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 sm:hidden">
-        {images.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setCurrent(i)}
-            className={`w-2 h-2 rounded-full transition-colors duration-300 ${
-              i === current ? 'bg-red-600' : 'bg-white/50'
-            }`}
-          />
-        ))}
-      </div>
     </div>
   );
 };

@@ -43,7 +43,8 @@ export default function Index() {
       opacity: 1, 
       y: 0, 
       transition: { duration: 0.8, ease: "easeOut" }
-    }
+    },
+    hovered: {scale: 1}
   };
 
   useEffect(() => {
@@ -75,13 +76,13 @@ export default function Index() {
         <TailwindSlideshow />
 
         <motion.div
-          className="absolute text-center text-white z-10"
+        className={`absolute text-center text-white z-10 ${isMobile ? 'inset-0 flex flex-col justify-center items-center px-4' : ''}`}
         initial={!isMobile ? { opacity: 0, y: 50, scale: 0.95 } : false}
         animate={!isMobile ? { opacity: 1, y: 0, scale: 1 } : false}
         transition={!isMobile ? { duration: 1.0, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] } : {}}
         >
           <motion.h1
-            className={`drop-shadow-lg font-bold italic text-red-600 font-mono mb-4 px-4 ${isMobile ? 'text-xl text-center leading-tight' : 'text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl'}`}
+            className={`drop-shadow-lg font-bold italic text-red-600 font-mono mb-4 ${isMobile ? 'text-xl text-center leading-tight max-w-sm' : 'text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl px-4'}`}
             initial={!isMobile ? { opacity: 0, y: 30 } : false}
             animate={!isMobile ? { opacity: 1, y: 0 } : false}
             transition={!isMobile ? { duration: 0.8, delay: 0.4, ease: [0.25, 0.46, 0.45, 0.94] } : {}}
@@ -89,7 +90,7 @@ export default function Index() {
             Resonance Racing REEV and GOKART
           </motion.h1>
           <motion.h2
-            className={`drop-shadow-lg text-white font-mono mb-8 px-4 ${isMobile ? 'text-sm text-center leading-relaxed' : 'text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-5xl'}`}
+            className={`drop-shadow-lg text-white font-mono mb-8 ${isMobile ? 'text-sm text-center leading-relaxed max-w-xs' : 'text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-5xl px-4'}`}
             initial={!isMobile ? { y: 30 } : false}
             animate={!isMobile ? { y: 0 } : false}
             transition={!isMobile ? { duration: 1.0, delay: 0.7, ease: [0.34, 1.56, 0.64, 1] } : {}}
@@ -164,6 +165,7 @@ export default function Index() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
+          whileHover="hovered"
         >
           {/* Image Section */}
           <motion.div
@@ -196,8 +198,10 @@ export default function Index() {
                 style={{
                   background: 'linear-gradient(to right, transparent, red, transparent)'
                 }}
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: 1 }}
+                variants={{
+                  visible: { scaleX: 0 },
+                  hovered: { scaleX: 1 },
+                }}
                 transition={{ duration: 0.6, ease: "easeInOut" }}
               />
             </h2>
@@ -290,6 +294,7 @@ export default function Index() {
           variants={fadeInUp}
           initial="hidden"
           whileInView="visible"
+          whileHover="hovered"
           viewport={{ once: true, amount: 0.3 }}
         >
           <motion.div 
@@ -304,6 +309,7 @@ export default function Index() {
                   background: 'linear-gradient(to right, transparent, red, transparent)'
                 }}
                 initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
                 variants={{
                   visible: { scaleX: 0 },
                   hovered: { scaleX: 1 },
@@ -502,6 +508,7 @@ export default function Index() {
           style={{ scrollSnapAlign: 'start' }}
           initial="hidden"
           animate={undefined}
+          whileHover="hovered"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
         >
@@ -519,6 +526,8 @@ export default function Index() {
                     background: 'linear-gradient(to right, transparent, red, transparent)'
                   }}
                   initial={{ scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  whileHover={{ scaleX: 1 }}
                   variants={{
                     visible: { scaleX: 0 },
                     hovered: { scaleX: 1 },
@@ -708,6 +717,7 @@ export default function Index() {
           initial="hidden"
           animate={undefined}
           whileInView="visible"
+          whileHover="hovered"
           viewport={{ once: true, amount: 0.2 }}
         >
           <motion.div 
@@ -722,6 +732,7 @@ export default function Index() {
                   background: 'linear-gradient(to right, transparent, red, transparent)'
                 }}
                 initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
                 variants={{
                   visible: { scaleX: 0 },
                   hovered: { scaleX: 1 },
@@ -744,15 +755,12 @@ export default function Index() {
             spaceBetween={30}
             slidesPerView={1}
             centeredSlides={true}
+            loopedSlides={4}
+            loop={true}
             autoplay={{
               delay: 5000,
               disableOnInteraction: false,
               pauseOnMouseEnter: true,
-            }}
-            pagination={{
-              clickable: true,
-              bulletClass: 'swiper-pagination-bullet !bg-white/30',
-              bulletActiveClass: 'swiper-pagination-bullet-active !bg-red-600',
             }}
             navigation={{
               nextEl: '.swiper-button-next',
@@ -760,10 +768,10 @@ export default function Index() {
             }}
             breakpoints={{
               768: {
-                slidesPerView: 1,
+                slidesPerView: 2,
               },
               1024: {
-                slidesPerView: 1,
+                slidesPerView: 3,
               },
             }}
             className="review-swiper !pb-12"
@@ -792,11 +800,29 @@ export default function Index() {
                 position: "MIT Energy Systems Lab",
                 review: "The research collaboration with REEV has yielded breakthrough results in battery efficiency and electric motor optimization.",
                 image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+              },
+              {
+                name: "Professor David Kim",
+                position: "MIT Energy Systems Lab",
+                review: "The research collaboration with REEV has yielded breakthrough results in battery efficiency and electric motor optimization.",
+                image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+              },
+              {
+                name: "Professor David Kim",
+                position: "MIT Energy Systems Lab",
+                review: "The research collaboration with REEV has yielded breakthrough results in battery efficiency and electric motor optimization.",
+                image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+              },
+              {
+                name: "Professor David Kim",
+                position: "MIT Energy Systems Lab",
+                review: "The research collaboration with REEV has yielded breakthrough results in battery efficiency and electric motor optimization.",
+                image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
               }
             ].map((review, index) => (
               <SwiperSlide key={index}>
                 <div className="flex justify-center">
-                  <div className="bg-white/10 rounded-xl p-8 border-2 border-red-600/20 hover:border-red-600 transition-colors duration-300 w-full max-w-2xl">
+                  <div className="bg-white/10 rounded-xl w-[27rem] h-[24rem] p-8 border-2 border-red-600/20 hover:border-red-600 transition-colors duration-300">
                     <div className="flex flex-col items-center text-center">
                       <img
                         src={review.image}
@@ -831,7 +857,7 @@ export default function Index() {
         <section
           ref={sponsorsRef}
           data-section="sponsors"
-          className="w-full bg-[#101010] flex flex-col py-8 justify-start"
+          className="w-full bg-[#101010] flex flex-col p-0 justify-start"
         >
           {/* Sponsors Content */}
           <div className="text-center group cursor-pointer mb-6">
@@ -848,7 +874,7 @@ export default function Index() {
 
           {/* Animated Marquee */}
           <div className="w-full overflow-hidden">
-            <div className="flex w-max">
+            <div className="flex w-max animate-marquee">
             {/* First set of sponsors */}
             {[
               { Icon: slideImg1, name: "Asset 13", class: "w-[8rem] h-[8rem] md:w-[12rem] md:h-[10rem] mx-[4rem] md:mx-[6rem] invert" },
@@ -904,11 +930,6 @@ export default function Index() {
             ))}
             </div>
           </div>
-
-          {/* Footer Content Integrated */}
-          <footer className="bg-black w-full text-white px-[8%] lg:px-[12%] pt-1 mt-auto grid items-center py-[1rem] font-mono">
-            <Footer />
-          </footer>
         </section>
       ) : (
         <motion.section 
@@ -919,6 +940,7 @@ export default function Index() {
           initial="hidden"
           animate={undefined}
           whileInView="visible"
+          whileHover="hovered"
           viewport={{ once: true, amount: 0.2 }}
         >
           {/* Sponsors Content */}
@@ -934,6 +956,7 @@ export default function Index() {
                   background: 'linear-gradient(to right, transparent, red, transparent)'
                 }}
                 initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
                 variants={{
                   visible: { scaleX: 0 },
                   hovered: { scaleX: 1 },
@@ -1015,6 +1038,10 @@ export default function Index() {
             <Footer />
           </motion.footer>
         </motion.section>
+      )}
+
+      {isMobile && (
+          <Footer />
       )}
     </main>
   );

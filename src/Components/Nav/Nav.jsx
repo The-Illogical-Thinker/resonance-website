@@ -33,14 +33,72 @@ function Nav() {
   }, []);
 
   useEffect(() => {
+    const preventTouchMove = (e) => {
+      // Allow touch events only within the mobile menu
+      const mobileMenu = e.target.closest('[data-mobile-menu]');
+      if (!mobileMenu) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    };
+
     if (menuOpen) {
+      // Store current scroll position
+      const scrollY = window.scrollY;
+      
+      // Fix body position to prevent scrolling
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
       document.body.style.overflow = 'hidden';
+      
+      // Add event listeners to prevent all forms of scrolling
+      document.addEventListener('touchmove', preventTouchMove, { passive: false });
+      
+      // Also prevent scrolling on main container
+      const mainContainer = document.querySelector('main');
+      if (mainContainer) {
+        mainContainer.style.overflow = 'hidden';
+      }
     } else {
+      // Remove all event listeners
+      document.removeEventListener('touchmove', preventTouchMove);
+      
+      // Get stored scroll position
+      const scrollY = document.body.style.top;
+      
+      // Restore body styles
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
       document.body.style.overflow = '';
+      
+      // Restore main container
+      const mainContainer = document.querySelector('main');
+      if (mainContainer) {
+        mainContainer.style.overflow = '';
+      }
+      
+      // Restore scroll position
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || '0') * -1);
+      }
     }
 
     return () => {
+      // Cleanup all event listeners
+      document.removeEventListener('touchmove', preventTouchMove);
+      
+      // Restore styles
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
       document.body.style.overflow = '';
+      
+      const mainContainer = document.querySelector('main');
+      if (mainContainer) {
+        mainContainer.style.overflow = '';
+      }
     };
   }, [menuOpen]);
 
@@ -151,7 +209,8 @@ function Nav() {
       <AnimatePresence>
         {menuOpen && (
           <motion.div 
-            className="lg:hidden fixed inset-0 z-[10000]"
+            className="lg:hidden w-screen fixed inset-0 z-[10000]"
+            data-mobile-menu
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -167,7 +226,7 @@ function Nav() {
             
             {/* Menu Content */}
             <motion.div 
-              className="relative flex flex-col justify-center items-center h-full text-center px-6"
+              className="relative flex flex-col justify-center w-screen items-center h-full text-center px-6"
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
