@@ -6,14 +6,20 @@ function Footer() {
       <footer className="bg-black text-white px-[8%] lg:px-[12%] pt-8 py-[5%] font-mono">
         {/* Navigation Links */}
         <div className="mx-auto flex flex-wrap justify-center items-center gap-4 text-base py-6 mt-10">
-          {["Home", "Achievements", "Team", "Go-Kart", "Reev", "Join Us"].map(
+          {[
+          {name:"Home", href: "/"},
+          {name:"Achievements", href: "/achievements"},
+          {name:"Team", href: "/team1"},
+          {name:"Go-Kart", href: "/gokart"},
+          {name:"Reev", href: "/reev"},
+          {name:"Join Us", href: "/joinus"}].map(
             (link, i) => (
               <React.Fragment key={i}>
                 <a
-                  href="#"
+                  href={link.href}
                   className="hover:text-red-600 transition-colors mx-3 text-white"
                 >
-                  {link}
+                  {link.name}
                 </a>
               </React.Fragment>
             )
@@ -23,10 +29,10 @@ function Footer() {
         {/* Social Icons */}
         <div className="flex justify-center gap-4 mb-4">
           {[
-            { icon: "ri-instagram-line", url: "#" },
-            { icon: "ri-facebook-circle-fill", url: "#" },
-            { icon: "ri-linkedin-fill", url: "#" },
-            { icon: "ri-youtube-fill ", url: "#" },
+            { icon: "ri-instagram-line", url: "https://www.instagram.com/reev.racingclub/ " },
+            { icon: "ri-facebook-circle-fill", url: "https://www.facebook.com/reev.racingclub/" },
+            { icon: "ri-linkedin-fill", url: "https://www.linkedin.com/company/reev-racing-club/" },
+            { icon: "ri-youtube-fill ", url: "https://www.youtube.com/channel/UCG1X_g89zOZb30nZS7gIk6Q" },
           ].map(({ icon, url }, idx) => (
             <a
               key={idx}
