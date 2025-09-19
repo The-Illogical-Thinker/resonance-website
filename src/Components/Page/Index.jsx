@@ -26,6 +26,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Pagination, Navigation, Autoplay } from "swiper/modules";
+import { Link } from "react-router-dom";
 
 export default function Index() {
   const heroRef = useRef(null);
@@ -547,31 +548,33 @@ export default function Index() {
                 className="group cursor-pointer col-span-1 h-[25rem] sm:h-[25rem] lg:h-[30rem]"
                 variants={fadeInUp}
               >
-                <div className="relative overflow-hidden bg-[#101010] h-[25rem] sm:h-[25rem] lg:h-[30rem]">
-                  <motion.img 
-                    src="PNG_image-removebg-preview.png"
-                    alt="REEV Racer"
-                    className="w-full h-full object-cover brightness-90 group-hover:scale-110 transition-transform duration-700"
-                    whileHover={{ scale: 1.02 }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-                  
-                  {/* Content Overlay */}
-                  <div className="absolute bottom-0 left-0 right-0 p-8">
-                    <h3 className="font-light text-white mb-3 font-mono tracking-wide transition-colors duration-300 text-4xl group-hover:text-red-600">
-                      <span className="text-red-600 font-black italic">REEV</span> Racer
-                    </h3>
-                    <p className="text-gray-300 mb-4 transition-opacity duration-500 text-base opacity-0 group-hover:opacity-100">
-                      High-Performance Electric Racing Vehicle
-                    </p>
-                    <div className="flex items-center text-white font-light transition-colors duration-300 text-sm group-hover:text-red-600">
-                      <span>Discover</span>
-                      <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                      </svg>
+                <Link to="/reev" className="w-full h-full">
+                  <div className="relative overflow-hidden bg-[#101010] h-[25rem] sm:h-[25rem] lg:h-[30rem]">
+                    <motion.img 
+                      src="PNG_image-removebg-preview.png"
+                      alt="REEV Racer"
+                      className="w-full h-full object-cover brightness-90 group-hover:scale-110 transition-transform duration-700"
+                      whileHover={{ scale: 1.02 }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                    
+                    {/* Content Overlay */}
+                    <div className="absolute bottom-0 left-0 right-0 p-8">
+                      <h3 className="font-light text-white mb-3 font-mono tracking-wide transition-colors duration-300 text-4xl group-hover:text-red-600">
+                        <span className="text-red-600 font-black italic">REEV</span> Racer
+                      </h3>
+                      <p className="text-gray-300 mb-4 transition-opacity duration-500 text-base opacity-0 group-hover:opacity-100">
+                        High-Performance Electric Racing Vehicle
+                      </p>
+                      <div className="flex items-center text-white font-light transition-colors duration-300 text-sm group-hover:text-red-600">
+                        <span>Discover</span>
+                        <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </Link>
               </motion.div>
 
               {/* REEV GoCar */}
@@ -579,31 +582,33 @@ export default function Index() {
                 className="group cursor-pointer col-span-1 h-[25rem] sm:h-[25rem] lg:h-[30rem]"
                 variants={fadeInUp}
               >
-                <div className="relative overflow-hidden bg-[#101010] h-[25rem] sm:h-[25rem] lg:h-[30rem]">
-                  <motion.img 
-                    src="/gokart cad 3d.png"
-                    alt="REEV GoCar"
-                    className="w-full h-full object-cover brightness-90 group-hover:scale-110 transition-transform duration-700"
-                    whileHover={{ scale: 1.02 }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-                  
-                  {/* Content Overlay */}
-                  <div className="absolute bottom-0 left-0 right-0 p-8">
-                    <h3 className="font-light text-white mb-3 font-mono tracking-wide transition-colors duration-300 text-4xl group-hover:text-red-600">
-                      <span className="text-red-600 font-black italic">REEV</span> GoCar
-                    </h3>
-                    <p className="text-gray-300 mb-4 transition-opacity duration-500 text-base opacity-0 group-hover:opacity-100">
-                      Urban Electric Mobility Solution
-                    </p>
-                    <div className="flex items-center text-white font-light transition-colors duration-300 text-sm group-hover:text-red-600">
-                      <span>Discover</span>
-                      <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                      </svg>
+                <Link to="/gokart" className="w-full h-full">
+                  <div className="relative overflow-hidden bg-[#101010] h-[25rem] sm:h-[25rem] lg:h-[30rem]">
+                    <motion.img 
+                      src="/gokart cad 3d.png"
+                      alt="REEV GoCar"
+                      className="w-full h-full object-cover brightness-90 group-hover:scale-110 transition-transform duration-700"
+                      whileHover={{ scale: 1.02 }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                    
+                    {/* Content Overlay */}
+                    <div className="absolute bottom-0 left-0 right-0 p-8">
+                      <h3 className="font-light text-white mb-3 font-mono tracking-wide transition-colors duration-300 text-4xl group-hover:text-red-600">
+                        <span className="text-red-600 font-black italic">REEV</span> GoCar
+                      </h3>
+                      <p className="text-gray-300 mb-4 transition-opacity duration-500 text-base opacity-0 group-hover:opacity-100">
+                        Urban Electric Mobility Solution
+                      </p>
+                      <div className="flex items-center text-white font-light transition-colors duration-300 text-sm group-hover:text-red-600">
+                        <span>Discover</span>
+                        <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </Link>
               </motion.div>
             </div>
           </div>
@@ -703,8 +708,8 @@ export default function Index() {
               ))}
               
               {/* Custom Navigation Buttons */}
-              <div className="swiper-button-prev !text-white hover:!text-red-600 !w-12 !h-12 !bg-black/50 !rounded-full after:!text-lg"></div>
-              <div className="swiper-button-next !text-white hover:!text-red-600 !w-12 !h-12 !bg-black/50 !rounded-full after:!text-lg"></div>
+              <div className="swiper-button-prev cursor-pointer !text-white hover:!text-red-600 !w-12 !h-12 !bg-black/50 !rounded-full after:!text-lg"></div>
+              <div className="swiper-button-next !text-white cursor-pointer hover:!text-red-600 !w-12 !h-12 !bg-black/50 !rounded-full after:!text-lg"></div>
             </Swiper>
           </div>
         </section>

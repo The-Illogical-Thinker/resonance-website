@@ -282,7 +282,7 @@
 
 @media (max-width: 900px) {
 
-.timeline-item.left {
+  .timeline-item.left {
     flex-direction: column;
   }
 
@@ -320,9 +320,15 @@
 .carousel-container {
   width: 100vw;
   overflow: hidden;
-  padding: 52px 25px;
-  margin: 0 auto;
+  padding: 25px;
+  margin: 27px auto;
   box-sizing: border-box;
+}
+
+.timeline-item .content {
+  width: 100%;
+  max-width: 90%;   /* take almost full screen width */
+  text-align: center;
 }
 
 .swiper {
